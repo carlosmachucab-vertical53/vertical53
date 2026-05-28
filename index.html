@@ -49,7 +49,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
 
 /* HERO */
 #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--gp)}
-.hero-photo{position:absolute;inset:0;background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20CRECIMIENTO%20CONTROLADO%20DSC06356.jpg');background-size:cover;background-position:center 18%{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,20,15,.85) 40%,rgba(0,20,15,.35) 100%)}
+.hero-photo{position:absolute;inset:0;background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20CRECIMIENTO%20CONTROLADO%20DSC06356.jpg');background-size:cover;background-position:center 18%}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,20,15,.85) 40%,rgba(0,20,15,.35) 100%)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(112,186,94,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(112,186,94,.04) 1px,transparent 1px);background-size:60px 60px}
 .hero-c{position:relative;z-index:2;padding:0 72px;max-width:740px;padding-top:70px}
 .hero-coord{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--gs);opacity:.8;margin-bottom:28px;display:flex;align-items:center;gap:14px}
@@ -126,9 +127,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .box-icon{font-size:28px}
 .box-popular{position:absolute;top:0;left:0;right:0;background:var(--gs);padding:5px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--white)}
 .box-tag{display:inline-block;padding:4px 10px;border:1px solid rgba(23,102,99,.25);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gp);border-radius:6px;transition:.3s;width:fit-content}
-.box-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--navy);transition:.3s}
-.box-price{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--gp);transition:.3s}
-.box-price span{font-size:10px;opacity:.6;letter-spacing:1px}
+.box-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);transition:.3s}
+.box-price{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gp);letter-spacing:1px;transition:.3s}
 .box-desc{font-size:11px;font-weight:300;color:var(--gray);line-height:1.7;transition:.3s}
 .box-contents{list-style:none;display:flex;flex-direction:column;gap:4px}
 .box-contents li{font-size:11px;color:var(--gray);font-weight:300;display:flex;align-items:center;gap:5px;transition:.3s}
@@ -215,9 +215,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
 
 /* FOOTER */
 footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.footer-brand{display:flex;align-items:center;gap:14px}
 .footer-logo-img{height:56px;width:auto;filter:brightness(10);opacity:.85}
-.footer-tagline{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-top:4px}
 .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.28);margin-top:10px}
 .footer-links{display:flex;gap:24px;flex-wrap:wrap}
 .footer-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:.2s}
@@ -389,15 +387,16 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   <div class="sub-intro fade-in">
     <div>
       <div class="tag-label">Suscripción semanal</div>
-      <h2>Tu box de<br/>microgreens<br/>cada semana</h2>
+      <h2>Comes lo que<br/>cortas.<br/>Cada semana.</h2>
       <div class="rule"></div>
     </div>
     <div class="sub-intro-right">
       <span class="sub-badge">Entrega semanal · Punta Arenas</span>
-      <p class="body-text">Elige tu box, recíbela cada semana cosechada el mismo día. Sin compromisos largos — pausas o cancelas cuando quieras.</p>
+      <p class="body-text">Elige tu box según tu momento y propósito. Recibes bandejas vivas en tu casa — cortas lo que consumes, cuando lo necesitas. Sin renovación manual, sin gestión por tu parte.</p>
       <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Próximamente · Pago online habilitado</p>
     </div>
   </div>
+
   <div class="boxes-grid fade-in">
 
     <!-- DETOX -->
@@ -406,8 +405,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <div class="box-icon">🥤</div>
       <span class="box-tag">Detox</span>
       <div class="box-name">Detox</div>
-      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
-      <div class="box-desc">Para smoothies y batidos. Del freezer directo a la licuadora. Sin lavar, sin cortar.</div>
+      <div class="box-price">Smoothies · Batidos</div>
+      <div class="box-desc">Del freezer directo a la licuadora. Sin lavar, sin cortar, sin pensar.</div>
       <ul class="box-contents">
         <li>7 potes · 5g c/u · congelados</li>
         <li>Brócoli · Col verde</li>
@@ -422,13 +421,13 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <div class="box-icon">🍳</div>
       <span class="box-tag">Brunch</span>
       <div class="box-name">Brunch</div>
-      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
-      <div class="box-desc">Comes lo que cortas. Frescura recién cosechada en tu mesa cada mañana.</div>
+      <div class="box-price">Desayuno · Brunch</div>
+      <div class="box-desc">Comes lo que cortas. Producto vivo en tu cocina durante 7+ días.</div>
       <ul class="box-contents">
         <li>4 bandejas vivas</li>
         <li>Mizuna · Tat soi · Amaranto</li>
-        <li>Vive 7+ días en cocina</li>
         <li>Tostadas · huevos · palta</li>
+        <li>Ritual matinal</li>
       </ul>
     </div>
 
@@ -439,12 +438,12 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <div class="box-icon">🌶️</div>
       <span class="box-tag">Spicy</span>
       <div class="box-name">Spicy</div>
-      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
-      <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde en el plato.</div>
+      <div class="box-price">Ensaladas · Gourmet</div>
+      <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde.</div>
       <ul class="box-contents">
         <li>5 bandejas vivas</li>
-        <li>Rábano · Mostaza · Rúcula</li>
-        <li>Verde y morado</li>
+        <li>Rábano verde y morado</li>
+        <li>Mostaza · Rúcula</li>
         <li>Foodies · chefs amateur</li>
       </ul>
     </div>
@@ -455,7 +454,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <div class="box-icon">💪</div>
       <span class="box-tag">Proteína</span>
       <div class="box-name">Proteína</div>
-      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-price">Rendimiento · Deporte</div>
       <div class="box-desc">Densidad nutricional para quienes entrenan y rinden. Alto aporte proteico.</div>
       <ul class="box-contents">
         <li>4 bandejas vivas</li>
@@ -471,21 +470,22 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <div class="box-icon">🧒</div>
       <span class="box-tag" style="border-color:rgba(199,166,104,.3);color:var(--earth)">Kids</span>
       <div class="box-name">Kids</div>
-      <div class="box-price" style="color:var(--earth);font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-price" style="color:var(--earth)">Familias · Niños</div>
       <div class="box-desc">Nutrición que entra disfrazada. Brócoli neutro, sin picor. Los niños no lo notan.</div>
       <ul class="box-contents">
         <li>1 bandeja viva brócoli</li>
         <li>Sabor neutro · sin picor</li>
         <li>Jugos · comidas · postres</li>
-        <li>Familias con niños</li>
+        <li>Mamás y familias</li>
       </ul>
     </div>
 
   </div>
+
   <div class="sub-cta fade-in">
     <div class="sub-cta-left">
       <h3>¿Listo para suscribirte?</h3>
-      <p>Próximamente habilitamos el pago online. Por ahora escríbenos con tu selección y coordinamos la entrega contigo.</p>
+      <p>Próximamente habilitamos el pago online. Por ahora escríbenos con tu selección y coordinamos la primera entrega contigo.</p>
     </div>
     <div class="sub-cta-right">
       <div class="selected-info" id="selectedInfo">— Selecciona una box —</div>
@@ -537,7 +537,11 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     <div class="b2b-box">
       <h3>¿A quiénes<br/>atendemos?</h3>
       <p>Actualmente en Punta Arenas y Magallanes. Próximamente expandiremos cobertura.</p>
-      <div class="tags"><span class="tag-i">Restaurantes</span><span class="tag-i">Hoteles</span><span class="tag-i">Catering</span><span class="tag-i">Tiendas gourmet</span><span class="tag-i">Distribuidores</span></div>
+      <div class="tags">
+        <span class="tag-i">Restaurantes</span><span class="tag-i">Hoteles</span>
+        <span class="tag-i">Catering</span><span class="tag-i">Tiendas gourmet</span>
+        <span class="tag-i">Distribuidores</span>
+      </div>
       <button class="btn-p" style="align-self:flex-start" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar info B2B</button>
     </div>
   </div>
@@ -624,9 +628,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 <!-- FOOTER -->
 <footer>
   <div>
-    <div class="footer-brand">
-      <img class="footer-logo-img" src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo.1%20vertical53.png" alt="Vertical 53°"/>
-    </div>
+    <img class="footer-logo-img" src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo.1%20vertical53.png" alt="Vertical 53°"/>
     <div class="footer-copy">© 2025 Vertical 53° SpA · Punta Arenas, Chile · RUT 77.466.345-2</div>
   </div>
   <div class="footer-links">
@@ -638,7 +640,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 </footer>
 
 <script>
-const nav = document.getElementById('nav');
+const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>80),{passive:true});
 
 function toggleMenu(){
@@ -659,12 +661,12 @@ let selBox=null;
 function selectBox(el,name,price){
   document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');selBox={name,price};
-  document.getElementById('selectedInfo').textContent=name+' · '+price;
+  document.getElementById('selectedInfo').textContent=name;
 }
 function goToContact(){
   if(selBox){
     document.getElementById('f-interes').value='Suscripción semanal B2C';
-    document.getElementById('f-mensaje').value='Me interesa suscribirme a la '+selBox.name+' ('+selBox.price+').';
+    document.getElementById('f-mensaje').value='Me interesa suscribirme a la '+selBox.name+'.';
   }
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
