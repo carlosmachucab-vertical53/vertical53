@@ -27,8 +27,8 @@ h2{font-family:'Sora',sans-serif;font-size:clamp(26px,3.5vw,46px);font-weight:70
 nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 72px;height:70px;display:flex;align-items:center;justify-content:space-between;transition:all .35s}
 nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,26,43,.07)}
 .nav-logo{display:flex;align-items:center;text-decoration:none}
-.nav-logo img{height:52px;width:auto;transition:.3s;filter:brightness(10);opacity:.9}
-nav.scrolled .nav-logo img{filter:none;opacity:1}
+.nav-logo img{height:52px;width:auto;transition:.3s}
+nav.scrolled .nav-logo img{opacity:1}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:11px;letter-spacing:1.5px;font-weight:400;color:rgba(255,255,255,.7);transition:.3s;text-transform:uppercase;text-decoration:none}
 nav.scrolled .nav-links a{color:var(--navy);opacity:.6}
@@ -215,7 +215,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
 
 /* FOOTER */
 footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.footer-logo-img{height:56px;width:auto;filter:brightness(10);opacity:.85}
+.footer-logo-img{height:56px;width:auto;opacity:.9}
 .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.28);margin-top:10px}
 .footer-links{display:flex;gap:24px;flex-wrap:wrap}
 .footer-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:.2s}
@@ -350,7 +350,19 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   </div>
 </section>
 
-<!-- PHOTO BREAK 2 — Riego -->
+<!-- PHOTO BREAK 1 — Germinación -->
+<div class="pb" style="height:85vh;background:#0a1a10">
+  <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20GERMINACION%20DSC06195.jpg')"></div>
+  <div class="pb-ov"></div>
+  <div class="pb-cap fade-in"><h3>Desde la semilla<br/>hasta tu mesa</h3><p>Semillas seleccionadas · cuidado artesanal · cosecha precisa</p></div>
+</div>
+
+<!-- PHOTO BREAK 2 — Brócoli -->
+<div class="pb" style="height:85vh;background:#081510">
+  <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/BROCOLI%20DSC06345.jpg')"></div>
+  <div class="pb-ov"></div>
+  <div class="pb-cap fade-in"><h3>Nutrición viva<br/>en tu cocina</h3><p>40× más nutrientes que la planta adulta · 100% sin agroquímicos</p></div>
+</div>
 <div class="pb" style="height:62vh;background:#081510">
   <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20RIEGO%20DSC06288.jpg')"></div>
   <div class="pb-ov"></div>
@@ -471,7 +483,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 </section>
 
 <!-- PHOTO BREAK 3 — LEDs -->
-<div class="pb" style="height:78vh;background:#080d0a">
+<div class="pb" style="height:92vh;background:#080d0a">
   <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/LEDS%20DSC06306.jpg')"></div>
   <div class="pb-ov" style="background:linear-gradient(to top,rgba(0,15,10,.9) 0%,rgba(0,15,10,.08) 52%)"></div>
   <div class="pb-cap fade-in"><h3>Tecnología al<br/>servicio de<br/>la naturaleza</h3><p>LED espectro completo · control 24/7 · sin estacionalidad</p></div>
