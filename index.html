@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vertical 53° – Microgreens · Punta Arenas</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#001A2B;--gp:#176663;--gs:#70BA5E;
+  --earth:#C7A668;--bg:#F5F7F5;--white:#fff;
+  --gray:#6B7280;--lg:#f0f8f0;--r:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* ── TOKENS ── */
+.sec{padding:96px 72px}
+.tag-label{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gp);text-transform:uppercase;margin-bottom:14px}
+.tag-label::before{content:'';width:22px;height:1px;background:var(--gp);display:block}
+h2{font-family:'Sora',sans-serif;font-size:clamp(26px,3.5vw,46px);font-weight:700;line-height:1.06;color:var(--navy)}
+.body-text{font-size:15px;font-weight:300;line-height:1.9;color:var(--gray)}
+.rule{width:44px;height:2px;background:var(--gs);margin:18px 0;border-radius:2px}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 72px;height:70px;display:flex;align-items:center;justify-content:space-between;transition:all .35s}
+nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,26,43,.07)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-brand{font-family:'Sora',sans-serif;font-weight:700;font-size:17px;color:var(--white);transition:.3s}
+nav.scrolled .nav-brand{color:var(--navy)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:1.5px;font-weight:400;color:rgba(255,255,255,.7);transition:.3s;text-transform:uppercase;text-decoration:none}
+nav.scrolled .nav-links a{color:var(--navy);opacity:.6}
+.nav-links a:hover{color:var(--gs)!important;opacity:1}
+.nav-cta{background:var(--gs);color:var(--white);padding:10px 20px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;border:none;cursor:pointer;transition:.3s;border-radius:10px;white-space:nowrap}
+.nav-cta:hover{background:var(--gp);transform:translateY(-1px)}
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:300}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+nav.scrolled .hamburger span{background:var(--navy)}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* Mobile menu */
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(0,26,43,.97);z-index:250;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Sora',sans-serif;font-size:22px;font-weight:600;color:rgba(255,255,255,.75);text-decoration:none;letter-spacing:1px;transition:.2s}
+.mobile-menu a:hover{color:var(--gs)}
+.mobile-menu .m-cta{background:var(--gs);color:var(--white);padding:14px 36px;border-radius:12px;font-size:16px;font-weight:600;margin-top:8px}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--gp)}
+.hero-photo{position:absolute;inset:0;background-image:url('https://drive.google.com/uc?export=view&id=1tZ6JJsTXiKQnDxpPO8iYfvlvZ3SlqcpA');background-size:cover;background-position:center}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,20,15,.85) 40%,rgba(0,20,15,.35) 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(112,186,94,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(112,186,94,.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-c{position:relative;z-index:2;padding:0 72px;max-width:740px;padding-top:70px}
+.hero-coord{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--gs);opacity:.8;margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.hero-coord::before{content:'';width:28px;height:1px;background:var(--gs)}
+.hero-h1{font-family:'Sora',sans-serif;font-size:clamp(40px,6vw,82px);font-weight:700;color:var(--white);line-height:1.0;letter-spacing:-1.5px;margin-bottom:8px}
+.hero-h1 .g{color:var(--gs)}
+.hero-h1 .sub-line{font-weight:300;font-size:.65em;letter-spacing:3px;color:rgba(255,255,255,.3);display:block;margin-top:12px;font-family:'IBM Plex Mono',monospace}
+.hero-sub{font-size:16px;font-weight:300;line-height:1.85;color:rgba(255,255,255,.45);max-width:480px;margin:26px 0 44px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-p{background:var(--gs);color:var(--white);padding:14px 28px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:.3s;border-radius:10px}
+.btn-p:hover{background:#5ca84e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(112,186,94,.3)}
+.btn-s{background:transparent;color:rgba(255,255,255,.65);padding:14px 28px;font-family:'Sora',sans-serif;font-size:13px;font-weight:400;border:1px solid rgba(255,255,255,.18);cursor:pointer;transition:.3s;border-radius:10px}
+.btn-s:hover{border-color:var(--gs);color:var(--gs)}
+.hero-scroll{position:absolute;bottom:36px;left:72px;z-index:2;display:flex;align-items:center;gap:12px}
+.hero-scroll span{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:4px;color:rgba(255,255,255,.22);text-transform:uppercase}
+.scroll-line{width:40px;height:1px;background:linear-gradient(to right,var(--gs),transparent)}
+
+/* ── STATS ── */
+.stats-bar{background:var(--gs);padding:26px 72px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px}
+.stat{text-align:center}
+.stat-n{font-family:'Sora',sans-serif;font-size:32px;font-weight:700;color:var(--white);letter-spacing:-1px}
+.stat-l{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.65);text-transform:uppercase;margin-top:5px}
+
+/* ── NOSOTROS ── */
+#nosotros{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-card{background:var(--lg);padding:36px;border-radius:var(--r);border-left:4px solid var(--gs);margin-bottom:14px}
+.about-card p{font-size:15px;line-height:1.9;color:var(--gray);font-weight:300}
+.about-badge{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:8px 16px;border:1px solid rgba(23,102,99,.25);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--gp);border-radius:8px}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.val{padding:20px;background:var(--bg);border-radius:16px;border-top:2px solid var(--gs);transition:.25s}
+.val:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,26,43,.07)}
+.val h4{font-family:'Sora',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;color:var(--navy);margin-bottom:6px}
+.val p{font-size:12px;line-height:1.75;color:var(--gray);font-weight:300}
+
+/* ── PHOTO BREAK ── */
+.pb{position:relative;overflow:hidden;display:flex;align-items:flex-end}
+.pb-bg{position:absolute;inset:-8%;background-size:cover;background-position:center}
+.pb-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,15,10,.86) 0%,rgba(0,15,10,.06) 52%)}
+.pb-cap{position:relative;z-index:2;padding:48px 72px;color:var(--white)}
+.pb-cap h3{font-family:'Sora',sans-serif;font-size:clamp(22px,4vw,50px);font-weight:700;letter-spacing:-.5px;line-height:1.06;margin-bottom:10px}
+.pb-cap p{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:300;letter-spacing:2.5px;color:rgba(255,255,255,.38);text-transform:uppercase}
+
+/* ── PRODUCTOS ── */
+#productos{background:var(--bg)}
+.prod-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prod-card{background:var(--white);padding:34px 28px;transition:.35s;cursor:default;border-radius:20px;border:1.5px solid transparent;position:relative;overflow:hidden}
+.prod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--gp),var(--gs));transform:scaleX(0);transform-origin:left;transition:.4s}
+.prod-card:hover::after{transform:scaleX(1)}
+.prod-card:hover{border-color:rgba(112,186,94,.2);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,26,43,.09)}
+.prod-icon{font-size:26px;margin-bottom:16px;display:block}
+.prod-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:600;margin-bottom:8px;color:var(--navy)}
+.prod-desc{font-size:13px;line-height:1.85;color:var(--gray);font-weight:300;margin-bottom:14px}
+.prod-avail{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gp)}
+
+/* ── SUSCRIPCIÓN ── */
+#suscripcion{background:var(--white);position:relative;overflow:hidden}
+#suscripcion::before{content:'';position:absolute;top:-100px;right:-100px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(112,186,94,.07) 0%,transparent 70%);pointer-events:none}
+.sub-intro{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:end;margin-bottom:56px}
+.sub-intro-right{display:flex;flex-direction:column;gap:14px}
+.sub-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(112,186,94,.1);border:1px solid rgba(112,186,94,.25);border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gp);text-transform:uppercase;width:fit-content}
+.sub-badge::before{content:'●';font-size:8px;color:var(--gs)}
+.boxes-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:40px}
+.box-card{background:var(--bg);border-radius:20px;padding:26px 18px;display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:.3s;border:2px solid transparent;position:relative;overflow:hidden}
+.box-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,26,43,.09);border-color:var(--gs)}
+.box-card.selected{background:var(--gp);border-color:var(--gs);transform:translateY(-5px);box-shadow:0 16px 40px rgba(23,102,99,.2)}
+.box-card.selected .box-name,.box-card.selected .box-desc{color:var(--white)}
+.box-card.selected .box-contents li{color:rgba(255,255,255,.6)}
+.box-card.selected .box-tag{background:var(--gs);color:var(--white);border-color:var(--gs)}
+.box-card.selected .box-price{color:var(--gs)}
+.box-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--gs);display:none;align-items:center;justify-content:center;font-size:10px;color:var(--white)}
+.box-card.selected .box-check{display:flex}
+.box-icon{font-size:28px}
+.box-popular{position:absolute;top:0;left:0;right:0;background:var(--gs);padding:5px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--white)}
+.box-tag{display:inline-block;padding:4px 10px;border:1px solid rgba(23,102,99,.25);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gp);border-radius:6px;transition:.3s;width:fit-content}
+.box-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--navy);transition:.3s}
+.box-price{font-family:'IBM Plex Mono',monospace;font-size:15px;color:var(--gp);transition:.3s}
+.box-price span{font-size:10px;opacity:.6;letter-spacing:1px}
+.box-desc{font-size:11px;font-weight:300;color:var(--gray);line-height:1.7;transition:.3s}
+.box-contents{list-style:none;display:flex;flex-direction:column;gap:4px}
+.box-contents li{font-size:11px;color:var(--gray);font-weight:300;display:flex;align-items:center;gap:5px;transition:.3s}
+.box-contents li::before{content:'·';color:var(--gs);font-size:14px}
+.sub-cta{background:var(--lg);border-radius:24px;padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border:1px solid rgba(112,186,94,.18)}
+.sub-cta-left h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.sub-cta-left p{font-size:14px;font-weight:300;color:var(--gray);max-width:400px;line-height:1.8}
+.sub-cta-right{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.selected-info{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gp)}
+.btn-sub{background:var(--gp);color:var(--white);padding:14px 28px;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:.3s;border-radius:12px;min-width:180px}
+.btn-sub:hover{background:var(--gs);transform:translateY(-2px)}
+.sub-note{font-size:11px;color:var(--gray);font-family:'IBM Plex Mono',monospace;letter-spacing:1px}
+
+/* ── TECNOLOGÍA ── */
+#tecnologia{background:var(--bg)}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.tech-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tc{background:var(--white);border:1px solid rgba(0,26,43,.06);padding:28px;border-radius:18px;transition:.3s}
+.tc:hover{border-color:rgba(112,186,94,.3);transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,26,43,.07)}
+.tc-num{font-family:'IBM Plex Mono',monospace;font-size:28px;color:var(--gs);letter-spacing:-1px;line-height:1;margin-bottom:8px}
+.tc h4{font-family:'Sora',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;margin-bottom:6px;color:var(--navy)}
+.tc p{font-size:12px;line-height:1.8;color:var(--gray);font-weight:300}
+.tc.hi{background:var(--lg);border-color:rgba(112,186,94,.2)}
+
+/* ── B2B ── */
+#b2b{background:var(--white)}
+.b2b-inner{background:var(--bg);border-radius:28px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.b2b-list{display:flex;flex-direction:column;gap:11px}
+.b2b-item{display:flex;gap:16px;padding:20px;background:var(--white);border-radius:14px;transition:.25s;border:1px solid transparent}
+.b2b-item:hover{border-color:rgba(112,186,94,.2);transform:translateX(4px)}
+.b2b-num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);min-width:22px;padding-top:2px}
+.b2b-item h4{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;margin-bottom:4px;color:var(--navy)}
+.b2b-item p{font-size:13px;line-height:1.8;color:var(--gray);font-weight:300}
+.b2b-box{background:var(--gp);padding:40px;border-radius:24px;display:flex;flex-direction:column;gap:20px}
+.b2b-box h3{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--white);line-height:1.2}
+.b2b-box>p{font-size:14px;line-height:1.85;color:rgba(255,255,255,.5);font-weight:300}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag-i{padding:6px 13px;border:1px solid rgba(255,255,255,.2);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);border-radius:8px;transition:.2s}
+.tag-i:hover{border-color:var(--gs);color:var(--gs)}
+
+/* ── PATAGONIA ── */
+#patagonia{background:var(--bg)}
+.pat-outer{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.pat-blocks{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pat-b{padding:28px;border-radius:20px;transition:.25s}
+.pat-b.l{background:var(--white)}
+.pat-b.d{background:var(--gp)}
+.pat-b:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,26,43,.08)}
+.pat-num{font-family:'IBM Plex Mono',monospace;font-size:32px;color:var(--gp);letter-spacing:-1px;margin-bottom:6px;line-height:1}
+.pat-b.d .pat-num{color:var(--gs)}
+.pat-b h4{font-family:'Sora',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;margin-bottom:6px;color:var(--navy)}
+.pat-b.d h4{color:rgba(255,255,255,.65)}
+.pat-b p{font-size:12px;line-height:1.8;color:var(--gray);font-weight:300}
+.pat-b.d p{color:rgba(255,255,255,.45)}
+
+/* ── MAPA ── */
+#ubicacion{background:var(--white)}
+.map-outer{display:grid;grid-template-columns:1fr 1.2fr;gap:72px;align-items:center}
+.map-coord-card{background:var(--lg);border-radius:20px;padding:28px;border-left:4px solid var(--gs);margin-top:24px}
+.map-coord-card h4{font-family:'Sora',sans-serif;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:12px}
+.coord-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(112,186,94,.15)}
+.coord-row:last-child{border-bottom:none}
+.coord-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gray);text-transform:uppercase}
+.coord-val{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gp)}
+.map-wrap{border-radius:24px;overflow:hidden;background:var(--lg);border:1px solid rgba(112,186,94,.15)}
+.map-wrap svg{width:100%;height:auto;display:block}
+
+/* ── CONTACTO ── */
+#contacto{background:var(--bg)}
+.contact-wrap{background:var(--white);border-radius:28px;padding:56px;box-shadow:0 2px 32px rgba(0,26,43,.04)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;margin-top:44px}
+.contact-info{display:flex;flex-direction:column;gap:24px}
+.ci h4{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gp);margin-bottom:6px}
+.ci p{font-size:14px;font-weight:300;color:var(--navy)}
+.form{display:flex;flex-direction:column;gap:12px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray)}
+.field input,.field select,.field textarea{border:1.5px solid var(--bg);padding:13px 16px;font-size:14px;font-family:'Inter',sans-serif;font-weight:300;outline:none;background:var(--bg);transition:.25s;color:var(--navy);border-radius:10px;-webkit-appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gs);background:var(--white)}
+.field textarea{resize:vertical;min-height:96px}
+.form-btn{background:var(--gp);color:var(--white);padding:14px 36px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:.3s;align-self:flex-start;border-radius:10px}
+.form-btn:hover{background:var(--gs);transform:translateY(-2px)}
+
+/* ── FOOTER ── */
+footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.footer-brand{display:flex;align-items:center;gap:12px}
+.footer-name{font-family:'Sora',sans-serif;font-size:17px;font-weight:700;color:var(--white)}
+.footer-tagline{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-top:4px}
+.footer-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.28);margin-top:12px}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:.2s}
+.footer-links a:hover{color:var(--white)}
+
+/* ════════════════════════════════
+   RESPONSIVE — TABLET (≤900px)
+════════════════════════════════ */
+@media(max-width:900px){
+  .sec{padding:72px 40px}
+  nav{padding:0 40px}
+  .hero-c{padding:0 40px;padding-top:70px}
+  .hero-scroll{left:40px}
+  .stats-bar{padding:22px 40px}
+  .about-grid,.tech-grid,.b2b-inner,.pat-outer,.map-outer,.contact-grid{grid-template-columns:1fr;gap:40px}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .boxes-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .box-card:nth-child(5){grid-column:span 2}
+  .sub-intro{grid-template-columns:1fr;gap:28px}
+  .pb-cap{padding:40px}
+  .contact-wrap{padding:40px}
+  .footer-links{display:none}
+  footer{padding:40px}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+}
+
+/* ════════════════════════════════
+   RESPONSIVE — MÓVIL (≤600px)
+════════════════════════════════ */
+@media(max-width:600px){
+  .sec{padding:56px 22px}
+  nav{padding:0 22px;height:62px}
+  .hero-c{padding:0 22px;padding-top:62px}
+  .hero-coord{font-size:9px;letter-spacing:2px;margin-bottom:18px}
+  .hero-sub{font-size:14px;margin:18px 0 32px}
+  .hero-btns{flex-direction:column;gap:10px}
+  .btn-p,.btn-s{width:100%;text-align:center;justify-content:center}
+  .hero-scroll{left:22px;bottom:24px}
+  .stats-bar{padding:18px 22px;gap:16px}
+  .stat-n{font-size:26px}
+  .stat-l{font-size:9px}
+  .vals{grid-template-columns:1fr}
+  .prod-grid{grid-template-columns:1fr}
+  .boxes-grid{grid-template-columns:1fr;gap:10px}
+  .box-card:nth-child(5){grid-column:span 1}
+  .sub-cta{flex-direction:column;padding:28px 22px}
+  .sub-cta-right{align-items:flex-start;width:100%}
+  .btn-sub{width:100%}
+  .tech-cards{grid-template-columns:1fr}
+  .pat-blocks{grid-template-columns:1fr}
+  .b2b-inner{padding:28px 22px}
+  .form-row{grid-template-columns:1fr}
+  .contact-wrap{padding:28px 22px;border-radius:20px}
+  .pb{height:52vh!important}
+  .pb-cap{padding:28px 22px}
+  .map-outer{grid-template-columns:1fr}
+  footer{padding:36px 22px;flex-direction:column;align-items:flex-start;gap:20px}
+  .footer-links{display:flex;flex-wrap:wrap;gap:16px}
+  .footer-links a{font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
+  <a href="#productos" onclick="closeMenu()">Productos</a>
+  <a href="#suscripcion" onclick="closeMenu()">Suscripción</a>
+  <a href="#b2b" onclick="closeMenu()">B2B</a>
+  <a href="#ubicacion" onclick="closeMenu()">Ubicación</a>
+  <a href="#contacto" onclick="closeMenu()">Contacto</a>
+  <a href="#suscripcion" class="m-cta" onclick="closeMenu()">Suscribirme</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">
+    <svg width="28" height="34" viewBox="0 0 200 240" fill="none">
+      <path d="M100 10 L122 42 L100 42Z" fill="#70BA5E"/>
+      <path d="M72 44 L128 44 L118 70 L82 70Z" fill="#fff" opacity=".9"/>
+      <path d="M78 73 L122 73 L112 99 L88 99Z" fill="#fff" opacity=".9"/>
+      <path d="M84 102 L116 102 L106 128 L94 128Z" fill="#fff" opacity=".9"/>
+      <path d="M88 131 L112 131 L102 157 L98 157Z" fill="#fff" opacity=".9"/>
+      <path d="M92 160 L108 160 L100 186Z" fill="#fff" opacity=".9"/>
+    </svg>
+    <span class="nav-brand">VERTICAL 53°</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#suscripcion">Suscripción</a></li>
+    <li><a href="#b2b">B2B</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Suscribirme</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-c">
+    <div class="hero-coord">53°10'S · PUNTA ARENAS · PATAGONIA</div>
+    <h1 class="hero-h1">Cultivo <span class="g">vivo</span><br/>desde el<br/>fin del mundo<span class="sub-line">Future Farming · Innovation</span></h1>
+    <p class="hero-sub">Microgreens de alta densidad nutricional cultivados en sistemas verticales controlados en la Patagonia. Frescos, limpios, entregados a tu puerta.</p>
+    <div class="hero-btns">
+      <button class="btn-p" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Ver planes de suscripción</button>
+      <button class="btn-s" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Nuestros productos</button>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll para explorar</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat fade-in"><div class="stat-n">7–14</div><div class="stat-l">Días · ciclo cosecha</div></div>
+  <div class="stat fade-in"><div class="stat-n">40×</div><div class="stat-l">Más nutrientes</div></div>
+  <div class="stat fade-in"><div class="stat-n">100%</div><div class="stat-l">Sin agroquímicos</div></div>
+  <div class="stat fade-in"><div class="stat-n">53°S</div><div class="stat-l">Latitud Patagónica</div></div>
+</div>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="sec">
+  <div class="about-grid">
+    <div class="fade-in">
+      <div class="tag-label">Sobre nosotros</div>
+      <h2>Agricultura vertical<br/>en el fin del mundo</h2>
+      <div class="rule"></div>
+      <p class="body-text">Vertical 53° nació con la convicción de que el futuro de la alimentación está en los cultivos controlados, limpios y trazables. Desde Punta Arenas llevamos microgreens de alta calidad directamente a tu mesa.</p>
+    </div>
+    <div class="fade-in">
+      <div class="about-card">
+        <p>Cultivamos microgreens en contenedores adaptados para el clima subantártico. Sin suelo, sin pesticidas y con mínimo uso de agua, producimos todo el año independientemente del clima exterior.</p>
+        <span class="about-badge">Punta Arenas · Desde 2021</span>
+      </div>
+      <div class="vals">
+        <div class="val"><h4>Consistencia</h4><p>Producción estable los 365 días del año.</p></div>
+        <div class="val"><h4>Trazabilidad</h4><p>Sabes exactamente de dónde viene cada brote.</p></div>
+        <div class="val"><h4>Frescura</h4><p>Cosecha y entrega el mismo día.</p></div>
+        <div class="val"><h4>Innovación</h4><p>Tecnología de punta en ambiente extremo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BREAK 1 -->
+<div class="pb" style="height:65vh;background:#0a1a10">
+  <div class="pb-bg" style="background-image:url('https://drive.google.com/uc?export=view&id=12xQq9TwYdie0N_q9VjQevkffw-qubWeV')"></div>
+  <div class="pb-ov"></div>
+  <div class="pb-cap fade-in"><h3>Desde la semilla<br/>hasta tu mesa</h3><p>Semillas seleccionadas · cuidado artesanal · cosecha precisa</p></div>
+</div>
+
+<!-- PRODUCTOS -->
+<section id="productos" class="sec">
+  <div class="prod-header fade-in">
+    <div><div class="tag-label">Nuestros productos</div><h2>Variedades<br/>disponibles</h2></div>
+    <p style="font-size:14px;color:var(--gray);max-width:240px;font-weight:300;line-height:1.85">Selección curada según valor nutricional, sabor y demanda gastronómica.</p>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card fade-in"><span class="prod-icon">🌿</span><div class="prod-name">Rábano</div><div class="prod-desc">Sabor picante y fresco. Alto en vitamina C y antioxidantes.</div><div class="prod-avail">Alta disponibilidad →</div></div>
+    <div class="prod-card fade-in"><span class="prod-icon">🥦</span><div class="prod-name">Brócoli</div><div class="prod-desc">Rico en sulforafano. Ideal para cocina saludable y de alta gama.</div><div class="prod-avail">Alta disponibilidad →</div></div>
+    <div class="prod-card fade-in"><span class="prod-icon">🌻</span><div class="prod-name">Girasol</div><div class="prod-desc">Textura crujiente, sabor a nuez. Proteínas, zinc y vitamina E.</div><div class="prod-avail">Disponible →</div></div>
+    <div class="prod-card fade-in"><span class="prod-icon">🫛</span><div class="prod-name">Guisante</div><div class="prod-desc">Dulce y crujiente. Ideal para ensaladas y cocina nórdica.</div><div class="prod-avail">Disponible →</div></div>
+    <div class="prod-card fade-in"><span class="prod-icon">🟣</span><div class="prod-name">Col morada</div><div class="prod-desc">Intensa pigmentación. Alto en antocianinas y vitamina K.</div><div class="prod-avail">Disponible →</div></div>
+    <div class="prod-card fade-in"><span class="prod-icon">✦</span><div class="prod-name">Mix Especial</div><div class="prod-desc">Mezcla personalizada según las necesidades de tu cocina.</div><div class="prod-avail">A pedido →</div></div>
+  </div>
+</section>
+
+<!-- PHOTO BREAK 2 -->
+<div class="pb" style="height:62vh;background:#081510">
+  <div class="pb-bg" style="background-image:url('https://drive.google.com/uc?export=view&id=13gEDHBwHgOuC-rlx3XT-RhRe6K8aSzLd')"></div>
+  <div class="pb-ov"></div>
+  <div class="pb-cap fade-in"><h3>Riego preciso,<br/>cero desperdicio</h3><p>Irrigación controlada · eficiencia hídrica máxima</p></div>
+</div>
+
+<!-- SUSCRIPCIÓN -->
+<section id="suscripcion" class="sec">
+  <div class="sub-intro fade-in">
+    <div>
+      <div class="tag-label">Suscripción semanal</div>
+      <h2>Tu box de<br/>microgreens<br/>cada semana</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="sub-intro-right">
+      <span class="sub-badge">Entrega semanal · Punta Arenas</span>
+      <p class="body-text">Elige tu box, recíbela cada semana cosechada el mismo día. Sin compromisos largos — pausas o cancelas cuando quieras.</p>
+      <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Próximamente · Pago online habilitado</p>
+    </div>
+  </div>
+  <div class="boxes-grid fade-in">
+    <div class="box-card" onclick="selectBox(this,'Starter Box','$4.990/sem')">
+      <div class="box-check">✓</div><div class="box-icon">🌿</div><span class="box-tag">Starter</span>
+      <div class="box-name">Starter Box</div><div class="box-price">$4.990 <span>/semana</span></div>
+      <div class="box-desc">Para comenzar. Una variedad fresca cada semana.</div>
+      <ul class="box-contents"><li>1 variedad</li><li>100g aprox.</li><li>Entrega semanal</li></ul>
+    </div>
+    <div class="box-card" onclick="selectBox(this,'Duo Box','$8.990/sem')">
+      <div class="box-check">✓</div><div class="box-icon">🌿🥦</div><span class="box-tag">Duo</span>
+      <div class="box-name">Duo Box</div><div class="box-price">$8.990 <span>/semana</span></div>
+      <div class="box-desc">Dos variedades para más sabor y nutrición.</div>
+      <ul class="box-contents"><li>2 variedades</li><li>200g aprox.</li><li>Entrega semanal</li></ul>
+    </div>
+    <div class="box-card" onclick="selectBox(this,'Family Box','$14.990/sem')" style="padding-top:38px">
+      <div class="box-popular">⭐ Más popular</div><div class="box-check">✓</div>
+      <div class="box-icon">🌿🥦🌻</div><span class="box-tag">Family</span>
+      <div class="box-name">Family Box</div><div class="box-price">$14.990 <span>/semana</span></div>
+      <div class="box-desc">La favorita. Tres variedades para toda la familia.</div>
+      <ul class="box-contents"><li>3 variedades</li><li>350g aprox.</li><li>Receta incluida</li></ul>
+    </div>
+    <div class="box-card" onclick="selectBox(this,'Chef Box','$21.990/sem')">
+      <div class="box-check">✓</div><div class="box-icon">🌿🥦🌻🟣</div><span class="box-tag">Chef</span>
+      <div class="box-name">Chef Box</div><div class="box-price">$21.990 <span>/semana</span></div>
+      <div class="box-desc">Para cocineros apasionados. Cuatro variedades premium.</div>
+      <ul class="box-contents"><li>4 variedades</li><li>500g aprox.</li><li>Guía de uso</li></ul>
+    </div>
+    <div class="box-card" onclick="selectBox(this,'Premium Box','$29.990/sem')">
+      <div class="box-check">✓</div><div class="box-icon">✦</div>
+      <span class="box-tag" style="border-color:rgba(199,166,104,.3);color:var(--earth)">Premium</span>
+      <div class="box-name">Premium Box</div><div class="box-price" style="color:var(--earth)">$29.990 <span>/semana</span></div>
+      <div class="box-desc">La experiencia completa. Todas las variedades + mix exclusivo.</div>
+      <ul class="box-contents"><li>5 var. + mix</li><li>700g aprox.</li><li>Asesoría incluida</li></ul>
+    </div>
+  </div>
+  <div class="sub-cta fade-in">
+    <div class="sub-cta-left">
+      <h3>¿Listo para suscribirte?</h3>
+      <p>Próximamente habilitamos el pago online. Por ahora escríbenos con tu selección y coordinamos la entrega contigo.</p>
+    </div>
+    <div class="sub-cta-right">
+      <div class="selected-info" id="selectedInfo">— Selecciona una box —</div>
+      <button class="btn-sub" onclick="goToContact()">Quiero suscribirme →</button>
+      <div class="sub-note">Sin compromisos · Cancela cuando quieras</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BREAK 3 -->
+<div class="pb" style="height:78vh;background:#080d0a">
+  <div class="pb-bg" style="background-image:url('https://drive.google.com/uc?export=view&id=1ODHscThbx55nEbgBfrPb5um4dAbIbizV')"></div>
+  <div class="pb-ov" style="background:linear-gradient(to top,rgba(0,15,10,.9) 0%,rgba(0,15,10,.08) 52%)"></div>
+  <div class="pb-cap fade-in"><h3>Tecnología al<br/>servicio de<br/>la naturaleza</h3><p>LED espectro completo · control 24/7 · sin estacionalidad</p></div>
+</div>
+
+<!-- TECNOLOGÍA -->
+<section id="tecnologia" class="sec">
+  <div class="tech-grid">
+    <div class="fade-in">
+      <div class="tag-label">Tecnología</div>
+      <h2>Precisión industrial<br/>en ambiente<br/>subantártico</h2>
+      <div class="rule"></div>
+      <p class="body-text">Operamos en uno de los climas más extremos del mundo. Nuestros contenedores adaptados controlan temperatura, humedad, iluminación LED y ciclos de crecimiento con precisión milimétrica.</p>
+    </div>
+    <div class="tech-cards fade-in">
+      <div class="tc hi"><div class="tc-num">24/7</div><h4>Control ambiente</h4><p>Temperatura, humedad y CO₂ monitoreados en tiempo real.</p></div>
+      <div class="tc"><div class="tc-num">LED</div><h4>Espectro completo</h4><p>Iluminación ajustada a cada variedad y etapa.</p></div>
+      <div class="tc"><div class="tc-num">0</div><h4>Uso de suelo</h4><p>Sin tierra, sin pesticidas. Cultivo completamente limpio.</p></div>
+      <div class="tc hi"><div class="tc-num" style="color:var(--earth)">3×</div><h4>Contenedores</h4><p>Germinación, crecimiento y próximamente liofilizados.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- B2B -->
+<section id="b2b" class="sec" style="background:var(--white)">
+  <div class="tag-label fade-in">Canal B2B</div>
+  <h2 class="fade-in">¿Eres restaurante,<br/>hotel o distribuidor?</h2>
+  <div class="rule fade-in"></div>
+  <div style="height:32px"></div>
+  <div class="b2b-inner fade-in">
+    <div class="b2b-list">
+      <p class="body-text" style="margin-bottom:4px">Trabajamos con los operadores más exigentes de la Patagonia con entregas programadas y volúmenes consistentes.</p>
+      <div class="b2b-item"><span class="b2b-num">01</span><div><h4>Entregas programadas</h4><p>Frecuencia semanal o bi-semanal. Cadena de frío garantizada.</p></div></div>
+      <div class="b2b-item"><span class="b2b-num">02</span><div><h4>Volumen y consistencia</h4><p>Producción escalable. Sin cortes ni variaciones estacionales.</p></div></div>
+      <div class="b2b-item"><span class="b2b-num">03</span><div><h4>Precios mayoristas</h4><p>Condiciones preferenciales para contratos anuales.</p></div></div>
+      <div class="b2b-item"><span class="b2b-num">04</span><div><h4>Asesoría gastronómica</h4><p>Te acompañamos en la incorporación a tu carta.</p></div></div>
+    </div>
+    <div class="b2b-box">
+      <h3>¿A quiénes<br/>atendemos?</h3>
+      <p>Actualmente en Punta Arenas y Magallanes. Próximamente expandiremos cobertura.</p>
+      <div class="tags"><span class="tag-i">Restaurantes</span><span class="tag-i">Hoteles</span><span class="tag-i">Catering</span><span class="tag-i">Tiendas gourmet</span><span class="tag-i">Distribuidores</span></div>
+      <button class="btn-p" style="align-self:flex-start" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar info B2B</button>
+    </div>
+  </div>
+</section>
+
+<!-- PATAGONIA -->
+<section id="patagonia" class="sec">
+  <div class="pat-outer">
+    <div class="fade-in">
+      <div class="tag-label">Por qué Patagonia</div>
+      <h2>El entorno más<br/>puro del mundo</h2>
+      <div class="rule"></div>
+      <p class="body-text">La Patagonia no es solo nuestro origen, es nuestra ventaja competitiva. Agua prístina, aire limpio y producción indoor hacen de los 53° Sur el lugar ideal para cultivos de precisión únicos en Chile.</p>
+    </div>
+    <div class="pat-blocks fade-in">
+      <div class="pat-b d"><div class="pat-num">−10°C</div><h4>Clima exterior</h4><p>Operamos independiente del clima extremo.</p></div>
+      <div class="pat-b l"><div class="pat-num">100%</div><h4>Agua pura</h4><p>Sin contaminantes. Origen Patagonia austral.</p></div>
+      <div class="pat-b l"><div class="pat-num">365</div><h4>Días activos</h4><p>Producción garantizada todo el año.</p></div>
+      <div class="pat-b d"><div class="pat-num">0</div><h4>Agroquímicos</h4><p>Cero pesticidas ni fertilizantes sintéticos.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section id="ubicacion" class="sec" style="background:var(--white)">
+  <div class="map-outer">
+    <div class="fade-in">
+      <div class="tag-label">Ubicación</div>
+      <h2>En el corazón<br/>de la Patagonia</h2>
+      <div class="rule"></div>
+      <p class="body-text">Operamos desde Punta Arenas, la ciudad más austral del mundo con más de 100.000 habitantes, a 53° de latitud sur en la región de Magallanes.</p>
+      <div class="map-coord-card">
+        <h4>Coordenadas exactas</h4>
+        <div class="coord-row"><span class="coord-label">Latitud</span><span class="coord-val">53°10'S</span></div>
+        <div class="coord-row"><span class="coord-label">Longitud</span><span class="coord-val">70°54'W</span></div>
+        <div class="coord-row"><span class="coord-label">Región</span><span class="coord-val">Magallanes</span></div>
+        <div class="coord-row"><span class="coord-label">País</span><span class="coord-val">Chile</span></div>
+      </div>
+      <p class="body-text" style="margin-top:16px;font-size:13px">Realizamos entregas en Punta Arenas. Próximamente expandiremos a toda la región.</p>
+    </div>
+    <div class="map-wrap fade-in">
+      <svg viewBox="0 0 520 580" xmlns="http://www.w3.org/2000/svg" style="background:#dceee8">
+        <rect width="520" height="580" fill="#dceee8"/>
+        <g stroke="rgba(23,102,99,0.12)" stroke-width="0.7">
+          <line x1="0" y1="116" x2="520" y2="116"/><line x1="0" y1="232" x2="520" y2="232"/>
+          <line x1="0" y1="348" x2="520" y2="348"/><line x1="0" y1="464" x2="520" y2="464"/>
+          <line x1="104" y1="0" x2="104" y2="580"/><line x1="208" y1="0" x2="208" y2="580"/>
+          <line x1="312" y1="0" x2="312" y2="580"/><line x1="416" y1="0" x2="416" y2="580"/>
+        </g>
+        <g font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(23,102,99,0.45)" letter-spacing="0.5">
+          <text x="6" y="112">50°S</text><text x="6" y="228">52°S</text>
+          <text x="6" y="344">54°S</text><text x="6" y="460">56°S</text>
+          <text x="96" y="572">72°W</text><text x="196" y="572">70°W</text><text x="300" y="572">68°W</text>
+        </g>
+        <path d="M 95 0 L 115 18 L 108 35 L 122 52 L 118 70 L 130 88 L 125 105 L 138 118 L 132 135 L 148 150 L 142 168 L 155 182 L 150 198 L 162 210 L 158 228 L 170 242 L 165 258 L 175 272 L 172 285 L 180 295 L 185 308 L 178 318 L 188 330 L 182 342 L 195 355 L 190 365 L 200 375 L 195 385 L 205 395 L 200 405 L 212 415 L 207 425 L 218 435 L 215 445 L 225 455 L 222 465 L 232 475 L 229 485 L 238 492 L 236 502 L 245 510 L 242 520 L 250 530 L 248 540 L 258 548 L 256 558 L 265 565 L 263 575 L 270 580 L 0 580 L 0 0 Z" fill="#c8dfc8" stroke="#a8c8a8" stroke-width="1"/>
+        <path d="M 520 0 L 520 580 L 270 580 L 263 575 L 265 565 L 260 558 L 262 548 L 255 540 L 257 530 L 250 522 L 252 512 L 245 502 L 247 492 C 250 485 255 478 258 470 C 262 462 258 452 262 444 C 268 436 272 428 276 420 C 280 412 278 402 284 395 C 290 388 292 378 296 370 C 300 362 304 354 308 346 C 318 335 325 325 335 318 C 345 311 355 305 365 298 C 375 290 382 280 390 272 C 398 264 404 254 412 247 C 418 241 422 232 428 225 C 434 218 440 210 446 203 C 452 196 458 188 464 181 C 470 174 472 164 478 157 C 484 150 488 140 490 132 C 492 123 495 113 497 104 C 500 93 502 82 504 72 C 506 61 506 48 507 37 L 508 18 L 510 0 Z" fill="#d4e6d0" stroke="#b0caa8" stroke-width="1"/>
+        <path d="M 195 395 C 202 390 212 388 222 385 C 235 382 248 380 260 378 C 275 376 290 374 305 372 C 320 370 335 368 350 366 C 365 364 378 362 390 360 C 402 358 412 354 420 350 C 430 345 438 338 445 330 C 452 322 458 313 462 304 C 466 295 468 284 468 273 C 468 262 466 251 462 241 C 458 231 452 222 445 214 C 438 206 430 200 421 196 C 412 192 402 190 392 190 C 382 190 372 193 363 198 C 354 203 346 210 340 218 C 334 226 330 235 326 244 C 322 253 320 263 318 272 C 315 282 314 292 312 302 C 309 313 306 323 302 333 C 298 343 293 352 286 360 C 279 368 270 374 261 379 C 252 384 242 387 232 390 C 222 393 212 394 202 396 Z" fill="#c0d8b8" stroke="#9cbaa0" stroke-width="1.2"/>
+        <path d="M 248 445 C 258 440 270 437 282 435 C 294 433 306 432 318 432 C 330 432 342 433 352 437 C 362 441 370 447 375 455 C 380 463 382 472 380 481 C 378 490 373 498 366 504 C 359 510 350 514 341 516 C 332 518 322 518 313 516 C 304 514 295 510 288 504 C 281 498 276 490 273 481 C 270 472 270 462 272 453 C 274 448 250 448 248 445 Z" fill="#b8d0b0" stroke="#98b898" stroke-width="1"/>
+        <path d="M 195 395 C 200 398 208 400 215 400 C 225 400 238 398 248 395 C 260 392 270 388 280 385 C 290 382 300 380 310 378 C 320 376 330 375 340 374 C 350 373 360 372 370 370 C 380 368 390 365 398 360 L 400 375 C 390 378 380 381 370 383 C 360 385 350 387 340 388 C 330 389 320 390 310 391 C 300 392 290 393 280 394 C 270 395 260 396 250 397 C 240 398 230 399 220 400 C 210 401 200 401 195 400 Z" fill="#b8d8e8" opacity="0.8"/>
+        <path d="M 248 440 C 258 437 270 435 282 434 C 294 433 306 433 318 434 C 330 435 342 437 352 440 L 352 445 C 342 442 330 440 318 439 C 306 438 294 438 282 439 C 270 440 258 442 248 445 Z" fill="#b8d8e8" opacity="0.8"/>
+        <!-- Punta Arenas -->
+        <circle cx="240" cy="310" r="22" fill="none" stroke="#70BA5E" stroke-width="1.5" opacity="0.3"/>
+        <circle cx="240" cy="310" r="15" fill="none" stroke="#70BA5E" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="240" cy="310" r="8" fill="#176663" stroke="#ffffff" stroke-width="2.5"/>
+        <circle cx="240" cy="310" r="3" fill="#70BA5E"/>
+        <line x1="240" y1="302" x2="240" y2="278" stroke="#176663" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
+        <g transform="translate(240,270)">
+          <rect x="-54" y="-20" width="108" height="44" rx="8" fill="#176663" opacity="0.95"/>
+          <text x="0" y="-4" text-anchor="middle" font-family="'Sora',sans-serif" font-size="11" font-weight="700" fill="#ffffff">PUNTA ARENAS</text>
+          <text x="0" y="12" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#70BA5E" letter-spacing="0.5">53°10'S · 70°54'W</text>
+        </g>
+        <circle cx="198" cy="248" r="4" fill="#176663" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+        <text x="206" y="251" font-family="'Inter',sans-serif" font-size="9" fill="#176663" opacity="0.8">Pto. Natales</text>
+        <circle cx="296" cy="488" r="4" fill="#176663" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+        <text x="304" y="491" font-family="'Inter',sans-serif" font-size="9" fill="#176663" opacity="0.8">Pto. Williams</text>
+        <circle cx="268" cy="330" r="3.5" fill="#176663" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+        <text x="275" y="333" font-family="'Inter',sans-serif" font-size="9" fill="#176663" opacity="0.8">Porvenir</text>
+        <g transform="translate(18,490)">
+          <rect width="148" height="76" rx="10" fill="rgba(255,255,255,0.85)" stroke="rgba(23,102,99,0.15)" stroke-width="1"/>
+          <circle cx="20" cy="20" r="5" fill="#176663" stroke="#fff" stroke-width="1.5"/>
+          <text x="32" y="24" font-family="'Inter',sans-serif" font-size="9.5" fill="#001A2B" font-weight="500">Punta Arenas</text>
+          <circle cx="20" cy="40" r="3.5" fill="#176663" stroke="#fff" stroke-width="1.5" opacity="0.7"/>
+          <text x="32" y="44" font-family="'Inter',sans-serif" font-size="9.5" fill="#6B7280">Otras ciudades</text>
+          <rect x="11" y="54" width="18" height="6" rx="2" fill="#b8d8e8" opacity="0.8"/>
+          <text x="32" y="62" font-family="'Inter',sans-serif" font-size="9.5" fill="#6B7280">Canales</text>
+        </g>
+        <g transform="translate(470,32)">
+          <circle cx="0" cy="0" r="18" fill="rgba(255,255,255,0.8)" stroke="rgba(23,102,99,0.2)" stroke-width="1"/>
+          <path d="M0 -11 L4 4 L0 1 L-4 4 Z" fill="#176663"/>
+          <path d="M0 11 L4 -4 L0 -1 L-4 -4 Z" fill="#ccc"/>
+          <text x="0" y="6" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#176663" font-weight="600">N</text>
+        </g>
+        <rect width="520" height="580" fill="none" stroke="rgba(23,102,99,0.15)" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="sec" style="background:var(--bg)">
+  <div class="contact-wrap">
+    <div class="tag-label fade-in">Contacto</div>
+    <h2 class="fade-in">Conversemos</h2>
+    <div class="rule fade-in"></div>
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <p class="body-text">¿Quieres suscribirte a una box o eres un operador B2B? Escríbenos y te respondemos a la brevedad.</p>
+        <div class="ci"><h4>Email</h4><p>contacto@vertical53.cl</p></div>
+        <div class="ci"><h4>Teléfono</h4><p>+56 9 XXXX XXXX</p></div>
+        <div class="ci"><h4>Ubicación</h4><p>Punta Arenas, Región de Magallanes</p></div>
+        <div class="ci"><h4>Horario</h4><p>Lunes a Viernes · 9:00 – 18:00</p></div>
+      </div>
+      <div class="form fade-in">
+        <div class="form-row">
+          <div class="field"><label>Nombre</label><input type="text" id="f-nombre" placeholder="Tu nombre"/></div>
+          <div class="field"><label>Teléfono</label><input type="tel" placeholder="+56 9 ..."/></div>
+        </div>
+        <div class="field"><label>Email</label><input type="email" placeholder="correo@ejemplo.cl"/></div>
+        <div class="field"><label>¿Qué te interesa?</label>
+          <select id="f-interes">
+            <option value="">Selecciona una opción</option>
+            <option>Suscripción semanal B2C</option>
+            <option>Proveedor B2B – Restaurante</option>
+            <option>Proveedor B2B – Hotel</option>
+            <option>Proveedor B2B – Otro</option>
+            <option>Solo tengo una pregunta</option>
+          </select>
+        </div>
+        <div class="field"><label>Mensaje</label><textarea id="f-mensaje" placeholder="Cuéntanos lo que necesitas..."></textarea></div>
+        <button class="form-btn">Enviar mensaje →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">
+      <svg width="30" height="36" viewBox="0 0 200 240" fill="none">
+        <path d="M100 10 L122 42 L100 42Z" fill="#70BA5E"/>
+        <path d="M72 44 L128 44 L118 70 L82 70Z" fill="#fff" opacity=".8"/>
+        <path d="M78 73 L122 73 L112 99 L88 99Z" fill="#fff" opacity=".8"/>
+        <path d="M84 102 L116 102 L106 128 L94 128Z" fill="#fff" opacity=".8"/>
+        <path d="M88 131 L112 131 L102 157 L98 157Z" fill="#fff" opacity=".8"/>
+        <path d="M92 160 L108 160 L100 186Z" fill="#fff" opacity=".8"/>
+      </svg>
+      <div>
+        <div class="footer-name">VERTICAL 53°</div>
+        <div class="footer-tagline">Future Farming · Innovation</div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Vertical 53° SpA · Punta Arenas, Chile</div>
+  </div>
+  <div class="footer-links">
+    <a href="#nosotros">Nosotros</a><a href="#productos">Productos</a>
+    <a href="#suscripcion">Suscripción</a><a href="#b2b">B2B</a>
+    <a href="#ubicacion">Ubicación</a><a href="#contacto">Contacto</a>
+  </div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.3)">53°10'S · PATAGONIA</div>
+</footer>
+
+<script>
+// Nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>80),{passive:true});
+
+// Hamburger
+function toggleMenu(){
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+}
+function closeMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Fade-in
+const obs = new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// Boxes
+let selBox = null;
+function selectBox(el,name,price){
+  document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  selBox={name,price};
+  document.getElementById('selectedInfo').textContent=name+' · '+price;
+}
+function goToContact(){
+  if(selBox){
+    document.getElementById('f-interes').value='Suscripción semanal B2C';
+    document.getElementById('f-mensaje').value='Me interesa suscribirme a la '+selBox.name+' ('+selBox.price+').';
+  }
+  document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
+}
+
+// Parallax
+const pbBgs = document.querySelectorAll('.pb-bg');
+window.addEventListener('scroll',()=>{
+  pbBgs.forEach(bg=>{
+    const r=bg.closest('.pb').getBoundingClientRect();
+    bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;
+  });
+},{passive:true});
+</script>
+</body>
+</html>
