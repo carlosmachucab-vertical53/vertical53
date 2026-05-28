@@ -49,8 +49,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
 
 /* HERO */
 #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--gp)}
-.hero-photo{position:absolute;inset:0;background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20CRECIMIENTO%20CONTROLADO%20DSC06356.jpg');background-size:cover;background-position:center}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,20,15,.85) 40%,rgba(0,20,15,.35) 100%)}
+.hero-photo{position:absolute;inset:0;background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20CRECIMIENTO%20CONTROLADO%20DSC06356.jpg');background-size:cover;background-position:center 18%{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,20,15,.85) 40%,rgba(0,20,15,.35) 100%)}
 .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(112,186,94,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(112,186,94,.04) 1px,transparent 1px);background-size:60px 60px}
 .hero-c{position:relative;z-index:2;padding:0 72px;max-width:740px;padding-top:70px}
 .hero-coord{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--gs);opacity:.8;margin-bottom:28px;display:flex;align-items:center;gap:14px}
@@ -400,38 +399,88 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     </div>
   </div>
   <div class="boxes-grid fade-in">
-    <div class="box-card" onclick="selectBox(this,'Starter Box','$4.990/sem')">
-      <div class="box-check">✓</div><div class="box-icon">🌿</div><span class="box-tag">Starter</span>
-      <div class="box-name">Starter Box</div><div class="box-price">$4.990 <span>/semana</span></div>
-      <div class="box-desc">Para comenzar. Una variedad fresca cada semana.</div>
-      <ul class="box-contents"><li>1 variedad</li><li>100g aprox.</li><li>Entrega semanal</li></ul>
+
+    <!-- DETOX -->
+    <div class="box-card" onclick="selectBox(this,'Box Detox','A consultar')">
+      <div class="box-check">✓</div>
+      <div class="box-icon">🥤</div>
+      <span class="box-tag">Detox</span>
+      <div class="box-name">Detox</div>
+      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-desc">Para smoothies y batidos. Del freezer directo a la licuadora. Sin lavar, sin cortar.</div>
+      <ul class="box-contents">
+        <li>7 potes · 5g c/u · congelados</li>
+        <li>Brócoli · Col verde</li>
+        <li>Amaranto · Mizuna</li>
+        <li>Ideal deportistas</li>
+      </ul>
     </div>
-    <div class="box-card" onclick="selectBox(this,'Duo Box','$8.990/sem')">
-      <div class="box-check">✓</div><div class="box-icon">🌿🥦</div><span class="box-tag">Duo</span>
-      <div class="box-name">Duo Box</div><div class="box-price">$8.990 <span>/semana</span></div>
-      <div class="box-desc">Dos variedades para más sabor y nutrición.</div>
-      <ul class="box-contents"><li>2 variedades</li><li>200g aprox.</li><li>Entrega semanal</li></ul>
+
+    <!-- BRUNCH -->
+    <div class="box-card" onclick="selectBox(this,'Box Brunch','A consultar')">
+      <div class="box-check">✓</div>
+      <div class="box-icon">🍳</div>
+      <span class="box-tag">Brunch</span>
+      <div class="box-name">Brunch</div>
+      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-desc">Comes lo que cortas. Frescura recién cosechada en tu mesa cada mañana.</div>
+      <ul class="box-contents">
+        <li>4 bandejas vivas</li>
+        <li>Mizuna · Tat soi · Amaranto</li>
+        <li>Vive 7+ días en cocina</li>
+        <li>Tostadas · huevos · palta</li>
+      </ul>
     </div>
-    <div class="box-card" onclick="selectBox(this,'Family Box','$14.990/sem')" style="padding-top:38px">
-      <div class="box-popular">⭐ Más popular</div><div class="box-check">✓</div>
-      <div class="box-icon">🌿🥦🌻</div><span class="box-tag">Family</span>
-      <div class="box-name">Family Box</div><div class="box-price">$14.990 <span>/semana</span></div>
-      <div class="box-desc">La favorita. Tres variedades para toda la familia.</div>
-      <ul class="box-contents"><li>3 variedades</li><li>350g aprox.</li><li>Receta incluida</li></ul>
+
+    <!-- SPICY -->
+    <div class="box-card" onclick="selectBox(this,'Box Spicy','A consultar')" style="padding-top:38px">
+      <div class="box-popular">🔥 Más intenso</div>
+      <div class="box-check">✓</div>
+      <div class="box-icon">🌶️</div>
+      <span class="box-tag">Spicy</span>
+      <div class="box-name">Spicy</div>
+      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde en el plato.</div>
+      <ul class="box-contents">
+        <li>5 bandejas vivas</li>
+        <li>Rábano · Mostaza · Rúcula</li>
+        <li>Verde y morado</li>
+        <li>Foodies · chefs amateur</li>
+      </ul>
     </div>
-    <div class="box-card" onclick="selectBox(this,'Chef Box','$21.990/sem')">
-      <div class="box-check">✓</div><div class="box-icon">🌿🥦🌻🟣</div><span class="box-tag">Chef</span>
-      <div class="box-name">Chef Box</div><div class="box-price">$21.990 <span>/semana</span></div>
-      <div class="box-desc">Para cocineros apasionados. Cuatro variedades premium.</div>
-      <ul class="box-contents"><li>4 variedades</li><li>500g aprox.</li><li>Guía de uso</li></ul>
+
+    <!-- PROTEÍNA -->
+    <div class="box-card" onclick="selectBox(this,'Box Proteína','A consultar')">
+      <div class="box-check">✓</div>
+      <div class="box-icon">💪</div>
+      <span class="box-tag">Proteína</span>
+      <div class="box-name">Proteína</div>
+      <div class="box-price" style="font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-desc">Densidad nutricional para quienes entrenan y rinden. Alto aporte proteico.</div>
+      <ul class="box-contents">
+        <li>4 bandejas vivas</li>
+        <li>Brócoli · Rábano · Arveja</li>
+        <li>Post-entrenamiento</li>
+        <li>Nutrición consciente</li>
+      </ul>
     </div>
-    <div class="box-card" onclick="selectBox(this,'Premium Box','$29.990/sem')">
-      <div class="box-check">✓</div><div class="box-icon">✦</div>
-      <span class="box-tag" style="border-color:rgba(199,166,104,.3);color:var(--earth)">Premium</span>
-      <div class="box-name">Premium Box</div><div class="box-price" style="color:var(--earth)">$29.990 <span>/semana</span></div>
-      <div class="box-desc">La experiencia completa. Todas las variedades + mix exclusivo.</div>
-      <ul class="box-contents"><li>5 var. + mix</li><li>700g aprox.</li><li>Asesoría incluida</li></ul>
+
+    <!-- KIDS -->
+    <div class="box-card" onclick="selectBox(this,'Box Kids','A consultar')">
+      <div class="box-check">✓</div>
+      <div class="box-icon">🧒</div>
+      <span class="box-tag" style="border-color:rgba(199,166,104,.3);color:var(--earth)">Kids</span>
+      <div class="box-name">Kids</div>
+      <div class="box-price" style="color:var(--earth);font-size:12px;letter-spacing:1px">A consultar</div>
+      <div class="box-desc">Nutrición que entra disfrazada. Brócoli neutro, sin picor. Los niños no lo notan.</div>
+      <ul class="box-contents">
+        <li>1 bandeja viva brócoli</li>
+        <li>Sabor neutro · sin picor</li>
+        <li>Jugos · comidas · postres</li>
+        <li>Familias con niños</li>
+      </ul>
     </div>
+
   </div>
   <div class="sub-cta fade-in">
     <div class="sub-cta-left">
@@ -448,7 +497,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 
 <!-- PHOTO BREAK 3 — LEDs -->
 <div class="pb" style="height:78vh;background:#080d0a">
-  <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/VMG%20MARZO%20PREPARACIONES.png')"></div>
+  <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/LEDS%20DSC06306.jpg')"></div>
   <div class="pb-ov" style="background:linear-gradient(to top,rgba(0,15,10,.9) 0%,rgba(0,15,10,.08) 52%)"></div>
   <div class="pb-cap fade-in"><h3>Tecnología al<br/>servicio de<br/>la naturaleza</h3><p>LED espectro completo · control 24/7 · sin estacionalidad</p></div>
 </div>
