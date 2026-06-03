@@ -500,7 +500,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-detox"></div>
       <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="subscribeBox(event,'detox')">🌱 Quiero suscribirme</button>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'detox')">Quiero suscribirme →</button>
     <div class="box-card" id="box-brunch" onclick="selectBox(this,'Brunch')">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
@@ -514,7 +514,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-brunch"></div>
       <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="subscribeBox(event,'brunch')">🌱 Quiero suscribirme</button>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'brunch')">Quiero suscribirme →</button>
     <div class="box-card" id="box-spicy" onclick="selectBox(this,'Spicy')">
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
@@ -528,7 +528,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-spicy"></div>
       <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="subscribeBox(event,'spicy')">🌱 Quiero suscribirme</button>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'spicy')">Quiero suscribirme →</button>
     <div class="box-card" id="box-protein" onclick="selectBox(this,'Proteína')">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
@@ -798,48 +798,16 @@ function goToContact(){
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
-// Suscripción directa desde box
-const NAMES = {detox:'Detox',brunch:'Brunch',spicy:'Spicy',protein:'Proteína'};
-async function subscribeBox(e, id){
+// Ir al formulario con datos pre-llenados
+function goToContactBox(e, id){
   e.stopPropagation();
-  const btn = e.target;
   const size = currentSize[id]||'M';
   const contents = buildContents(id, size);
   const name = NAMES[id];
-  const count = {S:3,M:5,L:8}[size];
-  const msg = `Nueva suscripción solicitada:\n\nBox: ${name}\nTamaño: ${size} (${count} brotes)\nContenido: ${contents.join(', ')}\n\nEl cliente solicita ser contactado para coordinar la primera entrega.`;
-  btn.textContent='Enviando…';
-  btn.style.pointerEvents='none';
-  try{
-    const res = await fetch('https://formspree.io/f/xlgkejdp',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        _subject: `Nueva suscripción Box ${name} talla ${size} · Vertical 53°`,
-        box: name,
-        tamaño: size,
-        contenido: contents.join(', '),
-        mensaje: msg
-      })
-    });
-    if(res.ok){
-      btn.textContent='✓ Solicitud enviada';
-      btn.style.background='linear-gradient(135deg,#22a35a,#14532d)';
-      setTimeout(()=>{
-        btn.textContent='🌱 Quiero suscribirme';
-        btn.style.background='';
-        btn.style.pointerEvents='auto';
-      },3500);
-    } else { throw new Error(); }
-  } catch {
-    btn.textContent='Error · intenta de nuevo';
-    btn.style.background='#e53e3e';
-    setTimeout(()=>{
-      btn.textContent='🌱 Quiero suscribirme';
-      btn.style.background='';
-      btn.style.pointerEvents='auto';
-    },3000);
-  }
+  document.getElementById('f-interes').value = 'Suscripción semanal B2C';
+  document.getElementById('f-mensaje').value =
+    `Hola, me interesa suscribirme a la Box ${name} talla ${size}.\nContenido: ${contents.join(', ')}.`;
+  document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 async function sendForm(e){
   e.preventDefault();
