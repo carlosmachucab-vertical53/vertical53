@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --navy:#001A2B;--gp:#176663;--gs:#70BA5E;
-  --earth:#C7A668;--bg:#F5F7F5;--white:#fff;
-  --gray:#6B7280;--lg:#f0f8f0;--r:20px;
-}
+:root{--navy:#001A2B;--gp:#176663;--gs:#70BA5E;--earth:#C7A668;--bg:#F5F7F5;--white:#fff;--gray:#6B7280;--lg:#f0f8f0;--r:20px}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden}
 .sec{padding:96px 72px}
@@ -28,7 +24,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 72px;height:70px;d
 nav.scrolled{background:rgba(255,255,255,.97);backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(0,26,43,.07)}
 .nav-logo{display:flex;align-items:center;text-decoration:none}
 .nav-logo img{height:52px;width:auto;transition:.3s}
-nav.scrolled .nav-logo img{opacity:1}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:11px;letter-spacing:1.5px;font-weight:400;color:rgba(255,255,255,.7);transition:.3s;text-transform:uppercase;text-decoration:none}
 nav.scrolled .nav-links a{color:var(--navy);opacity:.6}
@@ -94,26 +89,12 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .pb-cap h3{font-family:'Sora',sans-serif;font-size:clamp(22px,4vw,50px);font-weight:700;letter-spacing:-.5px;line-height:1.06;margin-bottom:10px}
 .pb-cap p{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:300;letter-spacing:2.5px;color:rgba(255,255,255,.38);text-transform:uppercase}
 
-/* PRODUCTOS */
-#productos{background:var(--bg)}
-.prod-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px}
-.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.prod-card{background:var(--white);padding:34px 28px;transition:.35s;cursor:default;border-radius:20px;border:1.5px solid transparent;position:relative;overflow:hidden}
-.prod-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--gp),var(--gs));transform:scaleX(0);transform-origin:left;transition:.4s}
-.prod-card:hover::after{transform:scaleX(1)}
-.prod-card:hover{border-color:rgba(112,186,94,.2);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,26,43,.09)}
-.prod-icon{font-size:26px;margin-bottom:16px;display:block}
-.prod-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:600;margin-bottom:8px;color:var(--navy)}
-.prod-desc{font-size:13px;line-height:1.85;color:var(--gray);font-weight:300;margin-bottom:14px}
-.prod-avail{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gp)}
-
 /* NUTRICIÓN */
 #nutricion{background:var(--navy);position:relative;overflow:hidden}
 #nutricion h2{color:var(--white)}
 #nutricion .tag-label{color:var(--gs)}
 #nutricion .tag-label::before{background:var(--gs)}
 #nutricion .body-text{color:rgba(255,255,255,.45)}
-.nutri-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:0}
 .nutri-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .nutri-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:28px;border-radius:18px;transition:.3s}
 .nutri-card:hover{background:rgba(112,186,94,.08);border-color:rgba(112,186,94,.25);transform:translateY(-3px)}
@@ -134,44 +115,34 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .sub-intro-right{display:flex;flex-direction:column;gap:14px}
 .sub-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(112,186,94,.1);border:1px solid rgba(112,186,94,.25);border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gp);text-transform:uppercase;width:fit-content}
 .sub-badge::before{content:'●';font-size:8px;color:var(--gs)}
-.boxes-grid{display:flex;flex-direction:row;gap:12px;margin-bottom:40px;overflow-x:auto;padding-bottom:8px}
-.boxes-grid::-webkit-scrollbar{height:4px}
-.boxes-grid::-webkit-scrollbar-track{background:var(--bg)}
-.boxes-grid::-webkit-scrollbar-thumb{background:var(--gs);border-radius:4px}
-.box-card{flex:1;min-width:200px}
+.boxes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px}
 .box-card{background:var(--bg);border-radius:20px;padding:26px 18px;display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:.3s;border:2px solid transparent;position:relative;overflow:hidden}
 .box-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,26,43,.09);border-color:var(--gs)}
 .box-card.selected{background:var(--gp);border-color:var(--gs);transform:translateY(-5px);box-shadow:0 16px 40px rgba(23,102,99,.2)}
 .box-card.selected .box-name,.box-card.selected .box-desc{color:var(--white)}
-.box-card.selected .box-contents li{color:rgba(255,255,255,.6)}
 .box-card.selected .box-tag{background:var(--gs);color:var(--white);border-color:var(--gs)}
 .box-card.selected .box-price{color:var(--gs)}
 .box-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--gs);display:none;align-items:center;justify-content:center;font-size:10px;color:var(--white)}
 .box-card.selected .box-check{display:flex}
 .box-icon{font-size:28px}
-.box-popular{position:absolute;top:0;left:0;right:0;background:var(--gs);padding:5px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--white)}
 .box-tag{display:inline-block;padding:4px 10px;border:1px solid rgba(23,102,99,.25);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gp);border-radius:6px;transition:.3s;width:fit-content}
 .box-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);transition:.3s}
 .box-price{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gp);letter-spacing:1px;transition:.3s}
 .box-desc{font-size:11px;font-weight:300;color:var(--gray);line-height:1.7;transition:.3s}
-.box-contents{list-style:none;display:flex;flex-direction:column;gap:4px}
-.box-contents li{font-size:11px;color:var(--gray);font-weight:300;display:flex;align-items:center;gap:5px;transition:.3s}
-.box-contents li::before{content:'·';color:var(--gs);font-size:14px}
-/* SIZES */
-.size-selector{display:flex;gap:8px;margin-bottom:10px}
+.size-selector{display:flex;gap:8px}
 .size-btn{padding:6px 14px;border:1.5px solid rgba(23,102,99,.3);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);border-radius:8px;cursor:pointer;transition:.25s;font-weight:400}
 .size-btn:hover{border-color:var(--gs);color:var(--gs)}
 .size-btn.active{background:var(--gp);border-color:var(--gp);color:var(--white)}
 .box-card.selected .size-btn{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
 .box-card.selected .size-btn.active{background:var(--gs);border-color:var(--gs);color:var(--white)}
 .size-info{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--gp);opacity:.8;line-height:1.6;transition:.3s}
-.box-card.selected .size-info{color:rgba(255,255,255,.55)};border-radius:24px;padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border:1px solid rgba(112,186,94,.18)}
-.sub-cta-left h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:7px}
-.sub-cta-left p{font-size:14px;font-weight:300;color:var(--gray);max-width:400px;line-height:1.8}
-.sub-cta-right{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
-.selected-info{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gp)}
-.btn-sub{background:var(--gp);color:var(--white);padding:14px 28px;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:.3s;border-radius:12px;min-width:180px}
-.btn-sub:hover{background:var(--gs);transform:translateY(-2px)}
+.box-card.selected .size-info{color:rgba(255,255,255,.55)}
+.box-sub-btn{width:100%;padding:14px 20px;background:var(--gp);color:var(--white);border:none;border-radius:50px;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s ease;margin-top:6px;opacity:0;transform:translateY(8px);pointer-events:none;letter-spacing:.3px;box-shadow:0 4px 16px rgba(23,102,99,.2)}
+.box-card.selected .box-sub-btn{opacity:1;transform:translateY(0);pointer-events:auto}
+.box-sub-btn:hover{background:#0d4f4c;box-shadow:0 8px 24px rgba(23,102,99,.35);transform:translateY(-2px)!important}
+.sub-cta{background:var(--lg);border-radius:24px;padding:40px;text-align:center;border:1px solid rgba(112,186,94,.18)}
+.sub-cta h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.sub-cta p{font-size:14px;font-weight:300;color:var(--gray);line-height:1.8;margin-bottom:12px}
 .sub-note{font-size:11px;color:var(--gray);font-family:'IBM Plex Mono',monospace;letter-spacing:1px}
 
 /* TECNOLOGÍA */
@@ -244,15 +215,16 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .field textarea{resize:vertical;min-height:96px}
 .form-btn{background:var(--gp);color:var(--white);padding:14px 36px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:.3s;align-self:flex-start;border-radius:10px}
 .form-btn:hover{background:var(--gs);transform:translateY(-2px)}
+.form-status{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;margin-top:8px;min-height:18px}
 
 /* WHATSAPP */
 .wa-wrap{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-.wa-bubble{background:var(--white);border-radius:16px;padding:14px 18px;box-shadow:0 4px 24px rgba(0,0,0,.15);max-width:220px;opacity:0;transform:translateY(8px) scale(.95);transition:all .25s ease;pointer-events:none;border:1px solid rgba(0,0,0,.06)}
+.wa-bubble{background:var(--white);border-radius:16px;padding:14px 18px;box-shadow:0 4px 24px rgba(0,0,0,.15);max-width:220px;opacity:0;transform:translateY(8px) scale(.95);transition:all .25s ease;pointer-events:none;border:1px solid rgba(0,0,0,.06);position:relative}
 .wa-bubble.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
 .wa-bubble p{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px}
 .wa-bubble span{font-size:12px;font-weight:300;color:var(--gray);line-height:1.5;display:block}
 .wa-bubble-arrow{position:absolute;bottom:-7px;right:22px;width:14px;height:14px;background:var(--white);border-right:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06);transform:rotate(45deg)}
-.wa-btn{width:58px;height:58px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:all .25s ease;position:relative}
+.wa-btn{width:58px;height:58px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:all .25s ease}
 .wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.5)}
 .wa-btn svg{width:30px;height:30px}
 .wa-confirm{display:none;flex-direction:column;gap:8px;width:100%}
@@ -262,16 +234,16 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .wa-confirm-btns{display:flex;gap:8px}
 .wa-yes{background:#25D366;color:var(--white);border:none;padding:9px 18px;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;flex:1}
 .wa-yes:hover{background:#1ebe5d}
-.wa-no{background:var(--bg);color:var(--gray);border:none;padding:9px 14px;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:400;cursor:pointer;transition:.2s}
-.wa-no:hover{background:var(--border);color:var(--navy)}
-@media(max-width:600px){.wa-wrap{bottom:20px;right:16px}.wa-btn{width:52px;height:52px}}background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.footer-logo-img{height:56px;width:auto;opacity:.9}
+.wa-no{background:var(--bg);color:var(--gray);border:none;padding:9px 14px;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;cursor:pointer;transition:.2s}
+
+/* FOOTER */
+footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
 .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.28);margin-top:10px}
 .footer-links{display:flex;gap:24px;flex-wrap:wrap}
 .footer-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:.2s}
 .footer-links a:hover{color:var(--white)}
 
-/* RESPONSIVE TABLET */
+/* RESPONSIVE */
 @media(max-width:900px){
   .sec{padding:72px 40px}
   nav{padding:0 40px}
@@ -279,9 +251,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .hero-scroll{left:40px}
   .stats-bar{padding:22px 40px}
   .about-grid,.tech-grid,.b2b-inner,.pat-outer,.map-outer,.contact-grid{grid-template-columns:1fr;gap:40px}
-  .prod-grid{grid-template-columns:1fr 1fr}
-  .boxes-grid{grid-template-columns:1fr 1fr;gap:12px}
-  .box-card:nth-child(5){grid-column:span 2}
+  .boxes-grid{grid-template-columns:1fr 1fr}
   .sub-intro{grid-template-columns:1fr;gap:28px}
   .pb-cap{padding:40px}
   .contact-wrap{padding:40px}
@@ -289,13 +259,10 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
 }
-
-/* RESPONSIVE MÓVIL */
 @media(max-width:600px){
   .sec{padding:56px 22px}
   nav{padding:0 22px;height:62px}
   .hero-c{padding:0 22px;padding-top:62px}
-  .hero-coord{font-size:9px;letter-spacing:2px;margin-bottom:18px}
   .hero-sub{font-size:14px;margin:18px 0 32px}
   .hero-btns{flex-direction:column;gap:10px}
   .btn-p,.btn-s{width:100%;text-align:center}
@@ -303,14 +270,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .stats-bar{padding:18px 22px;gap:16px}
   .stat-n{font-size:26px}
   .vals{grid-template-columns:1fr}
-  .prod-grid{grid-template-columns:1fr}
   .boxes-grid{grid-template-columns:1fr}
-  .box-card:nth-child(5){grid-column:span 1}
-  .sub-cta{flex-direction:column;padding:28px 22px}
-  .sub-cta-right{align-items:flex-start;width:100%}
-  .btn-sub{width:100%}
-  .tech-cards{grid-template-columns:1fr}
-  .pat-blocks{grid-template-columns:1fr}
+  .tech-cards,.pat-blocks{grid-template-columns:1fr}
   .b2b-inner{padding:28px 22px}
   .form-row{grid-template-columns:1fr}
   .contact-wrap{padding:28px 22px;border-radius:20px}
@@ -318,6 +279,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
   .pb-cap{padding:28px 22px}
   footer{padding:36px 22px;flex-direction:column;align-items:flex-start;gap:20px}
   .footer-links{flex-wrap:wrap;gap:16px}
+  .wa-wrap{bottom:20px;right:16px}
+  .wa-btn{width:52px;height:52px}
 }
 </style>
 </head>
@@ -346,9 +309,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
     <li><a href="#contacto">Contacto</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Suscribirme</button>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO -->
@@ -362,7 +323,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
     <p class="hero-sub">Microgreens de alta densidad nutricional cultivados en sistemas verticales controlados en la Patagonia. Frescos, limpios, entregados a tu puerta.</p>
     <div class="hero-btns">
       <button class="btn-p" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Ver planes de suscripción</button>
-      <button class="btn-s" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Nuestros productos</button>
+      <button class="btn-s" onclick="document.getElementById('nosotros').scrollIntoView({behavior:'smooth'})">Conocer más</button>
     </div>
   </div>
   <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll para explorar</span></div>
@@ -400,19 +361,21 @@ nav.scrolled .hamburger span{background:var(--navy)}
   </div>
 </section>
 
-<!-- PHOTO BREAK 1 — Germinación -->
+<!-- PHOTO BREAK 1 -->
 <div class="pb" style="height:85vh;background:#0a1a10">
   <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20GERMINACION%20DSC06195.jpg')"></div>
   <div class="pb-ov"></div>
   <div class="pb-cap fade-in"><h3>Desde la semilla<br/>hasta tu mesa</h3><p>Semillas seleccionadas · cuidado artesanal · cosecha precisa</p></div>
 </div>
 
-<!-- PHOTO BREAK 2 — Brócoli -->
+<!-- PHOTO BREAK 2 -->
 <div class="pb" style="height:85vh;background:#081510">
   <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/BROCOLI%20DSC06345.jpg')"></div>
   <div class="pb-ov"></div>
   <div class="pb-cap fade-in"><h3>Nutrición viva<br/>en tu cocina</h3><p>40× más nutrientes que la planta adulta · 100% sin agroquímicos</p></div>
 </div>
+
+<!-- PHOTO BREAK 3 -->
 <div class="pb" style="height:62vh;background:#081510">
   <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/CARRUSEL%20RIEGO%20DSC06288.jpg')"></div>
   <div class="pb-ov"></div>
@@ -426,45 +389,23 @@ nav.scrolled .hamburger span{background:var(--navy)}
       <div class="tag-label">Ciencia y nutrición</div>
       <h2>Más nutrientes.<br/>Respaldado<br/>por laboratorio.</h2>
       <div class="rule" style="background:var(--gs)"></div>
-      <p class="body-text">Los microgreens no son decoración — son una de las fuentes vegetales más densas en nutrientes conocidas por la ciencia. Nuestros análisis realizados en laboratorio certificado con CREAS lo confirman.</p>
+      <p class="body-text">Los microgreens no son decoración — son una de las fuentes vegetales más densas en nutrientes. Nuestros análisis realizados en laboratorio certificado con CREAS lo confirman.</p>
       <div class="nutri-stats" style="margin-top:32px">
-        <div class="nutri-card">
-          <div class="nutri-num">40×</div>
-          <h4>Más nutrientes</h4>
-          <p>Que la planta adulta equivalente, según estudios USDA.</p>
-        </div>
-        <div class="nutri-card">
-          <div class="nutri-num">38,6%</div>
-          <h4>Proteína</h4>
-          <p>Rabanito Vertical 53° — supera a la carne de res (26%).</p>
-        </div>
-        <div class="nutri-card">
-          <div class="nutri-num">33,2%</div>
-          <h4>Fibra dietética</h4>
-          <p>Excepcional para salud digestiva. La OMS recomienda 25g/día.</p>
-        </div>
-        <div class="nutri-card">
-          <div class="nutri-num">3,8%</div>
-          <h4>Carbohidratos</h4>
-          <p>Rabanito. Ideal para dietas cetogénicas y control de peso.</p>
-        </div>
+        <div class="nutri-card"><div class="nutri-num">40×</div><h4>Más nutrientes</h4><p>Que la planta adulta equivalente, según estudios USDA.</p></div>
+        <div class="nutri-card"><div class="nutri-num">38,6%</div><h4>Proteína</h4><p>Rabanito Vertical 53° — supera a la carne de res (26%).</p></div>
+        <div class="nutri-card"><div class="nutri-num">33,2%</div><h4>Fibra dietética</h4><p>Excepcional para salud digestiva. La OMS recomienda 25g/día.</p></div>
+        <div class="nutri-card"><div class="nutri-num">3,8%</div><h4>Carbohidratos</h4><p>Rabanito. Ideal para dietas cetogénicas y control de peso.</p></div>
       </div>
     </div>
     <div class="fade-in">
       <table class="nutri-table">
-        <thead>
-          <tr>
-            <th>Parámetro</th>
-            <th>🌿 Rabanito</th>
-            <th>🥦 Brócoli</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Parámetro</th><th>🌿 Rabanito</th><th>🥦 Brócoli</th></tr></thead>
         <tbody>
           <tr><td>Proteínas ⭐</td><td>38,63%</td><td>34,01%</td></tr>
           <tr><td>Fibra dietética ⭐</td><td>33,23%</td><td>26,49%</td></tr>
           <tr><td>Carbohidratos</td><td>3,82%</td><td>11,45%</td></tr>
           <tr><td>Grasas saludables</td><td>7,29%</td><td>8,01%</td></tr>
-          <tr><td>Minerales (cenizas)</td><td>8,04%</td><td>9,13%</td></tr>
+          <tr><td>Minerales</td><td>8,04%</td><td>9,13%</td></tr>
           <tr><td>Humedad</td><td>8,99%</td><td>10,91%</td></tr>
         </tbody>
       </table>
@@ -483,13 +424,12 @@ nav.scrolled .hamburger span{background:var(--navy)}
     </div>
     <div class="sub-intro-right">
       <span class="sub-badge">Entrega semanal · Punta Arenas</span>
-      <p class="body-text">Elige tu box según tu momento y propósito. Recibes bandejas vivas en tu casa — cortas lo que consumes, cuando lo necesitas. Sin renovación manual, sin gestión por tu parte.</p>
+      <p class="body-text">Elige tu box según tu momento y propósito. Recibes bandejas vivas en tu casa — cortas lo que consumes, cuando lo necesitas.</p>
       <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Próximamente · Pago online habilitado</p>
     </div>
   </div>
 
-  <div class="boxes-grid fade-in" style="grid-template-columns:repeat(4,1fr)">
-
+  <div class="boxes-grid fade-in">
     <!-- DETOX -->
     <div class="box-card" id="box-detox" onclick="selectBox(this,'Detox')">
       <div class="box-check">✓</div>
@@ -505,6 +445,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
       <div class="size-info" id="info-detox"></div>
       <div class="box-price">A consultar</div>
       <button class="box-sub-btn" onclick="goToContactBox(event,'detox')">Quiero suscribirme →</button>
+    </div>
+    <!-- BRUNCH -->
     <div class="box-card" id="box-brunch" onclick="selectBox(this,'Brunch')">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
@@ -519,6 +461,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
       <div class="size-info" id="info-brunch"></div>
       <div class="box-price">A consultar</div>
       <button class="box-sub-btn" onclick="goToContactBox(event,'brunch')">Quiero suscribirme →</button>
+    </div>
+    <!-- SPICY -->
     <div class="box-card" id="box-spicy" onclick="selectBox(this,'Spicy')">
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
@@ -533,6 +477,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
       <div class="size-info" id="info-spicy"></div>
       <div class="box-price">A consultar</div>
       <button class="box-sub-btn" onclick="goToContactBox(event,'spicy')">Quiero suscribirme →</button>
+    </div>
+    <!-- PROTEÍNA -->
     <div class="box-card" id="box-protein" onclick="selectBox(this,'Proteína')">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
@@ -546,20 +492,18 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-protein"></div>
       <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'protein')">Quiero suscribirme →</button>
     </div>
-
   </div>
 
-  <div class="sub-cta fade-in" style="justify-content:center;text-align:center">
-    <div>
-      <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:7px">¿Listo para suscribirte?</h3>
-      <p style="font-size:14px;font-weight:300;color:var(--gray);line-height:1.8;margin-bottom:20px">Próximamente habilitamos el pago online. Por ahora escríbenos con tu selección y coordinamos la primera entrega contigo.</p>
-      <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:1px">Sin compromisos · Cancela cuando quieras</p>
-    </div>
+  <div class="sub-cta fade-in">
+    <h3>¿Listo para suscribirte?</h3>
+    <p>Próximamente habilitamos el pago online. Por ahora selecciona tu box, completa el formulario y coordinamos la primera entrega contigo.</p>
+    <p class="sub-note">Sin compromisos · Cancela cuando quieras</p>
   </div>
 </section>
 
-<!-- PHOTO BREAK 3 — LEDs -->
+<!-- PHOTO BREAK 4 -->
 <div class="pb" style="height:92vh;background:#080d0a">
   <div class="pb-bg" style="background-image:url('https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/LEDS%20DSC06306.jpg')"></div>
   <div class="pb-ov" style="background:linear-gradient(to top,rgba(0,15,10,.9) 0%,rgba(0,15,10,.08) 52%)"></div>
@@ -668,9 +612,9 @@ nav.scrolled .hamburger span{background:var(--navy)}
       <div class="form fade-in">
         <div class="form-row">
           <div class="field"><label>Nombre</label><input type="text" id="f-nombre" placeholder="Tu nombre"/></div>
-          <div class="field"><label>Teléfono</label><input type="tel" placeholder="+56 9 ..."/></div>
+          <div class="field"><label>Teléfono</label><input type="tel" id="f-tel" placeholder="+56 9 ..."/></div>
         </div>
-        <div class="field"><label>Email</label><input type="email" placeholder="correo@ejemplo.cl"/></div>
+        <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="correo@ejemplo.cl"/></div>
         <div class="field"><label>¿Qué te interesa?</label>
           <select id="f-interes">
             <option value="">Selecciona una opción</option>
@@ -683,7 +627,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
         </div>
         <div class="field"><label>Mensaje</label><textarea id="f-mensaje" placeholder="Cuéntanos lo que necesitas..."></textarea></div>
         <button class="form-btn" onclick="sendForm(event)">Enviar mensaje →</button>
-      <div id="form-status" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;margin-top:10px;min-height:18px"></div>
+        <div class="form-status" id="form-status"></div>
       </div>
     </div>
   </div>
@@ -691,7 +635,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
 
 <!-- WHATSAPP -->
 <div class="wa-wrap" id="waWrap">
-  <div class="wa-bubble" id="waBubble" style="position:relative">
+  <div class="wa-bubble" id="waBubble">
     <div id="waDefault">
       <p>¿Hablamos? 🌱</p>
       <span>Escríbenos por WhatsApp y te respondemos a la brevedad.</span>
@@ -706,7 +650,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
     </div>
     <div class="wa-bubble-arrow"></div>
   </div>
-  <button class="wa-btn" id="waBtn" onclick="handleWA()" aria-label="WhatsApp">
+  <button class="wa-btn" onclick="handleWA()" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="var(--white)" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
@@ -716,193 +660,129 @@ nav.scrolled .hamburger span{background:var(--navy)}
 <!-- FOOTER -->
 <footer>
   <div>
-    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--white);letter-spacing:.5px">VERTICAL 53°</div>
+    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--white)">VERTICAL 53°</div>
     <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-top:4px">Future Farming · Innovation</div>
     <div class="footer-copy">© 2025 Vertical 53° SpA · Punta Arenas, Chile · RUT 77.466.345-2</div>
   </div>
   <div class="footer-links">
-    <a href="#nosotros">Nosotros</a><a href="#productos">Productos</a>
-    <a href="#suscripcion">Suscripción</a><a href="#b2b">B2B</a>
-    <a href="#ubicacion">Ubicación</a><a href="#contacto">Contacto</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#suscripcion">Suscripción</a>
+    <a href="#b2b">B2B</a>
+    <a href="#ubicacion">Ubicación</a>
+    <a href="#contacto">Contacto</a>
   </div>
   <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.3)">53°10'S · PATAGONIA</div>
 </footer>
 
 <script>
+// Nav
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>80),{passive:true});
+
+// Hamburger
 function toggleMenu(){const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
 function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
+
+// Fade-in
 const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');}),{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
-// Variedades por box
-const VARIETIES = {
-  detox:   ['Brócoli','Repollo verde','Amaranto','Mizuna'],
-  brunch:  ['Mizuna','Tatsoi','Brócoli','Repollo verde'],
-  spicy:   ['Mostaza verde','Rábano verde','Rábano morado','Rúcula'],
-  protein: ['Arveja','Brócoli','Rábano verde','Mizuna verde'],
-};
+// Parallax
+const pbBgs=document.querySelectorAll('.pb-bg');
+window.addEventListener('scroll',()=>{pbBgs.forEach(bg=>{const r=bg.closest('.pb').getBoundingClientRect();bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;});},{passive:true});
 
-// Genera lista de brotes según talla
-// S=3: primeros 3, M=5: 4+primero repetido, L=8: cada uno ×2
-function buildContents(id, size){
-  const v = VARIETIES[id];
+// Variedades
+const VARIETIES={
+  detox:  ['Brócoli','Repollo verde','Amaranto','Mizuna'],
+  brunch: ['Mizuna','Tatsoi','Brócoli','Repollo verde'],
+  spicy:  ['Mostaza verde','Rábano verde','Rábano morado','Rúcula'],
+  protein:['Arveja','Brócoli','Rábano verde','Mizuna verde'],
+};
+const NAMES={detox:'Detox',brunch:'Brunch',spicy:'Spicy',protein:'Proteína'};
+
+function buildContents(id,size){
+  const v=VARIETIES[id];
   if(size==='S') return v.slice(0,3);
-  if(size==='M') return [...v, v[0]]; // 4 + primero repetido = 5
-  if(size==='L') return [...v,...v];   // 4×2 = 8, cada uno ×2
+  if(size==='M') return [...v,v[0]];
+  if(size==='L') return [...v,...v];
   return v;
 }
 
-function renderInfo(id, size){
-  const contents = buildContents(id, size);
-  // Contar repeticiones
-  const count = {};
+function renderInfo(id,size){
+  const contents=buildContents(id,size);
+  const count={};
   contents.forEach(v=>count[v]=(count[v]||0)+1);
-  const parts = Object.entries(count).map(([v,n])=>n>1?v+' ×'+n:v);
-  const el = document.getElementById('info-'+id);
-  if(el) el.textContent = size+' · '+contents.length+' brotes · '+parts.join(', ');
+  const parts=Object.entries(count).map(([v,n])=>n>1?v+' ×'+n:v);
+  const el=document.getElementById('info-'+id);
+  if(el) el.textContent=size+' · '+contents.length+' brotes · '+parts.join(', ');
 }
 
-// Inicializar todos en M
 Object.keys(VARIETIES).forEach(id=>renderInfo(id,'M'));
-const currentSize = {detox:'M',brunch:'M',spicy:'M',protein:'M'};
+const currentSize={detox:'M',brunch:'M',spicy:'M',protein:'M'};
 
-function setSize(e, id, size){
+function setSize(e,id,size){
   e.stopPropagation();
   currentSize[id]=size;
-  const card = document.getElementById('box-'+id);
+  const card=document.getElementById('box-'+id);
   card.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
   e.target.classList.add('active');
-  renderInfo(id, size);
-  // Actualizar selectedInfo si esta box está seleccionada
-  if(card.classList.contains('selected')){
-    document.getElementById('selectedInfo').textContent=
-      card.querySelector('.box-name').textContent+' · Talla '+size;
-  }
+  renderInfo(id,size);
 }
 
 let selBox=null;
-function selectBox(el, name){
+function selectBox(el,name){
   document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
   const id=el.id.replace('box-','');
-  const size=currentSize[id]||'M';
-  selBox={name,size,contents:buildContents(id,size)};
-  document.getElementById('selectedInfo').textContent=name+' · Talla '+size;
+  selBox={name,id,size:currentSize[id]||'M'};
 }
 
-function goToContact(){
-  if(selBox){
-    document.getElementById('f-interes').value='Suscripción semanal B2C';
-    document.getElementById('f-mensaje').value=
-      'Me interesa suscribirme a la Box '+selBox.name+' talla '+selBox.size+
-      '.\nContenido: '+selBox.contents.join(', ')+'.';
-  }
-  document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
-}
-
-// Ir al formulario con datos pre-llenados
-function goToContactBox(e, id){
+function goToContactBox(e,id){
   e.stopPropagation();
-  const size = currentSize[id]||'M';
-  const contents = buildContents(id, size);
-  const name = NAMES[id];
-  document.getElementById('f-interes').value = 'Suscripción semanal B2C';
-  document.getElementById('f-mensaje').value =
-    `Hola, me interesa suscribirme a la Box ${name} talla ${size}.\nContenido: ${contents.join(', ')}.`;
+  const size=currentSize[id]||'M';
+  const contents=buildContents(id,size);
+  const name=NAMES[id];
+  document.getElementById('f-interes').value='Suscripción semanal B2C';
+  document.getElementById('f-mensaje').value='Hola, me interesa suscribirme a la Box '+name+' talla '+size+'.\nContenido: '+contents.join(', ')+'.';
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
+
+// Formspree
 async function sendForm(e){
   e.preventDefault();
-  const status = document.getElementById('form-status');
-  const btn = e.target;
-  const nombre = document.getElementById('f-nombre').value.trim();
-  const email = document.querySelector('#contacto input[type="email"]').value.trim();
-  const interes = document.getElementById('f-interes').value;
-  const mensaje = document.getElementById('f-mensaje').value.trim();
-  if(!nombre||!email||!interes||!mensaje){
-    status.style.color='#e53e3e';
-    status.textContent='Por favor completa todos los campos.';
-    return;
-  }
-  btn.textContent='Enviando…';
-  btn.disabled=true;
+  const status=document.getElementById('form-status');
+  const btn=e.target;
+  const nombre=document.getElementById('f-nombre').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const tel=document.getElementById('f-tel').value.trim();
+  const interes=document.getElementById('f-interes').value;
+  const mensaje=document.getElementById('f-mensaje').value.trim();
+  if(!nombre||!email||!interes||!mensaje){status.style.color='#e53e3e';status.textContent='Por favor completa todos los campos.';return;}
+  btn.textContent='Enviando…';btn.disabled=true;
   try{
-    const res = await fetch('https://formspree.io/f/xlgkejdp',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({nombre,email,interes,mensaje})
-    });
+    const res=await fetch('https://formspree.io/f/xlgkejdp',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Nuevo mensaje · Vertical 53°',nombre,email,telefono:tel,interes,mensaje})});
     if(res.ok){
-      status.style.color='var(--gs)';
-      status.textContent='✓ Mensaje enviado · Te respondemos pronto';
-      document.getElementById('f-nombre').value='';
-      document.querySelector('#contacto input[type="email"]').value='';
-      document.querySelector('#contacto input[type="tel"]').value='';
-      document.getElementById('f-interes').value='';
-      document.getElementById('f-mensaje').value='';
-    } else {
-      throw new Error();
-    }
-  } catch{
-    status.style.color='#e53e3e';
-    status.textContent='Error al enviar. Inténtalo de nuevo.';
-  }
-  btn.textContent='Enviar mensaje →';
-  btn.disabled=false;
+      status.style.color='var(--gs)';status.textContent='✓ Mensaje enviado · Te respondemos pronto';
+      document.getElementById('f-nombre').value='';document.getElementById('f-email').value='';document.getElementById('f-tel').value='';document.getElementById('f-interes').value='';document.getElementById('f-mensaje').value='';
+    } else throw new Error();
+  } catch{status.style.color='#e53e3e';status.textContent='Error al enviar. Inténtalo de nuevo.';}
+  btn.textContent='Enviar mensaje →';btn.disabled=false;
 }
-const WA_NUM = '56989680810';
-const WA_MSG = encodeURIComponent('Hola, me interesa suscribirme a Vertical 53°. ¿Me pueden dar más información?');
-let waBubbleOpen = false;
-let waConfirming = false;
 
-// Mostrar burbuja después de 3 segundos
-setTimeout(()=>{
-  document.getElementById('waBubble').classList.add('show');
-  waBubbleOpen = true;
-}, 3000);
-
+// WhatsApp
+const WA_NUM='56989680810';
+const WA_MSG=encodeURIComponent('Hola, me interesa suscribirme a Vertical 53°. ¿Me pueden dar más información?');
+let waBubbleOpen=false,waConfirming=false;
+setTimeout(()=>{document.getElementById('waBubble').classList.add('show');waBubbleOpen=true;},3000);
 function handleWA(){
-  if(window.innerWidth <= 600){
-    // En móvil: mostrar confirmación antes de abrir
-    const def = document.getElementById('waDefault');
-    const conf = document.getElementById('waConfirm');
-    if(!waConfirming){
-      def.style.display='none';
-      conf.classList.add('show');
-      document.getElementById('waBubble').classList.add('show');
-      waConfirming = true;
-    }
-  } else {
-    // En desktop: abrir directo
-    goWA();
-  }
+  if(window.innerWidth<=600){
+    if(!waConfirming){document.getElementById('waDefault').style.display='none';document.getElementById('waConfirm').classList.add('show');document.getElementById('waBubble').classList.add('show');waConfirming=true;}
+  } else goWA();
 }
-
-function goWA(){
-  window.open('https://wa.me/'+WA_NUM+'?text='+WA_MSG,'_blank');
-  cancelWA();
-}
-
-function cancelWA(){
-  document.getElementById('waDefault').style.display='block';
-  document.getElementById('waConfirm').classList.remove('show');
-  waConfirming = false;
-}
-
-// Cerrar burbuja al hacer scroll hacia abajo en móvil
-let lastScroll = 0;
-window.addEventListener('scroll',()=>{
-  const curr = window.scrollY;
-  if(curr > lastScroll + 40 && waBubbleOpen && !waConfirming){
-    document.getElementById('waBubble').classList.remove('show');
-  } else if(curr < lastScroll - 40){
-    document.getElementById('waBubble').classList.add('show');
-  }
-  lastScroll = curr;
-},{passive:true});
-window.addEventListener('scroll',()=>{pbBgs.forEach(bg=>{const r=bg.closest('.pb').getBoundingClientRect();bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;});},{passive:true});
+function goWA(){window.open('https://wa.me/'+WA_NUM+'?text='+WA_MSG,'_blank');cancelWA();}
+function cancelWA(){document.getElementById('waDefault').style.display='block';document.getElementById('waConfirm').classList.remove('show');waConfirming=false;}
+let lastScroll=0;
+window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>lastScroll+40&&waBubbleOpen&&!waConfirming)document.getElementById('waBubble').classList.remove('show');else if(c<lastScroll-40)document.getElementById('waBubble').classList.add('show');lastScroll=c;},{passive:true});
 </script>
 </body>
 </html>
