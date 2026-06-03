@@ -500,6 +500,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-detox"></div>
       <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContact()">Quiero suscribirme →</button>
     </div>
 
     <!-- BRUNCH -->
@@ -516,6 +517,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-brunch"></div>
       <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContact()">Quiero suscribirme →</button>
     </div>
 
     <!-- SPICY -->
@@ -533,6 +535,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-spicy"></div>
       <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContact()">Quiero suscribirme →</button>
     </div>
 
     <!-- PROTEÍNA -->
@@ -689,7 +692,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
           </select>
         </div>
         <div class="field"><label>Mensaje</label><textarea id="f-mensaje" placeholder="Cuéntanos lo que necesitas..."></textarea></div>
-        <button class="form-btn">Enviar mensaje →</button>
+        <button class="form-btn" onclick="sendForm(event)">Enviar mensaje →</button>
+      <div id="form-status" style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;margin-top:10px;min-height:18px"></div>
       </div>
     </div>
   </div>
@@ -807,7 +811,46 @@ function goToContact(){
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
-// WhatsApp
+// Formspree
+async function sendForm(e){
+  e.preventDefault();
+  const status = document.getElementById('form-status');
+  const btn = e.target;
+  const nombre = document.getElementById('f-nombre').value.trim();
+  const email = document.querySelector('#contacto input[type="email"]').value.trim();
+  const interes = document.getElementById('f-interes').value;
+  const mensaje = document.getElementById('f-mensaje').value.trim();
+  if(!nombre||!email||!interes||!mensaje){
+    status.style.color='#e53e3e';
+    status.textContent='Por favor completa todos los campos.';
+    return;
+  }
+  btn.textContent='Enviando…';
+  btn.disabled=true;
+  try{
+    const res = await fetch('https://formspree.io/f/xlgkejdp',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({nombre,email,interes,mensaje})
+    });
+    if(res.ok){
+      status.style.color='var(--gs)';
+      status.textContent='✓ Mensaje enviado · Te respondemos pronto';
+      document.getElementById('f-nombre').value='';
+      document.querySelector('#contacto input[type="email"]').value='';
+      document.querySelector('#contacto input[type="tel"]').value='';
+      document.getElementById('f-interes').value='';
+      document.getElementById('f-mensaje').value='';
+    } else {
+      throw new Error();
+    }
+  } catch{
+    status.style.color='#e53e3e';
+    status.textContent='Error al enviar. Inténtalo de nuevo.';
+  }
+  btn.textContent='Enviar mensaje →';
+  btn.disabled=false;
+}
 const WA_NUM = '56989680810';
 const WA_MSG = encodeURIComponent('Hola, me interesa suscribirme a Vertical 53°. ¿Me pueden dar más información?');
 let waBubbleOpen = false;
