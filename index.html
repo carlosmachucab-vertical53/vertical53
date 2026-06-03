@@ -500,10 +500,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-detox"></div>
       <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContact()">Quiero suscribirme →</button>
-    </div>
-
-    <!-- BRUNCH -->
+      <button class="box-sub-btn" onclick="subscribeBox(event,'detox')">🌱 Quiero suscribirme</button>
     <div class="box-card" id="box-brunch" onclick="selectBox(this,'Brunch')">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
@@ -517,10 +514,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-brunch"></div>
       <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContact()">Quiero suscribirme →</button>
-    </div>
-
-    <!-- SPICY -->
+      <button class="box-sub-btn" onclick="subscribeBox(event,'brunch')">🌱 Quiero suscribirme</button>
     <div class="box-card" id="box-spicy" onclick="selectBox(this,'Spicy')">
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
@@ -534,10 +528,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
       </div>
       <div class="size-info" id="info-spicy"></div>
       <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContact()">Quiero suscribirme →</button>
-    </div>
-
-    <!-- PROTEÍNA -->
+      <button class="box-sub-btn" onclick="subscribeBox(event,'spicy')">🌱 Quiero suscribirme</button>
     <div class="box-card" id="box-protein" onclick="selectBox(this,'Proteína')">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
@@ -721,7 +712,8 @@ nav.scrolled .hamburger span{background:var(--navy)}
 <!-- FOOTER -->
 <footer>
   <div>
-    <img class="footer-logo-img" src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo.1%20vertical53.png" alt="Vertical 53°"/>
+    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--white);letter-spacing:.5px">VERTICAL 53°</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.5);margin-top:4px">Future Farming · Innovation</div>
     <div class="footer-copy">© 2025 Vertical 53° SpA · Punta Arenas, Chile · RUT 77.466.345-2</div>
   </div>
   <div class="footer-links">
@@ -806,7 +798,49 @@ function goToContact(){
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
-// Formspree
+// Suscripción directa desde box
+const NAMES = {detox:'Detox',brunch:'Brunch',spicy:'Spicy',protein:'Proteína'};
+async function subscribeBox(e, id){
+  e.stopPropagation();
+  const btn = e.target;
+  const size = currentSize[id]||'M';
+  const contents = buildContents(id, size);
+  const name = NAMES[id];
+  const count = {S:3,M:5,L:8}[size];
+  const msg = `Nueva suscripción solicitada:\n\nBox: ${name}\nTamaño: ${size} (${count} brotes)\nContenido: ${contents.join(', ')}\n\nEl cliente solicita ser contactado para coordinar la primera entrega.`;
+  btn.textContent='Enviando…';
+  btn.style.pointerEvents='none';
+  try{
+    const res = await fetch('https://formspree.io/f/xlgkejdp',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        _subject: `Nueva suscripción Box ${name} talla ${size} · Vertical 53°`,
+        box: name,
+        tamaño: size,
+        contenido: contents.join(', '),
+        mensaje: msg
+      })
+    });
+    if(res.ok){
+      btn.textContent='✓ Solicitud enviada';
+      btn.style.background='linear-gradient(135deg,#22a35a,#14532d)';
+      setTimeout(()=>{
+        btn.textContent='🌱 Quiero suscribirme';
+        btn.style.background='';
+        btn.style.pointerEvents='auto';
+      },3500);
+    } else { throw new Error(); }
+  } catch {
+    btn.textContent='Error · intenta de nuevo';
+    btn.style.background='#e53e3e';
+    setTimeout(()=>{
+      btn.textContent='🌱 Quiero suscribirme';
+      btn.style.background='';
+      btn.style.pointerEvents='auto';
+    },3000);
+  }
+}
 async function sendForm(e){
   e.preventDefault();
   const status = document.getElementById('form-status');
