@@ -241,8 +241,26 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .form-btn{background:var(--gp);color:var(--white);padding:14px 36px;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:.3s;align-self:flex-start;border-radius:10px}
 .form-btn:hover{background:var(--gs);transform:translateY(-2px)}
 
-/* FOOTER */
-footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+/* WHATSAPP */
+.wa-wrap{position:fixed;bottom:28px;right:28px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.wa-bubble{background:var(--white);border-radius:16px;padding:14px 18px;box-shadow:0 4px 24px rgba(0,0,0,.15);max-width:220px;opacity:0;transform:translateY(8px) scale(.95);transition:all .25s ease;pointer-events:none;border:1px solid rgba(0,0,0,.06)}
+.wa-bubble.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.wa-bubble p{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.wa-bubble span{font-size:12px;font-weight:300;color:var(--gray);line-height:1.5;display:block}
+.wa-bubble-arrow{position:absolute;bottom:-7px;right:22px;width:14px;height:14px;background:var(--white);border-right:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06);transform:rotate(45deg)}
+.wa-btn{width:58px;height:58px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:all .25s ease;position:relative}
+.wa-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.5)}
+.wa-btn svg{width:30px;height:30px}
+.wa-confirm{display:none;flex-direction:column;gap:8px;width:100%}
+.wa-confirm.show{display:flex}
+.wa-confirm-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.wa-confirm-sub{font-size:11px;font-weight:300;color:var(--gray);margin-bottom:6px}
+.wa-confirm-btns{display:flex;gap:8px}
+.wa-yes{background:#25D366;color:var(--white);border:none;padding:9px 18px;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;flex:1}
+.wa-yes:hover{background:#1ebe5d}
+.wa-no{background:var(--bg);color:var(--gray);border:none;padding:9px 14px;border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:400;cursor:pointer;transition:.2s}
+.wa-no:hover{background:var(--border);color:var(--navy)}
+@media(max-width:600px){.wa-wrap{bottom:20px;right:16px}.wa-btn{width:52px;height:52px}}background:var(--gp);padding:48px 72px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
 .footer-logo-img{height:56px;width:auto;opacity:.9}
 .footer-copy{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.28);margin-top:10px}
 .footer-links{display:flex;gap:24px;flex-wrap:wrap}
@@ -677,6 +695,30 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   </div>
 </section>
 
+<!-- WHATSAPP -->
+<div class="wa-wrap" id="waWrap">
+  <div class="wa-bubble" id="waBubble" style="position:relative">
+    <div id="waDefault">
+      <p>¿Hablamos? 🌱</p>
+      <span>Escríbenos por WhatsApp y te respondemos a la brevedad.</span>
+    </div>
+    <div class="wa-confirm" id="waConfirm">
+      <div class="wa-confirm-title">¿Abrir WhatsApp?</div>
+      <div class="wa-confirm-sub">Serás redirigido a una conversación con nosotros.</div>
+      <div class="wa-confirm-btns">
+        <button class="wa-yes" onclick="goWA()">Sí, chatear →</button>
+        <button class="wa-no" onclick="cancelWA()">No</button>
+      </div>
+    </div>
+    <div class="wa-bubble-arrow"></div>
+  </div>
+  <button class="wa-btn" id="waBtn" onclick="handleWA()" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="var(--white)" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </button>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div>
@@ -765,7 +807,57 @@ function goToContact(){
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
-const pbBgs=document.querySelectorAll('.pb-bg');
+// WhatsApp
+const WA_NUM = '56989680810';
+const WA_MSG = encodeURIComponent('Hola, me interesa suscribirme a Vertical 53°. ¿Me pueden dar más información?');
+let waBubbleOpen = false;
+let waConfirming = false;
+
+// Mostrar burbuja después de 3 segundos
+setTimeout(()=>{
+  document.getElementById('waBubble').classList.add('show');
+  waBubbleOpen = true;
+}, 3000);
+
+function handleWA(){
+  if(window.innerWidth <= 600){
+    // En móvil: mostrar confirmación antes de abrir
+    const def = document.getElementById('waDefault');
+    const conf = document.getElementById('waConfirm');
+    if(!waConfirming){
+      def.style.display='none';
+      conf.classList.add('show');
+      document.getElementById('waBubble').classList.add('show');
+      waConfirming = true;
+    }
+  } else {
+    // En desktop: abrir directo
+    goWA();
+  }
+}
+
+function goWA(){
+  window.open('https://wa.me/'+WA_NUM+'?text='+WA_MSG,'_blank');
+  cancelWA();
+}
+
+function cancelWA(){
+  document.getElementById('waDefault').style.display='block';
+  document.getElementById('waConfirm').classList.remove('show');
+  waConfirming = false;
+}
+
+// Cerrar burbuja al hacer scroll hacia abajo en móvil
+let lastScroll = 0;
+window.addEventListener('scroll',()=>{
+  const curr = window.scrollY;
+  if(curr > lastScroll + 40 && waBubbleOpen && !waConfirming){
+    document.getElementById('waBubble').classList.remove('show');
+  } else if(curr < lastScroll - 40){
+    document.getElementById('waBubble').classList.add('show');
+  }
+  lastScroll = curr;
+},{passive:true});
 window.addEventListener('scroll',()=>{pbBgs.forEach(bg=>{const r=bg.closest('.pb').getBoundingClientRect();bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;});},{passive:true});
 </script>
 </body>
