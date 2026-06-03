@@ -107,6 +107,26 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .prod-desc{font-size:13px;line-height:1.85;color:var(--gray);font-weight:300;margin-bottom:14px}
 .prod-avail{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gp)}
 
+/* NUTRICIÓN */
+#nutricion{background:var(--navy);position:relative;overflow:hidden}
+#nutricion h2{color:var(--white)}
+#nutricion .tag-label{color:var(--gs)}
+#nutricion .tag-label::before{background:var(--gs)}
+#nutricion .body-text{color:rgba(255,255,255,.45)}
+.nutri-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:0}
+.nutri-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.nutri-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:28px;border-radius:18px;transition:.3s}
+.nutri-card:hover{background:rgba(112,186,94,.08);border-color:rgba(112,186,94,.25);transform:translateY(-3px)}
+.nutri-num{font-family:'IBM Plex Mono',monospace;font-size:32px;color:var(--gs);letter-spacing:-1px;line-height:1;margin-bottom:6px}
+.nutri-card h4{font-family:'Sora',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;margin-bottom:6px;color:rgba(255,255,255,.8)}
+.nutri-card p{font-size:12px;line-height:1.8;color:rgba(255,255,255,.38);font-weight:300}
+.nutri-table{width:100%;border-collapse:collapse;margin-top:32px}
+.nutri-table th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gs);padding:10px 12px;text-align:left;border-bottom:1px solid rgba(112,186,94,.2)}
+.nutri-table td{font-size:13px;font-weight:300;color:rgba(255,255,255,.7);padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.nutri-table tr:last-child td{border-bottom:none}
+.nutri-table td:nth-child(2),.nutri-table td:nth-child(3){font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gs)}
+.nutri-source{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,.25);margin-top:16px;text-transform:uppercase}
+
 /* SUSCRIPCIÓN */
 #suscripcion{background:var(--white);position:relative;overflow:hidden}
 #suscripcion::before{content:'';position:absolute;top:-100px;right:-100px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(112,186,94,.07) 0%,transparent 70%);pointer-events:none}
@@ -133,7 +153,15 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .box-contents{list-style:none;display:flex;flex-direction:column;gap:4px}
 .box-contents li{font-size:11px;color:var(--gray);font-weight:300;display:flex;align-items:center;gap:5px;transition:.3s}
 .box-contents li::before{content:'·';color:var(--gs);font-size:14px}
-.sub-cta{background:var(--lg);border-radius:24px;padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border:1px solid rgba(112,186,94,.18)}
+/* SIZES */
+.size-selector{display:flex;gap:8px;margin-bottom:10px}
+.size-btn{padding:6px 14px;border:1.5px solid rgba(23,102,99,.3);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);border-radius:8px;cursor:pointer;transition:.25s;font-weight:400}
+.size-btn:hover{border-color:var(--gs);color:var(--gs)}
+.size-btn.active{background:var(--gp);border-color:var(--gp);color:var(--white)}
+.box-card.selected .size-btn{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+.box-card.selected .size-btn.active{background:var(--gs);border-color:var(--gs);color:var(--white)}
+.size-info{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--gp);opacity:.8;line-height:1.6;transition:.3s}
+.box-card.selected .size-info{color:rgba(255,255,255,.55)};border-radius:24px;padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;border:1px solid rgba(112,186,94,.18)}
 .sub-cta-left h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:7px}
 .sub-cta-left p{font-size:14px;font-weight:300;color:var(--gray);max-width:400px;line-height:1.8}
 .sub-cta-right{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
@@ -369,6 +397,60 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   <div class="pb-cap fade-in"><h3>Riego preciso,<br/>cero desperdicio</h3><p>Irrigación controlada · eficiencia hídrica máxima</p></div>
 </div>
 
+<!-- NUTRICIÓN -->
+<section id="nutricion" class="sec">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+    <div class="fade-in">
+      <div class="tag-label">Ciencia y nutrición</div>
+      <h2>Más nutrientes.<br/>Respaldado<br/>por laboratorio.</h2>
+      <div class="rule" style="background:var(--gs)"></div>
+      <p class="body-text">Los microgreens no son decoración — son una de las fuentes vegetales más densas en nutrientes conocidas por la ciencia. Nuestros análisis realizados en laboratorio certificado con CREAS lo confirman.</p>
+      <div class="nutri-stats" style="margin-top:32px">
+        <div class="nutri-card">
+          <div class="nutri-num">40×</div>
+          <h4>Más nutrientes</h4>
+          <p>Que la planta adulta equivalente, según estudios USDA.</p>
+        </div>
+        <div class="nutri-card">
+          <div class="nutri-num">38,6%</div>
+          <h4>Proteína</h4>
+          <p>Rabanito Vertical 53° — supera a la carne de res (26%).</p>
+        </div>
+        <div class="nutri-card">
+          <div class="nutri-num">33,2%</div>
+          <h4>Fibra dietética</h4>
+          <p>Excepcional para salud digestiva. La OMS recomienda 25g/día.</p>
+        </div>
+        <div class="nutri-card">
+          <div class="nutri-num">3,8%</div>
+          <h4>Carbohidratos</h4>
+          <p>Rabanito. Ideal para dietas cetogénicas y control de peso.</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <table class="nutri-table">
+        <thead>
+          <tr>
+            <th>Parámetro</th>
+            <th>🌿 Rabanito</th>
+            <th>🥦 Brócoli</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Proteínas ⭐</td><td>38,63%</td><td>34,01%</td></tr>
+          <tr><td>Fibra dietética ⭐</td><td>33,23%</td><td>26,49%</td></tr>
+          <tr><td>Carbohidratos</td><td>3,82%</td><td>11,45%</td></tr>
+          <tr><td>Grasas saludables</td><td>7,29%</td><td>8,01%</td></tr>
+          <tr><td>Minerales (cenizas)</td><td>8,04%</td><td>9,13%</td></tr>
+          <tr><td>Humedad</td><td>8,99%</td><td>10,91%</td></tr>
+        </tbody>
+      </table>
+      <p class="nutri-source">Fuente: Análisis proximal certificado · CREAS · Vertical 53° · 2025<br/>Referencias: USDA / FAO / Journal of Agricultural and Food Chemistry</p>
+    </div>
+  </div>
+</section>
+
 <!-- SUSCRIPCIÓN -->
 <section id="suscripcion" class="sec">
   <div class="sub-intro fade-in">
@@ -384,87 +466,71 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     </div>
   </div>
 
-  <div class="boxes-grid fade-in">
+  <div class="boxes-grid fade-in" style="grid-template-columns:repeat(4,1fr)">
 
     <!-- DETOX -->
-    <div class="box-card" onclick="selectBox(this,'Box Detox','A consultar')">
+    <div class="box-card" id="box-detox" onclick="selectBox(this,'Detox')">
       <div class="box-check">✓</div>
       <div class="box-icon">🥤</div>
       <span class="box-tag">Detox</span>
       <div class="box-name">Detox</div>
-      <div class="box-price">Smoothies · Batidos</div>
-      <div class="box-desc">Del freezer directo a la licuadora. Sin lavar, sin cortar, sin pensar.</div>
-      <ul class="box-contents">
-        <li>7 potes · 5g c/u · congelados</li>
-        <li>Brócoli · Col verde</li>
-        <li>Amaranto · Mizuna</li>
-        <li>Ideal deportistas</li>
-      </ul>
+      <div class="box-desc">Del freezer directo a la licuadora. Sin lavar, sin cortar.</div>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'detox','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'detox','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'detox','L')">L</button>
+      </div>
+      <div class="size-info" id="info-detox"></div>
+      <div class="box-price">A consultar</div>
     </div>
 
     <!-- BRUNCH -->
-    <div class="box-card" onclick="selectBox(this,'Box Brunch','A consultar')">
+    <div class="box-card" id="box-brunch" onclick="selectBox(this,'Brunch')">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
       <span class="box-tag">Brunch</span>
       <div class="box-name">Brunch</div>
-      <div class="box-price">Desayuno · Brunch</div>
-      <div class="box-desc">Comes lo que cortas. Producto vivo en tu cocina durante 7+ días.</div>
-      <ul class="box-contents">
-        <li>4 bandejas vivas</li>
-        <li>Mizuna · Tat soi · Amaranto</li>
-        <li>Tostadas · huevos · palta</li>
-        <li>Ritual matinal</li>
-      </ul>
+      <div class="box-desc">Comes lo que cortas. Producto vivo en tu cocina 7+ días.</div>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'brunch','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'brunch','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'brunch','L')">L</button>
+      </div>
+      <div class="size-info" id="info-brunch"></div>
+      <div class="box-price">A consultar</div>
     </div>
 
     <!-- SPICY -->
-    <div class="box-card" onclick="selectBox(this,'Box Spicy','A consultar')" style="padding-top:38px">
+    <div class="box-card" id="box-spicy" onclick="selectBox(this,'Spicy')" style="padding-top:38px">
       <div class="box-popular">🔥 Más intenso</div>
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
       <span class="box-tag">Spicy</span>
       <div class="box-name">Spicy</div>
-      <div class="box-price">Ensaladas · Gourmet</div>
       <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde.</div>
-      <ul class="box-contents">
-        <li>5 bandejas vivas</li>
-        <li>Rábano verde y morado</li>
-        <li>Mostaza · Rúcula</li>
-        <li>Foodies · chefs amateur</li>
-      </ul>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'spicy','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'spicy','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'spicy','L')">L</button>
+      </div>
+      <div class="size-info" id="info-spicy"></div>
+      <div class="box-price">A consultar</div>
     </div>
 
     <!-- PROTEÍNA -->
-    <div class="box-card" onclick="selectBox(this,'Box Proteína','A consultar')">
+    <div class="box-card" id="box-protein" onclick="selectBox(this,'Proteína')">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
       <span class="box-tag">Proteína</span>
       <div class="box-name">Proteína</div>
-      <div class="box-price">Rendimiento · Deporte</div>
-      <div class="box-desc">Densidad nutricional para quienes entrenan y rinden. Alto aporte proteico.</div>
-      <ul class="box-contents">
-        <li>4 bandejas vivas</li>
-        <li>Brócoli · Rábano · Arveja</li>
-        <li>Post-entrenamiento</li>
-        <li>Nutrición consciente</li>
-      </ul>
-    </div>
-
-    <!-- KIDS -->
-    <div class="box-card" onclick="selectBox(this,'Box Kids','A consultar')">
-      <div class="box-check">✓</div>
-      <div class="box-icon">🧒</div>
-      <span class="box-tag" style="border-color:rgba(199,166,104,.3);color:var(--earth)">Kids</span>
-      <div class="box-name">Kids</div>
-      <div class="box-price" style="color:var(--earth)">Familias · Niños</div>
-      <div class="box-desc">Nutrición que entra disfrazada. Brócoli neutro, sin picor. Los niños no lo notan.</div>
-      <ul class="box-contents">
-        <li>1 bandeja viva brócoli</li>
-        <li>Sabor neutro · sin picor</li>
-        <li>Jugos · comidas · postres</li>
-        <li>Mamás y familias</li>
-      </ul>
+      <div class="box-desc">Densidad nutricional para quienes entrenan y rinden.</div>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'protein','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'protein','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'protein','L')">L</button>
+      </div>
+      <div class="size-info" id="info-protein"></div>
+      <div class="box-price">A consultar</div>
     </div>
 
   </div>
@@ -628,42 +694,79 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>80),{passive:true});
-
-function toggleMenu(){
-  const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
-  m.classList.toggle('open');h.classList.toggle('open');
-  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
-}
-function closeMenu(){
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('hamburger').classList.remove('open');
-  document.body.style.overflow='';
-}
-
+function toggleMenu(){const m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');m.classList.toggle('open');h.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').classList.remove('open');document.body.style.overflow='';}
 const obs=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');}),{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 
-let selBox=null;
-function selectBox(el,name,price){
-  document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');selBox={name,price};
-  document.getElementById('selectedInfo').textContent=name;
+// Variedades por box
+const VARIETIES = {
+  detox:   ['Brócoli','Repollo verde','Amaranto','Mizuna'],
+  brunch:  ['Mizuna','Tatsoi','Brócoli','Repollo verde'],
+  spicy:   ['Mostaza verde','Rábano verde','Rábano morado','Rúcula'],
+  protein: ['Arveja','Brócoli','Rábano verde','Mizuna verde'],
+};
+
+// Genera lista de brotes según talla
+// S=3: primeros 3, M=5: 4+primero repetido, L=8: cada uno ×2
+function buildContents(id, size){
+  const v = VARIETIES[id];
+  if(size==='S') return v.slice(0,3);
+  if(size==='M') return [...v, v[0]]; // 4 + primero repetido = 5
+  if(size==='L') return [...v,...v];   // 4×2 = 8, cada uno ×2
+  return v;
 }
+
+function renderInfo(id, size){
+  const contents = buildContents(id, size);
+  // Contar repeticiones
+  const count = {};
+  contents.forEach(v=>count[v]=(count[v]||0)+1);
+  const parts = Object.entries(count).map(([v,n])=>n>1?v+' ×'+n:v);
+  const el = document.getElementById('info-'+id);
+  if(el) el.textContent = size+' · '+contents.length+' brotes · '+parts.join(', ');
+}
+
+// Inicializar todos en M
+Object.keys(VARIETIES).forEach(id=>renderInfo(id,'M'));
+const currentSize = {detox:'M',brunch:'M',spicy:'M',protein:'M'};
+
+function setSize(e, id, size){
+  e.stopPropagation();
+  currentSize[id]=size;
+  const card = document.getElementById('box-'+id);
+  card.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderInfo(id, size);
+  // Actualizar selectedInfo si esta box está seleccionada
+  if(card.classList.contains('selected')){
+    document.getElementById('selectedInfo').textContent=
+      card.querySelector('.box-name').textContent+' · Talla '+size;
+  }
+}
+
+let selBox=null;
+function selectBox(el, name){
+  document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  const id=el.id.replace('box-','');
+  const size=currentSize[id]||'M';
+  selBox={name,size,contents:buildContents(id,size)};
+  document.getElementById('selectedInfo').textContent=name+' · Talla '+size;
+}
+
 function goToContact(){
   if(selBox){
     document.getElementById('f-interes').value='Suscripción semanal B2C';
-    document.getElementById('f-mensaje').value='Me interesa suscribirme a la '+selBox.name+'.';
+    document.getElementById('f-mensaje').value=
+      'Me interesa suscribirme a la Box '+selBox.name+' talla '+selBox.size+
+      '.\nContenido: '+selBox.contents.join(', ')+'.';
   }
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
 const pbBgs=document.querySelectorAll('.pb-bg');
-window.addEventListener('scroll',()=>{
-  pbBgs.forEach(bg=>{
-    const r=bg.closest('.pb').getBoundingClientRect();
-    bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;
-  });
-},{passive:true});
+window.addEventListener('scroll',()=>{pbBgs.forEach(bg=>{const r=bg.closest('.pb').getBoundingClientRect();bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;});},{passive:true});
 </script>
 </body>
 </html>
