@@ -115,31 +115,62 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .sub-intro-right{display:flex;flex-direction:column;gap:14px}
 .sub-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(112,186,94,.1);border:1px solid rgba(112,186,94,.25);border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gp);text-transform:uppercase;width:fit-content}
 .sub-badge::before{content:'●';font-size:8px;color:var(--gs)}
-.boxes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px}
-.box-card{background:var(--bg);border-radius:20px;padding:26px 18px;display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:.3s;border:2px solid transparent;position:relative;overflow:hidden}
-.box-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,26,43,.09);border-color:var(--gs)}
-.box-card.selected{background:var(--gp);border-color:var(--gs);transform:translateY(-5px);box-shadow:0 16px 40px rgba(23,102,99,.2)}
+
+/* Pasos de suscripción */
+.sub-steps{display:flex;gap:8px;align-items:center;margin-bottom:32px}
+.sub-step{display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(0,26,43,.35);text-transform:uppercase;transition:.3s}
+.sub-step.active{color:var(--gp)}
+.sub-step.done{color:var(--gs)}
+.sub-step-num{width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;transition:.3s}
+.sub-step.done .sub-step-num{background:var(--gs);border-color:var(--gs);color:var(--white)}
+.sub-step.done .sub-step-num::before{content:'✓'}
+.sub-step-sep{width:20px;height:1px;background:rgba(0,26,43,.15);flex-shrink:0}
+
+/* Boxes grid */
+.boxes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.box-card{background:var(--bg);border-radius:20px;padding:24px 18px 18px;display:flex;flex-direction:column;gap:10px;transition:.3s;border:2px solid transparent;position:relative;overflow:hidden}
+.box-select-btn{width:100%;padding:10px 14px;background:transparent;color:var(--gp);border:1.5px solid rgba(23,102,99,.35);border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.25s;letter-spacing:.3px;margin-top:4px}
+.box-select-btn:hover{background:rgba(23,102,99,.08);border-color:var(--gp)}
+.box-card.selected{background:var(--gp);border-color:var(--gs);box-shadow:0 16px 40px rgba(23,102,99,.2)}
 .box-card.selected .box-name,.box-card.selected .box-desc{color:var(--white)}
 .box-card.selected .box-tag{background:var(--gs);color:var(--white);border-color:var(--gs)}
-.box-card.selected .box-price{color:var(--gs)}
+.box-card.selected .box-select-btn{background:var(--gs);border-color:var(--gs);color:var(--white)}
+.box-card:not(.selected):hover{border-color:rgba(112,186,94,.4);box-shadow:0 8px 24px rgba(0,26,43,.07)}
 .box-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--gs);display:none;align-items:center;justify-content:center;font-size:10px;color:var(--white)}
 .box-card.selected .box-check{display:flex}
-.box-icon{font-size:28px}
+.box-icon{font-size:26px}
 .box-tag{display:inline-block;padding:4px 10px;border:1px solid rgba(23,102,99,.25);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gp);border-radius:6px;transition:.3s;width:fit-content}
 .box-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);transition:.3s}
-.box-price{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gp);letter-spacing:1px;transition:.3s}
 .box-desc{font-size:11px;font-weight:300;color:var(--gray);line-height:1.7;transition:.3s}
-.size-selector{display:flex;gap:8px}
-.size-btn{padding:6px 14px;border:1.5px solid rgba(23,102,99,.3);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);border-radius:8px;cursor:pointer;transition:.25s;font-weight:400}
-.size-btn:hover{border-color:var(--gs);color:var(--gs)}
-.size-btn.active{background:var(--gp);border-color:var(--gp);color:var(--white)}
-.box-card.selected .size-btn{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
-.box-card.selected .size-btn.active{background:var(--gs);border-color:var(--gs);color:var(--white)}
-.size-info{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--gp);opacity:.8;line-height:1.6;transition:.3s}
-.box-card.selected .size-info{color:rgba(255,255,255,.55)}
-.box-sub-btn{width:100%;padding:14px 20px;background:var(--gp);color:var(--white);border:none;border-radius:50px;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s ease;margin-top:6px;opacity:0;transform:translateY(8px);pointer-events:none;letter-spacing:.3px;box-shadow:0 4px 16px rgba(23,102,99,.2)}
-.box-card.selected .box-sub-btn{opacity:1;transform:translateY(0);pointer-events:auto}
-.box-sub-btn:hover{background:#0d4f4c;box-shadow:0 8px 24px rgba(23,102,99,.35);transform:translateY(-2px)!important}
+.box-card.selected .box-desc{color:rgba(255,255,255,.65)}
+
+/* Panel de tamaño y precio (paso 2 y 3) */
+.size-price-panel{background:var(--bg);border-radius:20px;padding:28px 32px;margin-bottom:32px;display:none;border:1px solid rgba(112,186,94,.2);animation:panelIn .3s ease}
+.size-price-panel.visible{display:block}
+@keyframes panelIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.spp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.spp-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:600;color:var(--navy)}
+.spp-box-name{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);text-transform:uppercase}
+.spp-sizes{display:flex;gap:10px;margin-bottom:20px}
+.spp-size-btn{flex:1;padding:14px 10px;border:2px solid rgba(23,102,99,.25);background:var(--white);border-radius:14px;cursor:pointer;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:5px}
+.spp-size-btn:hover{border-color:var(--gs)}
+.spp-size-btn.active{border-color:var(--gp);background:var(--gp)}
+.spp-size-letter{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--navy);transition:.3s}
+.spp-size-btn.active .spp-size-letter{color:var(--white)}
+.spp-size-price{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gp);letter-spacing:.5px;transition:.3s}
+.spp-size-btn.active .spp-size-price{color:var(--gs)}
+.spp-size-label{font-size:10px;color:var(--gray);font-weight:300;transition:.3s}
+.spp-size-btn.active .spp-size-label{color:rgba(255,255,255,.6)}
+.spp-info{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--gray);line-height:1.6;margin-bottom:20px;min-height:16px}
+.spp-price-row{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--white);border-radius:14px;border:1px solid rgba(112,186,94,.2);margin-bottom:16px}
+.spp-price-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
+.spp-price-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--gp);letter-spacing:-1px}
+.spp-price-period{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray);letter-spacing:1px;margin-top:2px}
+.spp-cta-btn{width:100%;padding:18px 24px;background:var(--gs);color:var(--white);border:none;border-radius:14px;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s ease;letter-spacing:.3px;box-shadow:0 6px 24px rgba(112,186,94,.35);display:flex;align-items:center;justify-content:center;gap:10px}
+.spp-cta-btn:hover{background:#5ca84e;box-shadow:0 10px 32px rgba(112,186,94,.45);transform:translateY(-2px)}
+.spp-cta-btn svg{width:18px;height:18px;flex-shrink:0}
+.spp-note{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gray);text-align:center;margin-top:10px}
+
 .sub-cta{background:var(--lg);border-radius:24px;padding:40px;text-align:center;border:1px solid rgba(112,186,94,.18)}
 .sub-cta h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px}
 .sub-cta p{font-size:14px;font-weight:300;color:var(--gray);line-height:1.8;margin-bottom:12px}
@@ -287,7 +318,12 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   .stats-bar{padding:18px 22px;gap:16px}
   .stat-n{font-size:26px}
   .vals{grid-template-columns:1fr}
-  .boxes-grid{grid-template-columns:1fr}
+  .boxes-grid{grid-template-columns:1fr 1fr}
+  .spp-sizes{gap:8px}
+  .spp-size-btn{padding:12px 6px}
+  .spp-size-letter{font-size:18px}
+  .size-price-panel{padding:22px 18px}
+  .spp-top{flex-direction:column;align-items:flex-start;gap:8px}
   .tech-cards,.pat-blocks{grid-template-columns:1fr}
   .b2b-inner{padding:28px 22px}
   .form-row{grid-template-columns:1fr}
@@ -298,6 +334,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   .footer-links{flex-wrap:wrap;gap:16px}
   .wa-wrap{bottom:20px;right:16px}
   .wa-btn{width:52px;height:52px}
+  .sub-steps{flex-wrap:wrap;gap:6px}
+  .sub-step-sep{display:none}
 }
 </style>
 </head>
@@ -446,76 +484,102 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     </div>
   </div>
 
+  <!-- PASOS INDICADORES -->
+  <div class="sub-steps fade-in" id="subSteps">
+    <div class="sub-step active" id="step1"><span class="sub-step-num">1</span>Elige tu box</div>
+    <div class="sub-step-sep"></div>
+    <div class="sub-step" id="step2"><span class="sub-step-num">2</span>Elige el tamaño</div>
+    <div class="sub-step-sep"></div>
+    <div class="sub-step" id="step3"><span class="sub-step-num">3</span>Suscríbete</div>
+  </div>
+
+  <!-- PASO 1: BOXES -->
   <div class="boxes-grid fade-in">
     <!-- DETOX -->
-    <div class="box-card" id="box-detox" onclick="selectBox(this,'Detox')">
+    <div class="box-card" id="box-detox">
       <div class="box-check">✓</div>
       <div class="box-icon">🥤</div>
       <span class="box-tag">Detox</span>
       <div class="box-name">Detox</div>
       <div class="box-desc">Del freezer directo a la licuadora. Sin lavar, sin cortar.</div>
-      <div class="size-selector">
-        <button class="size-btn" onclick="setSize(event,'detox','S')">S</button>
-        <button class="size-btn active" onclick="setSize(event,'detox','M')">M</button>
-        <button class="size-btn" onclick="setSize(event,'detox','L')">L</button>
-      </div>
-      <div class="size-info" id="info-detox"></div>
-      <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContactBox(event,'detox')">Quiero suscribirme →</button>
+      <button class="box-select-btn" onclick="selectBox('detox')">Seleccionar →</button>
     </div>
     <!-- BRUNCH -->
-    <div class="box-card" id="box-brunch" onclick="selectBox(this,'Brunch')">
+    <div class="box-card" id="box-brunch">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
       <span class="box-tag">Brunch</span>
       <div class="box-name">Brunch</div>
       <div class="box-desc">Comes lo que cortas. Producto vivo en tu cocina 7+ días.</div>
-      <div class="size-selector">
-        <button class="size-btn" onclick="setSize(event,'brunch','S')">S</button>
-        <button class="size-btn active" onclick="setSize(event,'brunch','M')">M</button>
-        <button class="size-btn" onclick="setSize(event,'brunch','L')">L</button>
-      </div>
-      <div class="size-info" id="info-brunch"></div>
-      <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContactBox(event,'brunch')">Quiero suscribirme →</button>
+      <button class="box-select-btn" onclick="selectBox('brunch')">Seleccionar →</button>
     </div>
     <!-- SPICY -->
-    <div class="box-card" id="box-spicy" onclick="selectBox(this,'Spicy')">
+    <div class="box-card" id="box-spicy">
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
       <span class="box-tag">Spicy</span>
       <div class="box-name">Spicy</div>
       <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde.</div>
-      <div class="size-selector">
-        <button class="size-btn" onclick="setSize(event,'spicy','S')">S</button>
-        <button class="size-btn active" onclick="setSize(event,'spicy','M')">M</button>
-        <button class="size-btn" onclick="setSize(event,'spicy','L')">L</button>
-      </div>
-      <div class="size-info" id="info-spicy"></div>
-      <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContactBox(event,'spicy')">Quiero suscribirme →</button>
+      <button class="box-select-btn" onclick="selectBox('spicy')">Seleccionar →</button>
     </div>
     <!-- PROTEÍNA -->
-    <div class="box-card" id="box-protein" onclick="selectBox(this,'Proteína')">
+    <div class="box-card" id="box-protein">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
       <span class="box-tag">Proteína</span>
       <div class="box-name">Proteína</div>
       <div class="box-desc">Densidad nutricional para quienes entrenan y rinden.</div>
-      <div class="size-selector">
-        <button class="size-btn" onclick="setSize(event,'protein','S')">S</button>
-        <button class="size-btn active" onclick="setSize(event,'protein','M')">M</button>
-        <button class="size-btn" onclick="setSize(event,'protein','L')">L</button>
-      </div>
-      <div class="size-info" id="info-protein"></div>
-      <div class="box-price">A consultar</div>
-      <button class="box-sub-btn" onclick="goToContactBox(event,'protein')">Quiero suscribirme →</button>
+      <button class="box-select-btn" onclick="selectBox('protein')">Seleccionar →</button>
     </div>
   </div>
 
+  <!-- PASO 2+3: TAMAÑO, PRECIO Y CTA -->
+  <div class="size-price-panel fade-in" id="sizePricePanel">
+    <div class="spp-top">
+      <div>
+        <div class="spp-title">Elige el tamaño de tu box</div>
+        <div class="spp-box-name" id="sppBoxName"></div>
+      </div>
+      <button onclick="resetSelection()" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);cursor:pointer;text-transform:uppercase;text-decoration:underline">Cambiar box</button>
+    </div>
+    <div class="spp-sizes" id="sppSizes">
+      <button class="spp-size-btn" id="sz-S" onclick="chooseSize('S')">
+        <span class="spp-size-letter">S</span>
+        <span class="spp-size-price">$15.000</span>
+        <span class="spp-size-label">3 variedades</span>
+      </button>
+      <button class="spp-size-btn active" id="sz-M" onclick="chooseSize('M')">
+        <span class="spp-size-letter">M</span>
+        <span class="spp-size-price">$22.500</span>
+        <span class="spp-size-label">4 variedades</span>
+      </button>
+      <button class="spp-size-btn" id="sz-L" onclick="chooseSize('L')">
+        <span class="spp-size-letter">L</span>
+        <span class="spp-size-price">$32.000</span>
+        <span class="spp-size-label">8 variedades</span>
+      </button>
+    </div>
+    <div class="spp-info" id="sppInfo"></div>
+    <div class="spp-price-row">
+      <div>
+        <div class="spp-price-label">Precio semanal</div>
+        <div class="spp-price-period">Entrega a domicilio · Punta Arenas</div>
+      </div>
+      <div style="text-align:right">
+        <div class="spp-price-val" id="sppPrice">$22.500</div>
+        <div class="spp-price-period">/ semana · IVA incluido</div>
+      </div>
+    </div>
+    <button class="spp-cta-btn" id="sppCtaBtn" onclick="goToContactBox()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Quiero suscribirme
+    </button>
+    <div class="spp-note">Sin compromisos · Cancela cuando quieras · Pago online próximamente</div>
+  </div>
+
   <div class="sub-cta fade-in">
-    <h3>¿Listo para suscribirte?</h3>
-    <p>Próximamente habilitamos el pago online. Por ahora selecciona tu box, completa el formulario y coordinamos la primera entrega contigo.</p>
+    <h3>¿Tienes preguntas?</h3>
+    <p>Escríbenos y te respondemos antes de tu primera entrega.</p>
     <p class="sub-note">Sin compromisos · Cancela cuando quieras</p>
   </div>
 </section>
@@ -774,7 +838,7 @@ document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 const pbBgs=document.querySelectorAll('.pb-bg');
 window.addEventListener('scroll',()=>{pbBgs.forEach(bg=>{const r=bg.closest('.pb').getBoundingClientRect();bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;});},{passive:true});
 
-// Variedades
+// Variedades y precios
 const VARIETIES={
   detox:  ['Brócoli','Repollo verde','Amaranto','Mizuna'],
   brunch: ['Mizuna','Tatsoi','Brócoli','Repollo verde'],
@@ -782,6 +846,8 @@ const VARIETIES={
   protein:['Arveja','Brócoli','Rábano verde','Mizuna verde'],
 };
 const NAMES={detox:'Detox',brunch:'Brunch',spicy:'Spicy',protein:'Proteína'};
+const PRICES={S:15000,M:22500,L:32000};
+const SIZE_LABELS={S:'3 variedades',M:'4 variedades',L:'8 variedades'};
 
 function buildContents(id,size){
   const v=VARIETIES[id];
@@ -791,42 +857,78 @@ function buildContents(id,size){
   return v;
 }
 
-function renderInfo(id,size){
-  const contents=buildContents(id,size);
+function formatPrice(n){return '$'+n.toLocaleString('es-CL');}
+
+let currentBox=null;
+let currentSize='M';
+
+function selectBox(id){
+  currentBox=id;
+  // Marcar box seleccionada
+  document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('box-'+id).classList.add('selected');
+  // Mostrar panel
+  const panel=document.getElementById('sizePricePanel');
+  panel.classList.add('visible');
+  document.getElementById('sppBoxName').textContent='Box '+NAMES[id];
+  // Reset tamaño a M
+  currentSize='M';
+  updateSizeButtons();
+  updatePricePanel();
+  // Actualizar pasos
+  updateSteps(2);
+  // Scroll suave al panel
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+}
+
+function chooseSize(size){
+  currentSize=size;
+  updateSizeButtons();
+  updatePricePanel();
+  updateSteps(3);
+}
+
+function updateSizeButtons(){
+  ['S','M','L'].forEach(s=>{
+    const btn=document.getElementById('sz-'+s);
+    btn.classList.toggle('active',s===currentSize);
+  });
+}
+
+function updatePricePanel(){
+  if(!currentBox) return;
+  const contents=buildContents(currentBox,currentSize);
   const count={};
   contents.forEach(v=>count[v]=(count[v]||0)+1);
   const parts=Object.entries(count).map(([v,n])=>n>1?v+' ×'+n:v);
-  const el=document.getElementById('info-'+id);
-  if(el) el.textContent=size+' · '+contents.length+' brotes · '+parts.join(', ');
+  document.getElementById('sppInfo').textContent=parts.join(' · ');
+  document.getElementById('sppPrice').textContent=formatPrice(PRICES[currentSize]);
 }
 
-Object.keys(VARIETIES).forEach(id=>renderInfo(id,'M'));
-const currentSize={detox:'M',brunch:'M',spicy:'M',protein:'M'};
-
-function setSize(e,id,size){
-  e.stopPropagation();
-  currentSize[id]=size;
-  const card=document.getElementById('box-'+id);
-  card.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
-  e.target.classList.add('active');
-  renderInfo(id,size);
+function updateSteps(active){
+  [1,2,3].forEach(n=>{
+    const el=document.getElementById('step'+n);
+    el.classList.remove('active','done');
+    if(n<active) el.classList.add('done');
+    else if(n===active) el.classList.add('active');
+  });
 }
 
-let selBox=null;
-function selectBox(el,name){
+function resetSelection(){
+  currentBox=null;
+  currentSize='M';
   document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-  const id=el.id.replace('box-','');
-  selBox={name,id,size:currentSize[id]||'M'};
+  document.getElementById('sizePricePanel').classList.remove('visible');
+  updateSteps(1);
+  document.getElementById('suscripcion').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function goToContactBox(e,id){
-  e.stopPropagation();
-  const size=currentSize[id]||'M';
-  const contents=buildContents(id,size);
-  const name=NAMES[id];
+function goToContactBox(){
+  if(!currentBox) return;
+  const contents=buildContents(currentBox,currentSize);
+  const name=NAMES[currentBox];
   document.getElementById('f-interes').value='Suscripción semanal B2C';
-  document.getElementById('f-mensaje').value='Hola, me interesa suscribirme a la Box '+name+' talla '+size+'.\nContenido: '+contents.join(', ')+'.';
+  document.getElementById('f-mensaje').value='Hola, me interesa suscribirme a la Box '+name+' talla '+currentSize+' ('+formatPrice(PRICES[currentSize])+'/semana).\nContenido: '+contents.join(', ')+'.';
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
