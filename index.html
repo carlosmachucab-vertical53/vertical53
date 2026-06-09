@@ -546,17 +546,17 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <button class="spp-size-btn" id="sz-S" onclick="chooseSize('S')">
         <span class="spp-size-letter">S</span>
         <span class="spp-size-price">$15.000</span>
-        <span class="spp-size-label">3 variedades</span>
+        <span class="spp-size-label">3 unidades</span>
       </button>
       <button class="spp-size-btn active" id="sz-M" onclick="chooseSize('M')">
         <span class="spp-size-letter">M</span>
         <span class="spp-size-price">$22.500</span>
-        <span class="spp-size-label">4 variedades</span>
+        <span class="spp-size-label">5 unidades</span>
       </button>
       <button class="spp-size-btn" id="sz-L" onclick="chooseSize('L')">
         <span class="spp-size-letter">L</span>
         <span class="spp-size-price">$32.000</span>
-        <span class="spp-size-label">8 variedades</span>
+        <span class="spp-size-label">8 unidades</span>
       </button>
     </div>
     <div class="spp-info" id="sppInfo"></div>
@@ -852,7 +852,7 @@ const SIZE_LABELS={S:'3 variedades',M:'4 variedades',L:'8 variedades'};
 function buildContents(id,size){
   const v=VARIETIES[id];
   if(size==='S') return v.slice(0,3);
-  if(size==='M') return [...v,v[0]];
+  if(size==='M') return [...v,v[0],v[1]];
   if(size==='L') return [...v,...v];
   return v;
 }
