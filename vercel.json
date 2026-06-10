@@ -7,6 +7,10 @@
     "api/flow-webhook.js": {
       "memory": 128,
       "maxDuration": 10
+    },
+    "api/confirm-registration.js": {
+      "memory": 128,
+      "maxDuration": 10
     }
   }
 }
