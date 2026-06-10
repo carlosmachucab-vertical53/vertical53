@@ -407,6 +407,32 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   .sub-steps{flex-wrap:wrap;gap:6px}
   .sub-step-sep{display:none}
 }
+
+/* MODAL SUSCRIPCIÓN FLOW */
+.flow-modal-overlay{position:fixed;inset:0;background:rgba(0,26,43,.75);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.flow-modal-overlay.open{display:flex}
+.flow-modal{background:var(--white);border-radius:24px;max-width:480px;width:100%;padding:40px;position:relative;box-shadow:0 24px 64px rgba(0,26,43,.18)}
+.flow-modal-close{position:absolute;top:16px;right:16px;background:var(--bg);border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;color:var(--gray);display:flex;align-items:center;justify-content:center;transition:.2s}
+.flow-modal-close:hover{background:var(--gs);color:var(--white)}
+.flow-modal-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gp);text-transform:uppercase;margin-bottom:8px}
+.flow-modal-title{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.flow-modal-plan{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gs);text-transform:uppercase;margin-bottom:24px}
+.flow-modal-rule{width:36px;height:2px;background:var(--gs);border-radius:2px;margin-bottom:24px}
+.flow-modal .field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.flow-modal .field label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray)}
+.flow-modal .field input{border:1.5px solid var(--bg);padding:12px 16px;font-size:14px;font-family:'Inter',sans-serif;font-weight:300;outline:none;background:var(--bg);transition:.25s;color:var(--navy);border-radius:10px}
+.flow-modal .field input:focus{border-color:var(--gs);background:var(--white)}
+.flow-modal .field .field-note{font-size:11px;color:var(--gray);font-family:'IBM Plex Mono',monospace;letter-spacing:.5px}
+.flow-modal-submit{width:100%;padding:15px 24px;background:var(--gs);color:var(--white);border:none;border-radius:12px;font-family:'Sora',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 20px rgba(112,186,94,.3)}
+.flow-modal-submit:hover{background:#5ca84e;transform:translateY(-2px);box-shadow:0 10px 28px rgba(112,186,94,.4)}
+.flow-modal-submit:disabled{background:var(--gray);transform:none;box-shadow:none;cursor:not-allowed}
+.flow-modal-note{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gray);text-align:center;margin-top:10px;line-height:1.7}
+.flow-modal-error{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#e53e3e;margin-top:8px;min-height:16px;text-align:center}
+.flow-modal-price-row{display:flex;align-items:center;justify-content:space-between;background:var(--lg);border-radius:12px;padding:12px 16px;margin-bottom:20px;border:1px solid rgba(112,186,94,.2)}
+.flow-modal-price-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase}
+.flow-modal-price-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--gp)}
+.flow-modal-price-period{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--gray)}
+
 </style>
 </head>
 <body>
@@ -1072,6 +1098,46 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   </div>
 </div>
 
+
+<!-- MODAL SUSCRIPCIÓN FLOW -->
+<div class="flow-modal-overlay" id="flowModal" onclick="closeFlowModalOutside(event)">
+  <div class="flow-modal">
+    <button class="flow-modal-close" onclick="closeFlowModal()">✕</button>
+    <div class="flow-modal-tag">Suscripción</div>
+    <div class="flow-modal-title">Completa tus datos</div>
+    <div class="flow-modal-plan" id="fmPlan"></div>
+    <div class="flow-modal-rule"></div>
+    <div class="flow-modal-price-row">
+      <div>
+        <div class="flow-modal-price-label">Cobro mensual</div>
+        <div class="flow-modal-price-period">Entrega semanal · Punta Arenas</div>
+      </div>
+      <div style="text-align:right">
+        <div class="flow-modal-price-val" id="fmPrice"></div>
+        <div class="flow-modal-price-period">IVA incluido</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Nombre completo</label>
+      <input type="text" id="fm-nombre" placeholder="Tu nombre" autocomplete="name"/>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="fm-email" placeholder="correo@ejemplo.cl" autocomplete="email"/>
+    </div>
+    <div class="field">
+      <label>Teléfono <span style="font-weight:300;letter-spacing:0">(opcional)</span></label>
+      <input type="tel" id="fm-telefono" placeholder="+56 9 ..." autocomplete="tel"/>
+    </div>
+    <div class="flow-modal-error" id="fm-error"></div>
+    <button class="flow-modal-submit" id="fm-submit" onclick="submitFlowModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Ir a pagar con Flow
+    </button>
+    <div class="flow-modal-note">Serás redirigido a Flow para ingresar tu tarjeta.<br/>Sin compromisos · Cancela cuando quieras.</div>
+  </div>
+</div>
+
 <!-- MODAL POLÍTICA DE PRIVACIDAD -->
 <div class="modal-overlay" id="modal-pp" onclick="closeModalOutside(event,'modal-pp')">
   <div class="modal-box">
@@ -1253,49 +1319,69 @@ function resetSelection(){
   document.getElementById('suscripcion').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-async function goToContactBox(){
+function goToContactBox(){
   if(!currentBox) return;
+  // Mostrar modal con datos del plan
+  const MONTHLY = {S: 60000, M: 90000, L: 128000};
+  const name = NAMES[currentBox];
+  document.getElementById('fmPlan').textContent = 'Box ' + name + ' · Talla ' + currentSize;
+  document.getElementById('fmPrice').textContent = '$' + MONTHLY[currentSize].toLocaleString('es-CL') + '/mes';
+  document.getElementById('fm-error').textContent = '';
+  document.getElementById('fm-nombre').value = '';
+  document.getElementById('fm-email').value = '';
+  document.getElementById('fm-telefono').value = '';
+  document.getElementById('fm-submit').disabled = false;
+  document.getElementById('fm-submit').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Ir a pagar con Flow';
+  document.getElementById('flowModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('fm-nombre').focus(), 100);
+}
 
-  const nombre = prompt('Tu nombre completo:');
-  if(!nombre || !nombre.trim()) return;
-  const email = prompt('Tu email:');
-  if(!email || !email.trim()) return;
-  const telefono = prompt('Tu teléfono (opcional, puedes dejar vacío):');
+function closeFlowModal(){
+  document.getElementById('flowModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-  const btn = document.getElementById('sppCtaBtn');
-  btn.textContent = 'Procesando...';
+function closeFlowModalOutside(e){
+  if(e.target === document.getElementById('flowModal')) closeFlowModal();
+}
+
+async function submitFlowModal(){
+  const nombre = document.getElementById('fm-nombre').value.trim();
+  const email  = document.getElementById('fm-email').value.trim();
+  const tel    = document.getElementById('fm-telefono').value.trim();
+  const errEl  = document.getElementById('fm-error');
+  const btn    = document.getElementById('fm-submit');
+
+  if(!nombre){ errEl.textContent = 'Por favor ingresa tu nombre.'; return; }
+  if(!email || !email.includes('@')){ errEl.textContent = 'Por favor ingresa un email válido.'; return; }
+  errEl.textContent = '';
+
   btn.disabled = true;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Procesando...';
 
   try {
     const res = await fetch('/api/create-subscription', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        box: currentBox,
-        size: currentSize,
-        nombre: nombre.trim(),
-        email: email.trim(),
-        telefono: telefono ? telefono.trim() : ''
-      })
+      body: JSON.stringify({ box: currentBox, size: currentSize, nombre, email, telefono: tel })
     });
-
     const data = await res.json();
 
-    if (!res.ok || !data.url) {
-      alert('Hubo un error al procesar tu suscripción. Por favor escríbenos a hola@vertical53.com');
-      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Quiero suscribirme';
+    if(!res.ok || !data.url){
+      errEl.textContent = data.error || 'Error al procesar. Intenta de nuevo o escríbenos.';
       btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Ir a pagar con Flow';
       return;
     }
 
-    // Redirigir a Flow para el pago
+    // Redirigir a Flow
     window.location.href = data.url;
 
-  } catch(err) {
-    console.error(err);
-    alert('Error de conexión. Por favor intenta nuevamente o escríbenos a hola@vertical53.com');
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Quiero suscribirme';
+  } catch(err){
+    errEl.textContent = 'Error de conexión. Por favor intenta nuevamente.';
     btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Ir a pagar con Flow';
   }
 }
 
