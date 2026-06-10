@@ -115,62 +115,31 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .sub-intro-right{display:flex;flex-direction:column;gap:14px}
 .sub-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(112,186,94,.1);border:1px solid rgba(112,186,94,.25);border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gp);text-transform:uppercase;width:fit-content}
 .sub-badge::before{content:'●';font-size:8px;color:var(--gs)}
-
-/* Pasos de suscripción */
-.sub-steps{display:flex;gap:8px;align-items:center;margin-bottom:32px}
-.sub-step{display:flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(0,26,43,.35);text-transform:uppercase;transition:.3s}
-.sub-step.active{color:var(--gp)}
-.sub-step.done{color:var(--gs)}
-.sub-step-num{width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;transition:.3s}
-.sub-step.done .sub-step-num{background:var(--gs);border-color:var(--gs);color:var(--white)}
-.sub-step.done .sub-step-num::before{content:'✓'}
-.sub-step-sep{width:20px;height:1px;background:rgba(0,26,43,.15);flex-shrink:0}
-
-/* Boxes grid */
-.boxes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
-.box-card{background:var(--bg);border-radius:20px;padding:24px 18px 18px;display:flex;flex-direction:column;gap:10px;transition:.3s;border:2px solid transparent;position:relative;overflow:hidden}
-.box-select-btn{width:100%;padding:10px 14px;background:transparent;color:var(--gp);border:1.5px solid rgba(23,102,99,.35);border-radius:10px;font-family:'Sora',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.25s;letter-spacing:.3px;margin-top:4px}
-.box-select-btn:hover{background:rgba(23,102,99,.08);border-color:var(--gp)}
-.box-card.selected{background:var(--gp);border-color:var(--gs);box-shadow:0 16px 40px rgba(23,102,99,.2)}
+.boxes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:40px}
+.box-card{background:var(--bg);border-radius:20px;padding:26px 18px;display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:.3s;border:2px solid transparent;position:relative;overflow:hidden}
+.box-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,26,43,.09);border-color:var(--gs)}
+.box-card.selected{background:var(--gp);border-color:var(--gs);transform:translateY(-5px);box-shadow:0 16px 40px rgba(23,102,99,.2)}
 .box-card.selected .box-name,.box-card.selected .box-desc{color:var(--white)}
 .box-card.selected .box-tag{background:var(--gs);color:var(--white);border-color:var(--gs)}
-.box-card.selected .box-select-btn{background:var(--gs);border-color:var(--gs);color:var(--white)}
-.box-card:not(.selected):hover{border-color:rgba(112,186,94,.4);box-shadow:0 8px 24px rgba(0,26,43,.07)}
+.box-card.selected .box-price{color:var(--gs)}
 .box-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--gs);display:none;align-items:center;justify-content:center;font-size:10px;color:var(--white)}
 .box-card.selected .box-check{display:flex}
-.box-icon{font-size:26px}
+.box-icon{font-size:28px}
 .box-tag{display:inline-block;padding:4px 10px;border:1px solid rgba(23,102,99,.25);font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gp);border-radius:6px;transition:.3s;width:fit-content}
 .box-name{font-family:'Sora',sans-serif;font-size:15px;font-weight:700;color:var(--navy);transition:.3s}
+.box-price{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gp);letter-spacing:1px;transition:.3s}
 .box-desc{font-size:11px;font-weight:300;color:var(--gray);line-height:1.7;transition:.3s}
-.box-card.selected .box-desc{color:rgba(255,255,255,.65)}
-
-/* Panel de tamaño y precio (paso 2 y 3) */
-.size-price-panel{background:var(--bg);border-radius:20px;padding:28px 32px;margin-bottom:32px;display:none;border:1px solid rgba(112,186,94,.2);animation:panelIn .3s ease}
-.size-price-panel.visible{display:block}
-@keyframes panelIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.spp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
-.spp-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:600;color:var(--navy)}
-.spp-box-name{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);text-transform:uppercase}
-.spp-sizes{display:flex;gap:10px;margin-bottom:20px}
-.spp-size-btn{flex:1;padding:14px 10px;border:2px solid rgba(23,102,99,.25);background:var(--white);border-radius:14px;cursor:pointer;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:5px}
-.spp-size-btn:hover{border-color:var(--gs)}
-.spp-size-btn.active{border-color:var(--gp);background:var(--gp)}
-.spp-size-letter{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--navy);transition:.3s}
-.spp-size-btn.active .spp-size-letter{color:var(--white)}
-.spp-size-price{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gp);letter-spacing:.5px;transition:.3s}
-.spp-size-btn.active .spp-size-price{color:var(--gs)}
-.spp-size-label{font-size:10px;color:var(--gray);font-weight:300;transition:.3s}
-.spp-size-btn.active .spp-size-label{color:rgba(255,255,255,.6)}
-.spp-info{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--gray);line-height:1.6;margin-bottom:20px;min-height:16px}
-.spp-price-row{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--white);border-radius:14px;border:1px solid rgba(112,186,94,.2);margin-bottom:16px}
-.spp-price-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
-.spp-price-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--gp);letter-spacing:-1px}
-.spp-price-period{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gray);letter-spacing:1px;margin-top:2px}
-.spp-cta-btn{width:100%;padding:18px 24px;background:var(--gs);color:var(--white);border:none;border-radius:14px;font-family:'Sora',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s ease;letter-spacing:.3px;box-shadow:0 6px 24px rgba(112,186,94,.35);display:flex;align-items:center;justify-content:center;gap:10px}
-.spp-cta-btn:hover{background:#5ca84e;box-shadow:0 10px 32px rgba(112,186,94,.45);transform:translateY(-2px)}
-.spp-cta-btn svg{width:18px;height:18px;flex-shrink:0}
-.spp-note{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gray);text-align:center;margin-top:10px}
-
+.size-selector{display:flex;gap:8px}
+.size-btn{padding:6px 14px;border:1.5px solid rgba(23,102,99,.3);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gp);border-radius:8px;cursor:pointer;transition:.25s;font-weight:400}
+.size-btn:hover{border-color:var(--gs);color:var(--gs)}
+.size-btn.active{background:var(--gp);border-color:var(--gp);color:var(--white)}
+.box-card.selected .size-btn{border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
+.box-card.selected .size-btn.active{background:var(--gs);border-color:var(--gs);color:var(--white)}
+.size-info{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.5px;color:var(--gp);opacity:.8;line-height:1.6;transition:.3s}
+.box-card.selected .size-info{color:rgba(255,255,255,.55)}
+.box-sub-btn{width:100%;padding:14px 20px;background:var(--gp);color:var(--white);border:none;border-radius:50px;font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s ease;margin-top:6px;opacity:0;transform:translateY(8px);pointer-events:none;letter-spacing:.3px;box-shadow:0 4px 16px rgba(23,102,99,.2)}
+.box-card.selected .box-sub-btn{opacity:1;transform:translateY(0);pointer-events:auto}
+.box-sub-btn:hover{background:#0d4f4c;box-shadow:0 8px 24px rgba(23,102,99,.35);transform:translateY(-2px)!important}
 .sub-cta{background:var(--lg);border-radius:24px;padding:40px;text-align:center;border:1px solid rgba(112,186,94,.18)}
 .sub-cta h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px}
 .sub-cta p{font-size:14px;font-weight:300;color:var(--gray);line-height:1.8;margin-bottom:12px}
@@ -291,6 +260,73 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .footer-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.45);text-decoration:none;transition:.2s}
 .footer-links a:hover{color:var(--white)}
 
+
+/* CATÁLOGO MODAL */
+.modal-pdf-wrap{width:100%;height:72vh;border:none;border-radius:12px;display:block}
+@media(max-width:600px){.modal-pdf-wrap{height:55vh}}
+
+/* GUÍA DEPORTIVA */
+#deportiva{background:var(--navy);position:relative;overflow:hidden}
+#deportiva .tag-label{color:var(--gs)}
+#deportiva .tag-label::before{background:var(--gs)}
+#deportiva h2{color:var(--white)}
+#deportiva .body-text{color:rgba(255,255,255,.45)}
+.dep-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0 36px}
+.dep-tab{padding:8px 18px;border:1.5px solid rgba(255,255,255,.18);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.5);border-radius:8px;cursor:pointer;transition:.25s;text-transform:uppercase}
+.dep-tab:hover{border-color:var(--gs);color:var(--gs)}
+.dep-tab.active{background:var(--gs);border-color:var(--gs);color:var(--white)}
+.dep-panel{display:none}
+.dep-panel.active{display:block}
+.dep-intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:48px}
+.dep-intro-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:24px;border-radius:16px;transition:.3s}
+.dep-intro-card:hover{background:rgba(112,186,94,.08);border-color:rgba(112,186,94,.2)}
+.dep-intro-card h4{font-family:'Sora',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;color:var(--gs);margin-bottom:8px}
+.dep-intro-card p{font-size:12px;line-height:1.8;color:rgba(255,255,255,.4);font-weight:300}
+.dep-ventana{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0}
+.dep-vent-card{padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,.07)}
+.dep-vent-card.pre{background:rgba(112,186,94,.08);border-color:rgba(112,186,94,.2)}
+.dep-vent-card.intra{background:rgba(199,166,104,.08);border-color:rgba(199,166,104,.2)}
+.dep-vent-card.post{background:rgba(23,102,99,.15);border-color:rgba(23,102,99,.35)}
+.dep-vent-card h4{font-family:'Sora',sans-serif;font-size:11px;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.dep-vent-card.pre h4{color:var(--gs)}
+.dep-vent-card.intra h4{color:var(--earth)}
+.dep-vent-card.post h4{color:#5bb5b2}
+.dep-vent-card .dep-time{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:10px;text-transform:uppercase}
+.dep-vent-card p{font-size:12px;line-height:1.75;color:rgba(255,255,255,.45);font-weight:300}
+.dep-vent-card ul{list-style:none;padding:0;margin:8px 0 0}
+.dep-vent-card ul li{font-size:12px;color:rgba(255,255,255,.55);line-height:1.7;font-weight:300}
+.dep-vent-card ul li::before{content:'→ ';color:var(--gs)}
+.dep-nutri-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}
+.dep-nutri-table th{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gs);padding:8px 10px;text-align:left;border-bottom:1px solid rgba(112,186,94,.2)}
+.dep-nutri-table td{font-weight:300;color:rgba(255,255,255,.65);padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04)}
+.dep-nutri-table tr:last-child td{border-bottom:none}
+.dep-nutri-table td:first-child{color:rgba(255,255,255,.85);font-weight:400}
+.dep-nutri-table .hi{color:var(--gs);font-family:'IBM Plex Mono',monospace;font-size:11px}
+.dep-vars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.dep-var-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:20px;border-radius:14px;transition:.3s}
+.dep-var-card:hover{background:rgba(112,186,94,.07);border-color:rgba(112,186,94,.2);transform:translateY(-2px)}
+.dep-var-card h4{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--gs);margin-bottom:8px}
+.dep-var-card .dep-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.dep-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 7px;border-radius:4px;text-transform:uppercase}
+.dep-badge.pre{background:rgba(112,186,94,.15);color:var(--gs)}
+.dep-badge.post{background:rgba(23,102,99,.25);color:#5bb5b2}
+.dep-var-card p{font-size:11px;line-height:1.75;color:rgba(255,255,255,.38);font-weight:300}
+.dep-var-card .dep-key{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,.3);border-top:1px solid rgba(255,255,255,.06);padding-top:8px}
+.dep-combos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.dep-combo{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:22px;border-radius:14px;transition:.3s}
+.dep-combo:hover{border-color:rgba(112,186,94,.25);transform:translateY(-2px)}
+.dep-combo h4{font-family:'Sora',sans-serif;font-size:12px;text-transform:uppercase;font-weight:600;color:var(--gs);margin-bottom:6px}
+.dep-combo .dep-mix{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--earth);margin-bottom:8px}
+.dep-combo p{font-size:12px;line-height:1.75;color:rgba(255,255,255,.38);font-weight:300}
+.dep-dry-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.dep-dry-card{background:rgba(199,166,104,.08);border:1px solid rgba(199,166,104,.2);padding:24px;border-radius:16px;text-align:center}
+.dep-dry-num{font-family:'IBM Plex Mono',monospace;font-size:26px;color:var(--earth);letter-spacing:-1px;line-height:1;margin-bottom:6px}
+.dep-dry-card h4{font-family:'Sora',sans-serif;font-size:11px;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:4px}
+.dep-dry-card p{font-size:11px;color:rgba(255,255,255,.35);font-weight:300;line-height:1.7}
+.dep-source{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,.2);margin-top:24px;text-transform:uppercase;line-height:1.8}
+@media(max-width:900px){.dep-intro-grid,.dep-ventana,.dep-vars-grid{grid-template-columns:1fr 1fr}.dep-combos{grid-template-columns:1fr}}
+@media(max-width:600px){.dep-intro-grid,.dep-ventana,.dep-vars-grid,.dep-dry-grid,.dep-combos{grid-template-columns:1fr}}
+
 /* RESPONSIVE */
 @media(max-width:900px){
   .sec{padding:72px 40px}
@@ -318,12 +354,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   .stats-bar{padding:18px 22px;gap:16px}
   .stat-n{font-size:26px}
   .vals{grid-template-columns:1fr}
-  .boxes-grid{grid-template-columns:1fr 1fr}
-  .spp-sizes{gap:8px}
-  .spp-size-btn{padding:12px 6px}
-  .spp-size-letter{font-size:18px}
-  .size-price-panel{padding:22px 18px}
-  .spp-top{flex-direction:column;align-items:flex-start;gap:8px}
+  .boxes-grid{grid-template-columns:1fr}
   .tech-cards,.pat-blocks{grid-template-columns:1fr}
   .b2b-inner{padding:28px 22px}
   .form-row{grid-template-columns:1fr}
@@ -334,8 +365,6 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   .footer-links{flex-wrap:wrap;gap:16px}
   .wa-wrap{bottom:20px;right:16px}
   .wa-btn{width:52px;height:52px}
-  .sub-steps{flex-wrap:wrap;gap:6px}
-  .sub-step-sep{display:none}
 }
 </style>
 </head>
@@ -345,7 +374,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 <div class="mobile-menu" id="mobileMenu">
   <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
   <a href="#suscripcion" onclick="closeMenu()">Suscripción</a>
-  <a href="#b2b" onclick="closeMenu()">B2B</a>
+  <a href="#catalogo" onclick="openModal('modal-catalogo');closeMenu();return false;">Catálogo</a>
+  <a href="#horeca" onclick="closeMenu()">Horeca</a>
   <a href="#ubicacion" onclick="closeMenu()">Ubicación</a>
   <a href="#contacto" onclick="closeMenu()">Contacto</a>
   <a href="#suscripcion" class="m-cta" onclick="closeMenu()">Suscribirme</a>
@@ -359,7 +389,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   <ul class="nav-links">
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#suscripcion">Suscripción</a></li>
-    <li><a href="#b2b">B2B</a></li>
+    <li><a href="#catalogo" onclick="openModal('modal-catalogo');return false;">Catálogo</a></li>
+    <li><a href="#horeca">Horeca</a></li>
     <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -484,102 +515,76 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     </div>
   </div>
 
-  <!-- PASOS INDICADORES -->
-  <div class="sub-steps fade-in" id="subSteps">
-    <div class="sub-step active" id="step1"><span class="sub-step-num">1</span>Elige tu box</div>
-    <div class="sub-step-sep"></div>
-    <div class="sub-step" id="step2"><span class="sub-step-num">2</span>Elige el tamaño</div>
-    <div class="sub-step-sep"></div>
-    <div class="sub-step" id="step3"><span class="sub-step-num">3</span>Suscríbete</div>
-  </div>
-
-  <!-- PASO 1: BOXES -->
   <div class="boxes-grid fade-in">
     <!-- DETOX -->
-    <div class="box-card" id="box-detox">
+    <div class="box-card" id="box-detox" onclick="selectBox(this,'Detox')">
       <div class="box-check">✓</div>
       <div class="box-icon">🥤</div>
       <span class="box-tag">Detox</span>
       <div class="box-name">Detox</div>
       <div class="box-desc">Del freezer directo a la licuadora. Sin lavar, sin cortar.</div>
-      <button class="box-select-btn" onclick="selectBox('detox')">Seleccionar →</button>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'detox','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'detox','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'detox','L')">L</button>
+      </div>
+      <div class="size-info" id="info-detox"></div>
+      <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'detox')">Quiero suscribirme →</button>
     </div>
     <!-- BRUNCH -->
-    <div class="box-card" id="box-brunch">
+    <div class="box-card" id="box-brunch" onclick="selectBox(this,'Brunch')">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
       <span class="box-tag">Brunch</span>
       <div class="box-name">Brunch</div>
       <div class="box-desc">Comes lo que cortas. Producto vivo en tu cocina 7+ días.</div>
-      <button class="box-select-btn" onclick="selectBox('brunch')">Seleccionar →</button>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'brunch','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'brunch','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'brunch','L')">L</button>
+      </div>
+      <div class="size-info" id="info-brunch"></div>
+      <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'brunch')">Quiero suscribirme →</button>
     </div>
     <!-- SPICY -->
-    <div class="box-card" id="box-spicy">
+    <div class="box-card" id="box-spicy" onclick="selectBox(this,'Spicy')">
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
       <span class="box-tag">Spicy</span>
       <div class="box-name">Spicy</div>
       <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde.</div>
-      <button class="box-select-btn" onclick="selectBox('spicy')">Seleccionar →</button>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'spicy','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'spicy','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'spicy','L')">L</button>
+      </div>
+      <div class="size-info" id="info-spicy"></div>
+      <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'spicy')">Quiero suscribirme →</button>
     </div>
     <!-- PROTEÍNA -->
-    <div class="box-card" id="box-protein">
+    <div class="box-card" id="box-protein" onclick="selectBox(this,'Proteína')">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
       <span class="box-tag">Proteína</span>
       <div class="box-name">Proteína</div>
       <div class="box-desc">Densidad nutricional para quienes entrenan y rinden.</div>
-      <button class="box-select-btn" onclick="selectBox('protein')">Seleccionar →</button>
-    </div>
-  </div>
-
-  <!-- PASO 2+3: TAMAÑO, PRECIO Y CTA -->
-  <div class="size-price-panel fade-in" id="sizePricePanel">
-    <div class="spp-top">
-      <div>
-        <div class="spp-title">Elige el tamaño de tu box</div>
-        <div class="spp-box-name" id="sppBoxName"></div>
+      <div class="size-selector">
+        <button class="size-btn" onclick="setSize(event,'protein','S')">S</button>
+        <button class="size-btn active" onclick="setSize(event,'protein','M')">M</button>
+        <button class="size-btn" onclick="setSize(event,'protein','L')">L</button>
       </div>
-      <button onclick="resetSelection()" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);cursor:pointer;text-transform:uppercase;text-decoration:underline">Cambiar box</button>
+      <div class="size-info" id="info-protein"></div>
+      <div class="box-price">A consultar</div>
+      <button class="box-sub-btn" onclick="goToContactBox(event,'protein')">Quiero suscribirme →</button>
     </div>
-    <div class="spp-sizes" id="sppSizes">
-      <button class="spp-size-btn" id="sz-S" onclick="chooseSize('S')">
-        <span class="spp-size-letter">S</span>
-        <span class="spp-size-price">$15.000</span>
-        <span class="spp-size-label">3 unidades</span>
-      </button>
-      <button class="spp-size-btn active" id="sz-M" onclick="chooseSize('M')">
-        <span class="spp-size-letter">M</span>
-        <span class="spp-size-price">$22.500</span>
-        <span class="spp-size-label">5 unidades</span>
-      </button>
-      <button class="spp-size-btn" id="sz-L" onclick="chooseSize('L')">
-        <span class="spp-size-letter">L</span>
-        <span class="spp-size-price">$32.000</span>
-        <span class="spp-size-label">8 unidades</span>
-      </button>
-    </div>
-    <div class="spp-info" id="sppInfo"></div>
-    <div class="spp-price-row">
-      <div>
-        <div class="spp-price-label">Precio semanal</div>
-        <div class="spp-price-period">Entrega a domicilio · Punta Arenas</div>
-      </div>
-      <div style="text-align:right">
-        <div class="spp-price-val" id="sppPrice">$22.500</div>
-        <div class="spp-price-period">/ semana · IVA incluido</div>
-      </div>
-    </div>
-    <button class="spp-cta-btn" id="sppCtaBtn" onclick="goToContactBox()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Quiero suscribirme
-    </button>
-    <div class="spp-note">Sin compromisos · Cancela cuando quieras · Pago online próximamente</div>
   </div>
 
   <div class="sub-cta fade-in">
-    <h3>¿Tienes preguntas?</h3>
-    <p>Escríbenos y te respondemos antes de tu primera entrega.</p>
+    <h3>¿Listo para suscribirte?</h3>
+    <p>Próximamente habilitamos el pago online. Por ahora selecciona tu box, completa el formulario y coordinamos la primera entrega contigo.</p>
     <p class="sub-note">Sin compromisos · Cancela cuando quieras</p>
   </div>
 </section>
@@ -590,6 +595,249 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   <div class="pb-ov" style="background:linear-gradient(to top,rgba(0,15,10,.9) 0%,rgba(0,15,10,.08) 52%)"></div>
   <div class="pb-cap fade-in"><h3>Tecnología al<br/>servicio de<br/>la naturaleza</h3><p>LED espectro completo · control 24/7 · sin estacionalidad</p></div>
 </div>
+
+
+<!-- GUÍA DEPORTIVA -->
+<section id="deportiva" class="sec">
+  <div class="fade-in">
+    <div class="tag-label">Ciencia · Deporte · Nutrición</div>
+    <h2>Rendimiento desde<br/>la naturaleza.</h2>
+    <div class="rule" style="background:var(--gs)"></div>
+    <p class="body-text">Los microgreens no son solo alimento — son concentrados biológicos con aplicación directa en el rendimiento físico. Todo validado por laboratorio certificado CREAS-PUCV y respaldado por bibliografía científica internacional.</p>
+  </div>
+
+  <div class="dep-tabs fade-in">
+    <button class="dep-tab active" onclick="depTab(this,'dep-intro')">¿Por qué microgreens?</button>
+    <button class="dep-tab" onclick="depTab(this,'dep-ventana')">Ventana nutricional</button>
+    <button class="dep-tab" onclick="depTab(this,'dep-tabla')">Tabla nutricional</button>
+    <button class="dep-tab" onclick="depTab(this,'dep-variedades')">11 variedades</button>
+    <button class="dep-tab" onclick="depTab(this,'dep-combos')">Combos por objetivo</button>
+    <button class="dep-tab" onclick="depTab(this,'dep-dry')">Vertical Dry</button>
+  </div>
+
+  <!-- TAB: Por qué microgreens -->
+  <div class="dep-panel active fade-in" id="dep-intro">
+    <div class="dep-intro-grid">
+      <div class="dep-intro-card">
+        <h4>Energía Pre-Entreno</h4>
+        <p>Vitaminas B, C, K · Magnesio · Hierro · Oxigenación y claridad mental.</p>
+      </div>
+      <div class="dep-intro-card">
+        <h4>Recuperación Post</h4>
+        <p>Proteína vegetal · Antioxidantes · Fibra · Reduce inflamación y apoya síntesis muscular.</p>
+      </div>
+      <div class="dep-intro-card">
+        <h4>Protección Celular</h4>
+        <p>Polifenoles · Glucosinolatos · Antocianinas · Protección del daño oxidativo diario.</p>
+      </div>
+    </div>
+    <p class="body-text">Los microgreens son plántulas cosechadas entre los 7 y 21 días, en el momento de máxima concentración de nutrientes. Estudios científicos demuestran que contienen entre 4 y 40 veces más vitaminas, minerales y antioxidantes que las verduras maduras equivalentes — en igual peso. Para el contexto deportivo, esa densidad nutricional en pequeño volumen los hace prácticos en fase pre y post-entreno.</p>
+    <p class="dep-source">Fuentes: Xiao Z. et al. (2012) J.Agric.Food Chem. · Weber CF (2017) Front.Nutr. · Ghoora MD et al. (2020) NFS J. · Kyriacou MC et al. (2016) Trends Food Sci. · USDA FoodData Central</p>
+  </div>
+
+  <!-- TAB: Ventana nutricional -->
+  <div class="dep-panel fade-in" id="dep-ventana">
+    <div class="dep-ventana">
+      <div class="dep-vent-card pre">
+        <div class="dep-time">30–60 min antes</div>
+        <h4>Fase Pre-Entreno</h4>
+        <p>Energía + O₂ celular</p>
+        <ul>
+          <li>Rúcula</li><li>Mizuna</li><li>Amaranto</li><li>Tatsoi</li><li>Mostaza</li>
+        </ul>
+        <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.3)">Bowl · ensalada · wrap</div>
+      </div>
+      <div class="dep-vent-card intra">
+        <div class="dep-time">Durante (&gt;60 min)</div>
+        <h4>Fase Activa</h4>
+        <p>Electrólitos + hidratación</p>
+        <ul>
+          <li>Vertical Dry en smoothie</li><li>Jugo deportivo isotónico</li>
+        </ul>
+        <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.3)">Polvo en líquido</div>
+      </div>
+      <div class="dep-vent-card post">
+        <div class="dep-time">0–45 min después</div>
+        <h4>Fase Post-Entreno</h4>
+        <p>Recuperación + antioxidantes</p>
+        <ul>
+          <li>Brócoli</li><li>Rábano</li><li>Repollo</li><li>Mostaza</li><li>Amaranto</li>
+        </ul>
+        <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.3)">Fresco o polvo + proteína</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: Tabla nutricional -->
+  <div class="dep-panel fade-in" id="dep-tabla">
+    <p class="body-text" style="margin-bottom:20px">Valores por 100g peso fresco basados en literatura científica peer-reviewed. Datos deshidratados de rabanito y brócoli son análisis propios CREAS-PUCV 2026.</p>
+    <div style="overflow-x:auto">
+      <table class="dep-nutri-table">
+        <thead>
+          <tr>
+            <th>Variedad</th><th>Proteína (g)</th><th>Vit.C (mg)</th><th>Vit.K (µg)</th><th>Hierro (mg)</th><th>Calcio (mg)</th><th>Mg (mg)</th><th>Fibra (g)</th><th>Antioxid.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Rúcula</td><td class="hi">2.6</td><td class="hi">110</td><td>108</td><td>1.5</td><td>160</td><td>47</td><td>1.6</td><td>Alto</td></tr>
+          <tr><td>Amaranto</td><td class="hi">3.8</td><td>43</td><td class="hi">295</td><td class="hi">2.3</td><td class="hi">215</td><td class="hi">65</td><td class="hi">2.1</td><td>Muy Alto</td></tr>
+          <tr><td>Tatsoi</td><td>2.5</td><td>62</td><td>185</td><td>1.8</td><td>190</td><td>52</td><td>1.4</td><td>Alto</td></tr>
+          <tr><td>Mizuna Verde</td><td>2.4</td><td>65</td><td>157</td><td>1.6</td><td>140</td><td>38</td><td>1.3</td><td>Mod-Alto</td></tr>
+          <tr><td>Mizuna Roja</td><td>2.5</td><td>68</td><td>165</td><td>1.7</td><td>145</td><td>40</td><td>1.4</td><td>Alto</td></tr>
+          <tr><td>Brócoli</td><td class="hi">3.1</td><td class="hi">89</td><td>185</td><td>1.8</td><td>75</td><td>21</td><td>1.8</td><td>Muy Alto</td></tr>
+          <tr><td>Rábano Verde</td><td>2.8</td><td>74</td><td>132</td><td>1.2</td><td>62</td><td>19</td><td>1.4</td><td>Alto</td></tr>
+          <tr><td>Rábano Morado</td><td>2.9</td><td>80</td><td>138</td><td>1.3</td><td>65</td><td>21</td><td>1.5</td><td>Muy Alto</td></tr>
+          <tr><td>Repollo Verde</td><td>2.2</td><td>58</td><td>149</td><td>1.0</td><td>72</td><td>18</td><td>1.2</td><td>Mod-Alto</td></tr>
+          <tr><td>Mostaza Verde</td><td>2.6</td><td>78</td><td>175</td><td class="hi">1.9</td><td>105</td><td>33</td><td>1.6</td><td>Alto</td></tr>
+          <tr><td>Mostaza Roja</td><td>2.7</td><td>82</td><td>180</td><td class="hi">2.0</td><td>110</td><td>35</td><td>1.7</td><td>Muy Alto</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="dep-source">Fuentes: Xiao Z. et al. (2012) · Weber CF (2017) · Ghoora MD et al. (2020) · Kyriacou MC et al. (2016) · Treadwell DD et al. (2020) · USDA FoodData Central</p>
+  </div>
+
+  <!-- TAB: 11 variedades -->
+  <div class="dep-panel fade-in" id="dep-variedades">
+    <div class="dep-vars-grid">
+      <div class="dep-var-card">
+        <h4>Rúcula</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Nitratos naturales mejoran flujo sanguíneo y VO₂max. Vitamina C 110mg para recuperación inmune. Glucosinolatos antiinflamatorios.</p>
+        <div class="dep-key">Nitratos · Vit.C 110mg · Calcio 160mg</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Amaranto</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Mayor proteína de las 11 variedades (3.8g/100g). Hierro elevado para transporte de O₂. Magnesio para contracción muscular y síntesis ATP.</p>
+        <div class="dep-key">Proteína 3.8g · Hierro 2.3mg · Mg 65mg</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Tatsoi</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Calcio 190mg para salud ósea y contracción muscular. Vitamina K alta (185µg) para mineralización ósea. Antioxidantes y polifenoles.</p>
+        <div class="dep-key">Calcio 190mg · Vit.K 185µg · Polifenoles</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Mizuna Verde</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Vitaminas A, C y K equilibradas. Bajo calórico, alto micronutriente — ideal para control de peso. Glucosinolatos depurativos.</p>
+        <div class="dep-key">Glucosinolatos · Vit. A, C, K · Bajo calórico</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Mizuna Roja</h4>
+        <div class="dep-badges"><span class="dep-badge post">POST</span></div>
+        <p>Antocianinas con mayor capacidad antioxidante que la versión verde. Efecto antiinflamatorio superior por pigmentos rojos. Recuperación vascular.</p>
+        <div class="dep-key">Antocianinas · Polifenoles vasculares</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Brócoli</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Sulforafano: el antiinflamatorio más estudiado. Vit.C 89mg y Vit.K 185µg. Deshidratado: 40.786 ORAC y 34% proteína (CREAS).</p>
+        <div class="dep-key">Sulforafano · Vit.C 89mg · ORAC 40.786</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Rábano Verde</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Isotiocianatos antiinflamatorios y antimicrobianos. Deshidratado: 63.289 ORAC y 38.6% proteína — el mayor ORAC medido (CREAS).</p>
+        <div class="dep-key">Isotiocianatos · ORAC 63.289 · Prot. 38.6%</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Rábano Morado</h4>
+        <div class="dep-badges"><span class="dep-badge post">POST</span></div>
+        <p>Antocianinas superiores al rábano verde en fresco. Vit.C 80mg. Compuestos fenólicos totales elevados. Recuperación articular.</p>
+        <div class="dep-key">Antocianinas · Vit.C 80mg · CFT</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Repollo Verde</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Vitamina K 149µg para recuperación ósea. Glucosinolatos para soporte hepático. Calcio y magnesio equilibrados para contracción muscular.</p>
+        <div class="dep-key">Vit.K 149µg · Glucosinolatos · Ca+Mg</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Mostaza Verde</h4>
+        <div class="dep-badges"><span class="dep-badge pre">PRE</span><span class="dep-badge post">POST</span></div>
+        <p>Glucosinolatos e isotiocianatos antiinflamatorios. Hierro 1.9mg y magnesio 33mg. Sabor picante suave que activa termogénesis leve.</p>
+        <div class="dep-key">Isotiocianatos · Hierro 1.9mg · Mg 33mg</div>
+      </div>
+      <div class="dep-var-card">
+        <h4>Mostaza Roja</h4>
+        <div class="dep-badges"><span class="dep-badge post">POST</span></div>
+        <p>Antocianinas + isotiocianatos: doble efecto antiinflamatorio. Mayor concentración de activos que la mostaza verde. Máxima acción recuperadora.</p>
+        <div class="dep-key">Antocianinas + Isotiocianatos · Hierro 2.0mg</div>
+      </div>
+    </div>
+    <p class="dep-source">Fuentes: Xiao Z. et al. (2012) · Ghoora MD et al. (2020) · Kyriacou MC et al. (2016) · Weber CF (2017) · CREAS-PUCV, CORFO 25IRS-300369</p>
+  </div>
+
+  <!-- TAB: Combos -->
+  <div class="dep-panel fade-in" id="dep-combos">
+    <div class="dep-combos">
+      <div class="dep-combo">
+        <h4>Fuerza / Hipertrofia</h4>
+        <div class="dep-mix">Amaranto + Brócoli + Mostaza Verde</div>
+        <p>Alto aporte proteico vegetal + sulforafano antiinflamatorio + hierro y magnesio para síntesis muscular.</p>
+      </div>
+      <div class="dep-combo">
+        <h4>Resistencia / Cardio</h4>
+        <div class="dep-mix">Rúcula + Mizuna Verde + Rábano Verde</div>
+        <p>Nitratos para VO₂max + bajo peso calórico + vitamina C para inmunidad bajo estrés aeróbico.</p>
+      </div>
+      <div class="dep-combo">
+        <h4>Crossfit / HIIT</h4>
+        <div class="dep-mix">Brócoli + Rábano Morado + Mostaza Roja</div>
+        <p>Triple antioxidante: sulforafano + antocianinas + isotiocianatos. Máximo estrés oxidativo.</p>
+      </div>
+      <div class="dep-combo">
+        <h4>Recuperación / Descanso</h4>
+        <div class="dep-mix">Tatsoi + Repollo Verde + Amaranto</div>
+        <p>Calcio + vitamina K para regeneración ósea y articular + magnesio para relajación nocturna.</p>
+      </div>
+      <div class="dep-combo">
+        <h4>Control de Peso</h4>
+        <div class="dep-mix">Mizuna Roja + Rúcula + Tatsoi</div>
+        <p>Máximo micronutriente, mínimo aporte calórico. Saciedad por fibra + antocianinas activas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: Vertical Dry -->
+  <div class="dep-panel fade-in" id="dep-dry">
+    <p class="body-text" style="margin-bottom:28px">Los microgreens deshidratados de Vertical 53° superan en capacidad antioxidante a los principales superfrutos del mercado. Datos propios de laboratorio certificado CREAS-PUCV.</p>
+    <div class="dep-dry-grid">
+      <div class="dep-dry-card">
+        <div class="dep-dry-num">63.289</div>
+        <h4>ORAC Rabanito</h4>
+        <p>µmol ET/100g base seca · Supera al maqui en 70% y a la mora en 187%</p>
+      </div>
+      <div class="dep-dry-card">
+        <div class="dep-dry-num">40.786</div>
+        <h4>ORAC Brócoli</h4>
+        <p>µmol ET/100g base seca · Por encima del maqui (37.000) y el calafate (20.000)</p>
+      </div>
+      <div class="dep-dry-card">
+        <div class="dep-dry-num">38,63%</div>
+        <h4>Proteína Rabanito</h4>
+        <p>Base seca · Análisis CREAS-PUCV · Supera a la carne de res (26%)</p>
+      </div>
+      <div class="dep-dry-card">
+        <div class="dep-dry-num">34,01%</div>
+        <h4>Proteína Brócoli</h4>
+        <p>Base seca · Análisis CREAS-PUCV 2026</p>
+      </div>
+      <div class="dep-dry-card">
+        <div class="dep-dry-num">33,23%</div>
+        <h4>Fibra Rabanito</h4>
+        <p>Base seca · La OMS recomienda 25g/día totales</p>
+      </div>
+      <div class="dep-dry-card">
+        <div class="dep-dry-num">26,49%</div>
+        <h4>Fibra Brócoli</h4>
+        <p>Base seca · Análisis CREAS-PUCV, CORFO 25IRS-300369</p>
+      </div>
+    </div>
+    <p class="dep-source">Fuente: CREAS-PUCV — Informe Técnico CORFO 25IRS-300369 · Proyecto "Desarrollo de microgreens liofilizados y deshidratados para la industria alimentaria" · Mayo 2026<br/>Comparativas de referencia: USDA FoodData Central · Bases de datos ORAC públicas</p>
+  </div>
+</section>
 
 <!-- TECNOLOGÍA -->
 <section id="tecnologia" class="sec">
@@ -610,9 +858,9 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 </section>
 
 <!-- B2B -->
-<section id="b2b" class="sec" style="background:var(--white)">
-  <div class="tag-label fade-in">Canal B2B</div>
-  <h2 class="fade-in">¿Eres restaurante,<br/>hotel o distribuidor?</h2>
+<section id="horeca" class="sec" style="background:var(--white)">
+  <div class="tag-label fade-in">Canal Horeca</div>
+  <h2 class="fade-in">¿Eres restaurante,<br/>hotel o catering?</h2>
   <div class="rule fade-in"></div>
   <div style="height:32px"></div>
   <div class="b2b-inner fade-in">
@@ -620,8 +868,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <p class="body-text" style="margin-bottom:4px">Trabajamos con los operadores más exigentes de la Patagonia con entregas programadas y volúmenes consistentes.</p>
       <div class="b2b-item"><span class="b2b-num">01</span><div><h4>Entregas programadas</h4><p>Frecuencia semanal o bi-semanal. Cadena de frío garantizada.</p></div></div>
       <div class="b2b-item"><span class="b2b-num">02</span><div><h4>Volumen y consistencia</h4><p>Producción escalable. Sin cortes ni variaciones estacionales.</p></div></div>
-      <div class="b2b-item"><span class="b2b-num">03</span><div><h4>Precios mayoristas</h4><p>Condiciones preferenciales para contratos anuales.</p></div></div>
-      <div class="b2b-item"><span class="b2b-num">04</span><div><h4>Asesoría gastronómica</h4><p>Te acompañamos en la incorporación a tu carta.</p></div></div>
+      <div class="b2b-item"><span class="b2b-num">03</span><div><h4>Asesoría gastronómica</h4><p>Te acompañamos en la incorporación a tu carta.</p></div></div>
     </div>
     <div class="b2b-box">
       <h3>¿A quiénes<br/>atendemos?</h3>
@@ -631,7 +878,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
         <span class="tag-i">Catering</span><span class="tag-i">Tiendas gourmet</span>
         <span class="tag-i">Distribuidores</span>
       </div>
-      <button class="btn-p" style="align-self:flex-start" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar info B2B</button>
+      <button class="btn-p" style="align-self:flex-start" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar información Horeca</button>
     </div>
   </div>
 </section>
@@ -685,7 +932,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     <div class="rule fade-in"></div>
     <div class="contact-grid">
       <div class="contact-info fade-in">
-        <p class="body-text">¿Quieres suscribirte a una box o eres un operador B2B? Escríbenos y te respondemos a la brevedad.</p>
+        <p class="body-text">¿Quieres suscribirte a una box o perteneces al Canal Horeca? Escríbenos y te respondemos a la brevedad.</p>
         <div class="ci"><h4>Email</h4><p>hola@vertical53.com</p></div>
         <div class="ci"><h4>Ubicación</h4><p>Punta Arenas, Región de Magallanes</p></div>
         <div class="ci"><h4>Horario</h4><p>Lunes a Viernes · 9:00 – 18:00</p></div>
@@ -697,14 +944,14 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
         </div>
         <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="correo@ejemplo.cl"/></div>
         <div class="field"><label>¿Qué te interesa?</label>
-          <select id="f-interes">
+          <select id="f-interes" onchange="handleInteresChange(this.value)">
             <option value="">Selecciona una opción</option>
-            <option>Suscripción semanal B2C</option>
-            <option>Proveedor B2B – Restaurante</option>
-            <option>Proveedor B2B – Hotel</option>
-            <option>Proveedor B2B – Otro</option>
-            <option>Solo tengo una pregunta</option>
+            <option value="suscriptor">Soy suscriptor / quiero suscribirme</option>
+            <option value="horeca">Canal Horeca – solicitar información</option>
           </select>
+        </div>
+        <div id="horeca-notice" style="display:none;background:var(--lg);border-left:4px solid var(--gs);border-radius:0 10px 10px 0;padding:12px 16px;font-size:13px;color:var(--gray);line-height:1.7;">
+          Nos contactaremos contigo para presentarte nuestra propuesta de Canal Horeca. Por favor deja tu mensaje y datos de contacto.
         </div>
         <div class="field"><label>Mensaje</label><textarea id="f-mensaje" placeholder="Cuéntanos lo que necesitas..."></textarea></div>
         <button class="form-btn" onclick="sendForm(event)">Enviar mensaje →</button>
@@ -736,6 +983,25 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
   </button>
+</div>
+
+<!-- MODAL CATÁLOGO -->
+<div class="modal-overlay" id="modal-catalogo" onclick="closeModalOutside(event,'modal-catalogo')">
+  <div class="modal-box" style="max-width:860px;padding:32px 40px">
+    <button class="modal-close" onclick="closeModal('modal-catalogo')">✕</button>
+    <h2>Catálogo de Productos</h2>
+    <div class="modal-sub">Vertical 53° · 2026</div>
+    <div class="modal-rule"></div>
+    <iframe
+      class="modal-pdf-wrap"
+      src="https://drive.google.com/file/d/1rhAVKujlyspuJ8mnlt3EPzASwTigRAkr/preview"
+      allow="autoplay"
+      title="Catálogo Vertical 53°">
+    </iframe>
+    <p style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--gray);margin-top:12px;letter-spacing:1px">
+      Para descargar el catálogo completo escríbenos a hola@vertical53.com
+    </p>
+  </div>
 </div>
 
 <!-- MODAL POLÍTICA DE PRIVACIDAD -->
@@ -809,7 +1075,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   <div class="footer-links">
     <a href="#nosotros">Nosotros</a>
     <a href="#suscripcion">Suscripción</a>
-    <a href="#b2b">B2B</a>
+    <a href="#catalogo" onclick="openModal('modal-catalogo');return false;">Catálogo</a>
+    <a href="#horeca">Horeca</a>
     <a href="#ubicacion">Ubicación</a>
     <a href="#contacto">Contacto</a>
   </div>
@@ -838,7 +1105,7 @@ document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 const pbBgs=document.querySelectorAll('.pb-bg');
 window.addEventListener('scroll',()=>{pbBgs.forEach(bg=>{const r=bg.closest('.pb').getBoundingClientRect();bg.style.transform=`translateY(${r.top*0.1}px) scale(1.1)`;});},{passive:true});
 
-// Variedades y precios
+// Variedades
 const VARIETIES={
   detox:  ['Brócoli','Repollo verde','Amaranto','Mizuna'],
   brunch: ['Mizuna','Tatsoi','Brócoli','Repollo verde'],
@@ -846,89 +1113,51 @@ const VARIETIES={
   protein:['Arveja','Brócoli','Rábano verde','Mizuna verde'],
 };
 const NAMES={detox:'Detox',brunch:'Brunch',spicy:'Spicy',protein:'Proteína'};
-const PRICES={S:15000,M:22500,L:32000};
-const SIZE_LABELS={S:'3 variedades',M:'4 variedades',L:'8 variedades'};
 
 function buildContents(id,size){
   const v=VARIETIES[id];
   if(size==='S') return v.slice(0,3);
-  if(size==='M') return [...v,v[0],v[1]];
+  if(size==='M') return [...v,v[0]];
   if(size==='L') return [...v,...v];
   return v;
 }
 
-function formatPrice(n){return '$'+n.toLocaleString('es-CL');}
-
-let currentBox=null;
-let currentSize='M';
-
-function selectBox(id){
-  currentBox=id;
-  // Marcar box seleccionada
-  document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('box-'+id).classList.add('selected');
-  // Mostrar panel
-  const panel=document.getElementById('sizePricePanel');
-  panel.classList.add('visible');
-  document.getElementById('sppBoxName').textContent='Box '+NAMES[id];
-  // Reset tamaño a M
-  currentSize='M';
-  updateSizeButtons();
-  updatePricePanel();
-  // Actualizar pasos
-  updateSteps(2);
-  // Scroll suave al panel
-  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
-}
-
-function chooseSize(size){
-  currentSize=size;
-  updateSizeButtons();
-  updatePricePanel();
-  updateSteps(3);
-}
-
-function updateSizeButtons(){
-  ['S','M','L'].forEach(s=>{
-    const btn=document.getElementById('sz-'+s);
-    btn.classList.toggle('active',s===currentSize);
-  });
-}
-
-function updatePricePanel(){
-  if(!currentBox) return;
-  const contents=buildContents(currentBox,currentSize);
+function renderInfo(id,size){
+  const contents=buildContents(id,size);
   const count={};
   contents.forEach(v=>count[v]=(count[v]||0)+1);
   const parts=Object.entries(count).map(([v,n])=>n>1?v+' ×'+n:v);
-  document.getElementById('sppInfo').textContent=parts.join(' · ');
-  document.getElementById('sppPrice').textContent=formatPrice(PRICES[currentSize]);
+  const el=document.getElementById('info-'+id);
+  if(el) el.textContent=size+' · '+contents.length+' brotes · '+parts.join(', ');
 }
 
-function updateSteps(active){
-  [1,2,3].forEach(n=>{
-    const el=document.getElementById('step'+n);
-    el.classList.remove('active','done');
-    if(n<active) el.classList.add('done');
-    else if(n===active) el.classList.add('active');
-  });
+Object.keys(VARIETIES).forEach(id=>renderInfo(id,'M'));
+const currentSize={detox:'M',brunch:'M',spicy:'M',protein:'M'};
+
+function setSize(e,id,size){
+  e.stopPropagation();
+  currentSize[id]=size;
+  const card=document.getElementById('box-'+id);
+  card.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderInfo(id,size);
 }
 
-function resetSelection(){
-  currentBox=null;
-  currentSize='M';
+let selBox=null;
+function selectBox(el,name){
   document.querySelectorAll('.box-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('sizePricePanel').classList.remove('visible');
-  updateSteps(1);
-  document.getElementById('suscripcion').scrollIntoView({behavior:'smooth',block:'start'});
+  el.classList.add('selected');
+  const id=el.id.replace('box-','');
+  selBox={name,id,size:currentSize[id]||'M'};
 }
 
-function goToContactBox(){
-  if(!currentBox) return;
-  const contents=buildContents(currentBox,currentSize);
-  const name=NAMES[currentBox];
-  document.getElementById('f-interes').value='Suscripción semanal B2C';
-  document.getElementById('f-mensaje').value='Hola, me interesa suscribirme a la Box '+name+' talla '+currentSize+' ('+formatPrice(PRICES[currentSize])+'/semana).\nContenido: '+contents.join(', ')+'.';
+function goToContactBox(e,id){
+  e.stopPropagation();
+  const size=currentSize[id]||'M';
+  const contents=buildContents(id,size);
+  const name=NAMES[id];
+  document.getElementById('f-interes').value='suscriptor';
+  document.getElementById('f-mensaje').value='Hola, me interesa suscribirme a la Box '+name+' talla '+size+'.\nContenido: '+contents.join(', ')+'.';
   document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
 }
 
@@ -968,6 +1197,21 @@ function goWA(){window.open('https://wa.me/'+WA_NUM+'?text='+WA_MSG,'_blank');ca
 function cancelWA(){document.getElementById('waDefault').style.display='block';document.getElementById('waConfirm').classList.remove('show');waConfirming=false;}
 let lastScroll=0;
 window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>lastScroll+40&&waBubbleOpen&&!waConfirming)document.getElementById('waBubble').classList.remove('show');else if(c<lastScroll-40)document.getElementById('waBubble').classList.add('show');lastScroll=c;},{passive:true});
+
+// Tabs sección deportiva
+function depTab(btn,panel){
+  document.querySelectorAll('.dep-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.dep-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panel).classList.add('active');
+}
+
+// Formulario: mostrar aviso Horeca
+function handleInteresChange(val){
+  const notice=document.getElementById('horeca-notice');
+  if(notice) notice.style.display = val==='horeca' ? 'block' : 'none';
+}
+
 </script>
 </body>
 </html>
