@@ -1,4 +1,11 @@
 // api/create-subscription.js
+// Flujo correcto Flow suscripciones:
+// 1. Crear cliente (o recuperar si ya existe)
+// 2. Crear suscripción al plan
+// 3. Llamar customer/register → redirigir al cliente a registrar tarjeta
+// 4. Flow devuelve a url_return con token
+// 5. El sitio llama a /api/confirm-registration con ese token
+
 const crypto = require('crypto');
 
 const FLOW_API_URL = 'https://www.flow.cl/api';
@@ -27,14 +34,16 @@ async function flowPost(endpoint, params) {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams(p).toString(),
   });
-  return res.json();
+  const text = await res.text();
+  try { return JSON.parse(text); } catch(e) { return { _raw: text }; }
 }
 
 async function flowGet(endpoint, params) {
   const p = { ...params, apiKey: API_KEY };
   p.s = signParams(p);
   const res = await fetch(`${FLOW_API_URL}${endpoint}?${new URLSearchParams(p).toString()}`);
-  return res.json();
+  const text = await res.text();
+  try { return JSON.parse(text); } catch(e) { return { _raw: text }; }
 }
 
 module.exports = async (req, res) => {
@@ -52,13 +61,13 @@ module.exports = async (req, res) => {
   const planId = PLAN_IDS[`${box}-${size}`];
   if (!planId) return res.status(400).json({ error: 'Plan no válido' });
 
-  const urlReturn = `https://www.vertical53.com?suscripcion=ok&box=${box}&size=${size}&nombre=${encodeURIComponent(nombre)}`;
+  // URL de retorno después que el cliente registra su tarjeta en Flow
+  const urlReturn = `https://www.vertical53.com/api/confirm-registration?box=${box}&size=${size}&nombre=${encodeURIComponent(nombre)}&email=${encodeURIComponent(email)}&planId=${planId}`;
 
   try {
-    // ── Paso 1: Obtener o crear cliente ──────────────────────
+    // ── Paso 1: Crear o recuperar cliente ──────────────────────
     let customerId = null;
 
-    // Intentar crear cliente
     const custData = await flowPost('/customer/create', {
       email,
       name: nombre,
@@ -67,42 +76,44 @@ module.exports = async (req, res) => {
     });
 
     if (custData.customerId) {
-      // Cliente creado exitosamente
       customerId = custData.customerId;
+      console.log('Cliente creado:', customerId);
     } else if (custData.code === 501 || custData.code === 101) {
-      // Cliente ya existe — buscarlo por externalId
+      // Ya existe — buscar por externalId
       const existing = await flowGet('/customer/getByExternalId', { externalId: email });
+      console.log('Cliente existente:', JSON.stringify(existing));
       customerId = existing.customerId;
     }
 
     if (!customerId) {
-      console.error('No se pudo obtener customerId:', custData);
+      console.error('Sin customerId:', JSON.stringify(custData));
       return res.status(500).json({ error: 'Error al registrar cliente en Flow' });
     }
 
-    // ── Paso 2: Crear suscripción ────────────────────────────
+    // ── Paso 2: Crear suscripción ───────────────────────────────
     const subscData = await flowPost('/subscription/create', {
       planId,
       customerId,
       trial_period_days: 0,
     });
-    console.log('Suscripción:', subscData.subscriptionId || JSON.stringify(subscData));
+    console.log('Suscripción:', JSON.stringify(subscData).slice(0, 200));
 
-    // ── Paso 3: Obtener URL de registro de tarjeta ───────────
+    // ── Paso 3: Registrar tarjeta del cliente ───────────────────
     const regData = await flowPost('/customer/register', {
       customerId,
       url_return: urlReturn,
     });
+    console.log('Register response:', JSON.stringify(regData));
 
     if (!regData.url || !regData.token) {
-      console.error('Error en customer/register:', regData);
-      return res.status(500).json({ error: 'Error al generar página de pago' });
+      console.error('Error customer/register:', JSON.stringify(regData));
+      return res.status(500).json({ error: 'Error al generar página de pago: ' + (regData.message || JSON.stringify(regData)) });
     }
 
     return res.status(200).json({ url: `${regData.url}?token=${regData.token}` });
 
   } catch (err) {
-    console.error('Error inesperado:', err);
-    return res.status(500).json({ error: 'Error interno del servidor' });
+    console.error('Error inesperado:', err.message);
+    return res.status(500).json({ error: 'Error interno: ' + err.message });
   }
 };
