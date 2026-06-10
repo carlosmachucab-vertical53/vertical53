@@ -1,10 +1,4 @@
 // api/create-subscription.js
-// Vercel Serverless Function
-// Flujo correcto Flow:
-// 1. Crear cliente
-// 2. Crear suscripción  
-// 3. Llamar customer/register para obtener URL donde cliente ingresa tarjeta
-
 const crypto = require('crypto');
 
 const FLOW_API_URL = 'https://www.flow.cl/api';
@@ -39,8 +33,7 @@ async function flowPost(endpoint, params) {
 async function flowGet(endpoint, params) {
   const p = { ...params, apiKey: API_KEY };
   p.s = signParams(p);
-  const qs = new URLSearchParams(p).toString();
-  const res = await fetch(`${FLOW_API_URL}${endpoint}?${qs}`);
+  const res = await fetch(`${FLOW_API_URL}${endpoint}?${new URLSearchParams(p).toString()}`);
   return res.json();
 }
 
@@ -52,7 +45,6 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Método no permitido' });
 
   const { box, size, nombre, email, telefono } = req.body;
-
   if (!box || !size || !nombre || !email) {
     return res.status(400).json({ error: 'Faltan datos requeridos' });
   }
@@ -63,22 +55,29 @@ module.exports = async (req, res) => {
   const urlReturn = `https://www.vertical53.com?suscripcion=ok&box=${box}&size=${size}&nombre=${encodeURIComponent(nombre)}`;
 
   try {
-    // ── Paso 1: Crear cliente ────────────────────────────────
-    const custParams = { email, name: nombre, externalId: email };
-    if (telefono) custParams.phone = telefono;
-    const custData = await flowPost('/customer/create', custParams);
+    // ── Paso 1: Obtener o crear cliente ──────────────────────
+    let customerId = null;
 
-    // Código 101 = cliente ya existe, lo buscamos por customerId
-    let customerId = custData.customerId;
-    if (!customerId) {
-      // Intentar obtener cliente existente por externalId
+    // Intentar crear cliente
+    const custData = await flowPost('/customer/create', {
+      email,
+      name: nombre,
+      externalId: email,
+      ...(telefono && { phone: telefono }),
+    });
+
+    if (custData.customerId) {
+      // Cliente creado exitosamente
+      customerId = custData.customerId;
+    } else if (custData.code === 501 || custData.code === 101) {
+      // Cliente ya existe — buscarlo por externalId
       const existing = await flowGet('/customer/getByExternalId', { externalId: email });
       customerId = existing.customerId;
     }
 
     if (!customerId) {
       console.error('No se pudo obtener customerId:', custData);
-      return res.status(500).json({ error: 'Error al registrar cliente' });
+      return res.status(500).json({ error: 'Error al registrar cliente en Flow' });
     }
 
     // ── Paso 2: Crear suscripción ────────────────────────────
@@ -87,11 +86,9 @@ module.exports = async (req, res) => {
       customerId,
       trial_period_days: 0,
     });
+    console.log('Suscripción:', subscData.subscriptionId || JSON.stringify(subscData));
 
-    console.log('Suscripción creada:', subscData.subscriptionId || subscData);
-
-    // ── Paso 3: Registrar tarjeta del cliente ────────────────
-    // customer/register devuelve la URL donde el cliente ingresa su tarjeta
+    // ── Paso 3: Obtener URL de registro de tarjeta ───────────
     const regData = await flowPost('/customer/register', {
       customerId,
       url_return: urlReturn,
@@ -102,10 +99,7 @@ module.exports = async (req, res) => {
       return res.status(500).json({ error: 'Error al generar página de pago' });
     }
 
-    // La URL final es regData.url + ?token=regData.token
-    const payUrl = `${regData.url}?token=${regData.token}`;
-
-    return res.status(200).json({ url: payUrl });
+    return res.status(200).json({ url: `${regData.url}?token=${regData.token}` });
 
   } catch (err) {
     console.error('Error inesperado:', err);
