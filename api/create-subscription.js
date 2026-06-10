@@ -1,31 +1,23 @@
 // api/create-subscription.js
 // Vercel Serverless Function
-// Recibe: { planId, nombre, email, telefono }
-// Devuelve: { url } — URL de pago de Flow para redirigir al cliente
+// Flujo correcto Flow:
+// 1. Crear cliente
+// 2. Crear suscripción  
+// 3. Llamar customer/register para obtener URL donde cliente ingresa tarjeta
 
 const crypto = require('crypto');
 
 const FLOW_API_URL = 'https://www.flow.cl/api';
-const API_KEY      = process.env.FLOW_API_KEY;
-const SECRET_KEY   = process.env.FLOW_SECRET_KEY;
+const API_KEY     = process.env.FLOW_API_KEY;
+const SECRET_KEY  = process.env.FLOW_SECRET_KEY;
 
-// Mapa de plan interno → ID de plan en Flow
 const PLAN_IDS = {
-  'detox-S':   'BDS',
-  'detox-M':   'BDM',
-  'detox-L':   'BDL',
-  'brunch-S':  'BBS',
-  'brunch-M':  'BBM',
-  'brunch-L':  'BBL',
-  'spicy-S':   'BSS',
-  'spicy-M':   'BSM',
-  'spicy-L':   'BSL',
-  'protein-S': 'BPS',
-  'protein-M': 'BPM',
-  'protein-L': 'BPL',
+  'detox-S':   'BDS', 'detox-M':   'BDM', 'detox-L':   'BDL',
+  'brunch-S':  'BBS', 'brunch-M':  'BBM', 'brunch-L':  'BBL',
+  'spicy-S':   'BSS', 'spicy-M':   'BSM', 'spicy-L':   'BSL',
+  'protein-S': 'BPS', 'protein-M': 'BPM', 'protein-L': 'BPL',
 };
 
-// Firma los parámetros con HMAC-SHA256 según especificación Flow
 function signParams(params) {
   const keys = Object.keys(params).sort();
   let toSign = '';
@@ -33,18 +25,27 @@ function signParams(params) {
   return crypto.createHmac('sha256', SECRET_KEY).update(toSign).digest('hex');
 }
 
-// Calcula el próximo lunes a partir de hoy
-function proximoLunes() {
-  const hoy = new Date();
-  const dia = hoy.getDay(); // 0=dom, 1=lun ... 6=sab
-  const diasHastaLunes = dia === 1 ? 7 : (8 - dia) % 7 || 7;
-  hoy.setDate(hoy.getDate() + diasHastaLunes);
-  return hoy.toISOString().split('T')[0]; // YYYY-MM-DD
+async function flowPost(endpoint, params) {
+  const p = { ...params, apiKey: API_KEY };
+  p.s = signParams(p);
+  const res = await fetch(`${FLOW_API_URL}${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(p).toString(),
+  });
+  return res.json();
+}
+
+async function flowGet(endpoint, params) {
+  const p = { ...params, apiKey: API_KEY };
+  p.s = signParams(p);
+  const qs = new URLSearchParams(p).toString();
+  const res = await fetch(`${FLOW_API_URL}${endpoint}?${qs}`);
+  return res.json();
 }
 
 module.exports = async (req, res) => {
-  // CORS
-  res.setHeader('Access-Control-Allow-Origin', 'https://www.vertical53.com');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -52,74 +53,59 @@ module.exports = async (req, res) => {
 
   const { box, size, nombre, email, telefono } = req.body;
 
-  // Validaciones básicas
   if (!box || !size || !nombre || !email) {
     return res.status(400).json({ error: 'Faltan datos requeridos' });
   }
 
-  const planKey = `${box}-${size}`;
-  const planId  = PLAN_IDS[planKey];
-  if (!planId) {
-    return res.status(400).json({ error: 'Plan no válido' });
-  }
+  const planId = PLAN_IDS[`${box}-${size}`];
+  if (!planId) return res.status(400).json({ error: 'Plan no válido' });
+
+  const urlReturn = `https://www.vertical53.com?suscripcion=ok&box=${box}&size=${size}&nombre=${encodeURIComponent(nombre)}`;
 
   try {
-    // ── Paso 1: Crear o recuperar cliente en Flow ─────────────
-    const customerParams = {
-      apiKey: API_KEY,
-      email,
-      name: nombre,
-      ...(telefono && { phone: telefono }),
-      externalId: email, // usamos email como ID externo único
-    };
-    customerParams.s = signParams(customerParams);
+    // ── Paso 1: Crear cliente ────────────────────────────────
+    const custParams = { email, name: nombre, externalId: email };
+    if (telefono) custParams.phone = telefono;
+    const custData = await flowPost('/customer/create', custParams);
 
-    const custBody = new URLSearchParams(customerParams).toString();
-    const custRes  = await fetch(`${FLOW_API_URL}/customer/create`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: custBody,
-    });
-    const custData = await custRes.json();
-
-    if (!custRes.ok || custData.code) {
-      // Si el cliente ya existe en Flow, continuar igual
-      if (custData.code !== 101) { // 101 = email duplicado (ya existe)
-        console.error('Error creando cliente Flow:', custData);
-        return res.status(500).json({ error: 'Error al registrar cliente' });
-      }
+    // Código 101 = cliente ya existe, lo buscamos por customerId
+    let customerId = custData.customerId;
+    if (!customerId) {
+      // Intentar obtener cliente existente por externalId
+      const existing = await flowGet('/customer/getByExternalId', { externalId: email });
+      customerId = existing.customerId;
     }
 
-    const customerId = custData.customerId || email;
+    if (!customerId) {
+      console.error('No se pudo obtener customerId:', custData);
+      return res.status(500).json({ error: 'Error al registrar cliente' });
+    }
 
-    // ── Paso 2: Crear suscripción en Flow ─────────────────────
-    const subscParams = {
-      apiKey: API_KEY,
+    // ── Paso 2: Crear suscripción ────────────────────────────
+    const subscData = await flowPost('/subscription/create', {
       planId,
       customerId,
       trial_period_days: 0,
-      url_return: `https://www.vertical53.com?suscripcion=ok&box=${box}&size=${size}&nombre=${encodeURIComponent(nombre)}`,
-    };
-    subscParams.s = signParams(subscParams);
-
-    const subscBody = new URLSearchParams(subscParams).toString();
-    const subscRes  = await fetch(`${FLOW_API_URL}/subscription/create`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: subscBody,
     });
-    const subscData = await subscRes.json();
 
-    if (!subscRes.ok || !subscData.url) {
-      console.error('Error creando suscripción Flow:', subscData);
-      return res.status(500).json({ error: 'Error al crear suscripción' });
+    console.log('Suscripción creada:', subscData.subscriptionId || subscData);
+
+    // ── Paso 3: Registrar tarjeta del cliente ────────────────
+    // customer/register devuelve la URL donde el cliente ingresa su tarjeta
+    const regData = await flowPost('/customer/register', {
+      customerId,
+      url_return: urlReturn,
+    });
+
+    if (!regData.url || !regData.token) {
+      console.error('Error en customer/register:', regData);
+      return res.status(500).json({ error: 'Error al generar página de pago' });
     }
 
-    // Devolver la URL de pago de Flow al cliente
-    return res.status(200).json({
-      url: subscData.url,
-      proximaEntrega: proximoLunes(),
-    });
+    // La URL final es regData.url + ?token=regData.token
+    const payUrl = `${regData.url}?token=${regData.token}`;
+
+    return res.status(200).json({ url: payUrl });
 
   } catch (err) {
     console.error('Error inesperado:', err);
