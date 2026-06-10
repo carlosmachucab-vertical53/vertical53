@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/create-subscription.js": {
+      "memory": 128,
+      "maxDuration": 10
+    },
+    "api/flow-webhook.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  }
+}
