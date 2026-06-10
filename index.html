@@ -1253,13 +1253,50 @@ function resetSelection(){
   document.getElementById('suscripcion').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function goToContactBox(){
+async function goToContactBox(){
   if(!currentBox) return;
-  const contents=buildContents(currentBox,currentSize);
-  const name=NAMES[currentBox];
-  document.getElementById('f-interes').value='suscriptor';
-  document.getElementById('f-mensaje').value='Hola, me interesa suscribirme a la Box '+name+' talla '+currentSize+' ('+formatPrice(PRICES[currentSize])+'/semana).\nContenido: '+contents.join(', ')+'.';
-  document.getElementById('contacto').scrollIntoView({behavior:'smooth'});
+
+  const nombre = prompt('Tu nombre completo:');
+  if(!nombre || !nombre.trim()) return;
+  const email = prompt('Tu email:');
+  if(!email || !email.trim()) return;
+  const telefono = prompt('Tu teléfono (opcional, puedes dejar vacío):');
+
+  const btn = document.getElementById('sppCtaBtn');
+  btn.textContent = 'Procesando...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/create-subscription', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        box: currentBox,
+        size: currentSize,
+        nombre: nombre.trim(),
+        email: email.trim(),
+        telefono: telefono ? telefono.trim() : ''
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok || !data.url) {
+      alert('Hubo un error al procesar tu suscripción. Por favor escríbenos a hola@vertical53.com');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Quiero suscribirme';
+      btn.disabled = false;
+      return;
+    }
+
+    // Redirigir a Flow para el pago
+    window.location.href = data.url;
+
+  } catch(err) {
+    console.error(err);
+    alert('Error de conexión. Por favor intenta nuevamente o escríbenos a hola@vertical53.com');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Quiero suscribirme';
+    btn.disabled = false;
+  }
 }
 
 // Formspree
@@ -1312,6 +1349,25 @@ function handleInteresChange(val){
   const notice=document.getElementById('horeca-notice');
   if(notice) notice.style.display = val==='horeca' ? 'block' : 'none';
 }
+
+
+// Detectar retorno desde Flow con suscripción confirmada
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('suscripcion') === 'ok'){
+    const box = params.get('box') || '';
+    const size = params.get('size') || '';
+    const nombre = params.get('nombre') || '';
+    setTimeout(()=>{
+      const msg = nombre
+        ? nombre.split(' ')[0] + ', tu suscripción está confirmada. Te enviamos un correo con los detalles de tu primera entrega el próximo lunes.'
+        : 'Tu suscripción está confirmada. Te enviamos un correo con los detalles de tu primera entrega el próximo lunes.';
+      alert(msg);
+      // Limpiar URL sin recargar
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }, 800);
+  }
+})();
 
 </script>
 </body>
