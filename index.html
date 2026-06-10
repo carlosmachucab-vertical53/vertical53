@@ -1440,16 +1440,20 @@ function handleInteresChange(val){
 // Detectar retorno desde Flow con suscripción confirmada
 (function(){
   const params = new URLSearchParams(window.location.search);
-  if(params.get('suscripcion') === 'ok'){
-    const box = params.get('box') || '';
-    const size = params.get('size') || '';
+  const estado = params.get('suscripcion');
+  if(estado === 'ok'){
     const nombre = params.get('nombre') || '';
     setTimeout(()=>{
-      const msg = nombre
-        ? nombre.split(' ')[0] + ', tu suscripción está confirmada. Te enviamos un correo con los detalles de tu primera entrega el próximo lunes.'
-        : 'Tu suscripción está confirmada. Te enviamos un correo con los detalles de tu primera entrega el próximo lunes.';
+      const primerNombre = nombre ? decodeURIComponent(nombre).split(' ')[0] : '';
+      const msg = primerNombre
+        ? primerNombre + ', tu suscripcion quedo confirmada. Te enviaremos un correo con los detalles de tu primera entrega el proximo lunes.'
+        : 'Tu suscripcion quedo confirmada. Te enviaremos un correo con los detalles de tu primera entrega el proximo lunes.';
       alert(msg);
-      // Limpiar URL sin recargar
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }, 800);
+  } else if(estado === 'error'){
+    setTimeout(()=>{
+      alert('Hubo un problema al registrar tu tarjeta. Por favor intentalo nuevamente o escribenos a hola@vertical53.com');
       window.history.replaceState({}, document.title, window.location.pathname);
     }, 800);
   }
