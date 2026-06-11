@@ -591,6 +591,15 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     <div class="sub-step" id="step3"><span class="sub-step-num">3</span>Suscríbete</div>
   </div>
 
+  <!-- AVISO PRECIOS EN EVALUACIÓN -->
+  <div class="fade-in" style="background:rgba(199,166,104,.12);border:1px solid rgba(199,166,104,.35);border-radius:14px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px">
+    <span style="font-size:20px">⏳</span>
+    <div>
+      <div style="font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:#7a5a1e;margin-bottom:2px">Precios en definición</div>
+      <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:#9a7a3e;line-height:1.6">Estamos finalizando nuestra estructura de precios y cantidades. Puedes registrar tu interés ahora y te avisaremos con todos los detalles antes del lanzamiento.</div>
+    </div>
+  </div>
+
   <!-- PASO 1: BOXES -->
   <div class="boxes-grid fade-in">
     <!-- DETOX -->
@@ -643,18 +652,18 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     <div class="spp-sizes" id="sppSizes">
       <button class="spp-size-btn" id="sz-S" onclick="chooseSize('S')">
         <span class="spp-size-letter">S</span>
-        <span class="spp-size-price">$15.000</span>
-        <span class="spp-size-label">3 unidades</span>
+        <span class="spp-size-price" style="font-size:9px;letter-spacing:0">Precio por definir</span>
+        <span class="spp-size-label">Pequeño</span>
       </button>
       <button class="spp-size-btn active" id="sz-M" onclick="chooseSize('M')">
         <span class="spp-size-letter">M</span>
-        <span class="spp-size-price">$22.500</span>
-        <span class="spp-size-label">5 unidades</span>
+        <span class="spp-size-price" style="font-size:9px;letter-spacing:0">Precio por definir</span>
+        <span class="spp-size-label">Mediano</span>
       </button>
       <button class="spp-size-btn" id="sz-L" onclick="chooseSize('L')">
         <span class="spp-size-letter">L</span>
-        <span class="spp-size-price">$32.000</span>
-        <span class="spp-size-label">8 unidades</span>
+        <span class="spp-size-price" style="font-size:9px;letter-spacing:0">Precio por definir</span>
+        <span class="spp-size-label">Grande</span>
       </button>
     </div>
     <div class="spp-info" id="sppInfo"></div>
@@ -664,15 +673,15 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
         <div class="spp-price-period">Entrega a domicilio · Punta Arenas</div>
       </div>
       <div style="text-align:right">
-        <div class="spp-price-val" id="sppPrice">$22.500</div>
-        <div class="spp-price-period">/ semana · IVA incluido</div>
+        <div class="spp-price-val" id="sppPrice" style="font-size:16px;letter-spacing:0">En evaluación</div>
+        <div class="spp-price-period">Precios próximamente</div>
       </div>
     </div>
     <button class="spp-cta-btn" id="sppCtaBtn" onclick="goToContactBox()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       Quiero suscribirme
     </button>
-    <div class="spp-note">Sin compromisos · Cancela cuando quieras · Pago online próximamente</div>
+    <div class="spp-note">Sin compromisos · Precios se confirmarán antes del lanzamiento</div>
   </div>
 
   <div class="sub-cta fade-in">
@@ -1109,12 +1118,11 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
     <div class="flow-modal-rule"></div>
     <div class="flow-modal-price-row">
       <div>
-        <div class="flow-modal-price-label">Cobro mensual</div>
-        <div class="flow-modal-price-period">Entrega semanal · Punta Arenas</div>
+        <div class="flow-modal-price-label">Precio por confirmar</div>
+        <div class="flow-modal-price-period">Te avisaremos antes del primer cobro</div>
       </div>
       <div style="text-align:right">
-        <div class="flow-modal-price-val" id="fmPrice"></div>
-        <div class="flow-modal-price-period">IVA incluido</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gp);letter-spacing:1px">En evaluación</div>
       </div>
     </div>
     <div class="field">
@@ -1298,7 +1306,8 @@ function updatePricePanel(){
   contents.forEach(v=>count[v]=(count[v]||0)+1);
   const parts=Object.entries(count).map(([v,n])=>n>1?v+' ×'+n:v);
   document.getElementById('sppInfo').textContent=parts.join(' · ');
-  document.getElementById('sppPrice').textContent=formatPrice(PRICES[currentSize]);
+  // Precios en evaluación — no mostrar monto
+  // document.getElementById('sppPrice').textContent=formatPrice(PRICES[currentSize]);
 }
 
 function updateSteps(active){
@@ -1325,7 +1334,7 @@ function goToContactBox(){
   const MONTHLY = {S: 60000, M: 90000, L: 128000};
   const name = NAMES[currentBox];
   document.getElementById('fmPlan').textContent = 'Box ' + name + ' · Talla ' + currentSize;
-  document.getElementById('fmPrice').textContent = '$' + MONTHLY[currentSize].toLocaleString('es-CL') + '/mes';
+  // Precio en evaluación — no se muestra
   document.getElementById('fm-error').textContent = '';
   document.getElementById('fm-nombre').value = '';
   document.getElementById('fm-email').value = '';
