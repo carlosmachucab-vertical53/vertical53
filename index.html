@@ -440,6 +440,25 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .flow-modal-price-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--gp)}
 .flow-modal-price-period{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--gray)}
 
+
+/* MÉTODOS DE PAGO */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.pay-method-btn{padding:12px 10px;border:2px solid rgba(23,102,99,.25);background:var(--white);border-radius:12px;cursor:pointer;transition:.25s;display:flex;flex-direction:column;align-items:center;gap:5px;font-family:'Sora',sans-serif}
+.pay-method-btn:hover{border-color:var(--gs);background:var(--lg)}
+.pay-method-btn.active{border-color:var(--gp);background:var(--gp)}
+.pay-method-btn.active .pay-method-label{color:var(--white)}
+.pay-method-btn.active .pay-method-sub{color:rgba(255,255,255,.6)}
+.pay-method-icon{font-size:22px}
+.pay-method-label{font-size:13px;font-weight:600;color:var(--navy);transition:.3s}
+.pay-method-sub{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1px;color:var(--gray);text-transform:uppercase;transition:.3s}
+.transfer-box{background:var(--lg);border:1px solid rgba(23,102,99,.2);border-radius:14px;padding:18px 20px;margin-bottom:14px;display:none}
+.transfer-box.show{display:block}
+.transfer-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(112,186,94,.15)}
+.transfer-row:last-child{border-bottom:none}
+.transfer-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gray);text-transform:uppercase}
+.transfer-val{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gp);font-weight:400}
+.transfer-note{font-size:11px;color:var(--gray);margin-top:10px;line-height:1.6;font-weight:300}
+
 </style>
 </head>
 <body>
@@ -578,130 +597,113 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- SUSCRIPCIÓN -->
+<!-- COMPRA -->
 <section id="suscripcion" class="sec">
   <div class="sub-intro fade-in">
     <div>
-      <div class="tag-label">Suscripción semanal</div>
-      <h2>Comes lo que<br/>cortas.<br/>Cada semana.</h2>
+      <div class="tag-label">Compra directa</div>
+      <h2>Elige tu pack<br/>de microgreens.</h2>
       <div class="rule"></div>
     </div>
     <div class="sub-intro-right">
       <span class="sub-badge">Entrega semanal · Punta Arenas</span>
-      <p class="body-text">Elige tu box según tu momento y propósito. Recibes bandejas vivas en tu casa — cortas lo que consumes, cuando lo necesitas.</p>
-      <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Próximamente · Pago online habilitado</p>
+      <p class="body-text">Selecciona tu box favorito y la cantidad que necesitas. Pagas una vez y te lo llevamos directamente.</p>
+      <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Pago seguro vía Flow · Entrega el próximo lunes</p>
     </div>
   </div>
 
-  <!-- PASOS INDICADORES -->
-  <div class="sub-steps fade-in" id="subSteps">
-    <div class="sub-step active" id="step1"><span class="sub-step-num">1</span>Elige tu box</div>
-    <div class="sub-step-sep"></div>
-    <div class="sub-step" id="step2"><span class="sub-step-num">2</span>Elige el tamaño</div>
-    <div class="sub-step-sep"></div>
-    <div class="sub-step" id="step3"><span class="sub-step-num">3</span>Suscríbete</div>
-  </div>
 
-  <!-- AVISO PRECIOS EN EVALUACIÓN -->
-  <div class="fade-in" style="background:rgba(199,166,104,.12);border:1px solid rgba(199,166,104,.35);border-radius:14px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px">
-    <span style="font-size:20px">⏳</span>
-    <div>
-      <div style="font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:#7a5a1e;margin-bottom:2px">Precios en definición</div>
-      <div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:#9a7a3e;line-height:1.6">Estamos finalizando nuestra estructura de precios y cantidades. Puedes registrar tu interés ahora y te avisaremos con todos los detalles antes del lanzamiento.</div>
-    </div>
-  </div>
 
   <!-- PASO 1: BOXES -->
-  <div class="boxes-grid fade-in">
+  <div class="boxes-grid fade-in" id="shopBoxGrid">
     <!-- DETOX -->
-    <div class="box-card" id="box-detox">
+    <div class="box-card" id="shop-detox">
       <div class="box-check">✓</div>
       <div class="box-icon">🥤</div>
       <span class="box-tag">Detox</span>
       <div class="box-name">Detox</div>
-      <div class="box-desc">Del freezer directo a la licuadora. Sin lavar, sin cortar.</div>
-      <button class="box-select-btn" onclick="selectBox('detox')">Seleccionar →</button>
+      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
+      <button class="box-select-btn" onclick="shopSelectBox('detox')">Seleccionar →</button>
     </div>
     <!-- BRUNCH -->
-    <div class="box-card" id="box-brunch">
+    <div class="box-card" id="shop-brunch">
       <div class="box-check">✓</div>
       <div class="box-icon">🍳</div>
       <span class="box-tag">Brunch</span>
       <div class="box-name">Brunch</div>
-      <div class="box-desc">Comes lo que cortas. Producto vivo en tu cocina 7+ días.</div>
-      <button class="box-select-btn" onclick="selectBox('brunch')">Seleccionar →</button>
+      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
+      <button class="box-select-btn" onclick="shopSelectBox('brunch')">Seleccionar →</button>
     </div>
     <!-- SPICY -->
-    <div class="box-card" id="box-spicy">
+    <div class="box-card" id="shop-spicy">
       <div class="box-check">✓</div>
       <div class="box-icon">🌶️</div>
       <span class="box-tag">Spicy</span>
       <div class="box-name">Spicy</div>
-      <div class="box-desc">Sabor y picor real. Para quienes buscan más que decoración verde.</div>
-      <button class="box-select-btn" onclick="selectBox('spicy')">Seleccionar →</button>
+      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
+      <button class="box-select-btn" onclick="shopSelectBox('spicy')">Seleccionar →</button>
     </div>
     <!-- PROTEÍNA -->
-    <div class="box-card" id="box-protein">
+    <div class="box-card" id="shop-protein">
       <div class="box-check">✓</div>
       <div class="box-icon">💪</div>
       <span class="box-tag">Proteína</span>
       <div class="box-name">Proteína</div>
-      <div class="box-desc">Densidad nutricional para quienes entrenan y rinden.</div>
-      <button class="box-select-btn" onclick="selectBox('protein')">Seleccionar →</button>
+      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
+      <button class="box-select-btn" onclick="shopSelectBox('protein')">Seleccionar →</button>
     </div>
   </div>
 
-  <!-- PASO 2+3: TAMAÑO, PRECIO Y CTA -->
-  <div class="size-price-panel fade-in" id="sizePricePanel">
+  <!-- PASO 2+3: CANTIDAD Y COMPRA -->
+  <div class="size-price-panel fade-in" id="shopPanel">
     <div class="spp-top">
       <div>
-        <div class="spp-title">Elige el tamaño de tu box</div>
-        <div class="spp-box-name" id="sppBoxName"></div>
+        <div class="spp-title">Elige la cantidad</div>
+        <div class="spp-box-name" id="shopBoxName"></div>
       </div>
-      <button onclick="resetSelection()" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);cursor:pointer;text-transform:uppercase;text-decoration:underline">Cambiar box</button>
+      <button onclick="shopReset()" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);cursor:pointer;text-transform:uppercase;text-decoration:underline">Cambiar box</button>
     </div>
-    <div class="spp-sizes" id="sppSizes">
-      <button class="spp-size-btn" id="sz-S" onclick="chooseSize('S')">
-        <span class="spp-size-letter">S</span>
-        <span class="spp-size-price" style="font-size:9px;letter-spacing:0">Precio por definir</span>
-        <span class="spp-size-label">Pequeño</span>
+    <div class="spp-sizes">
+      <button class="spp-size-btn" id="shop-sz-3" onclick="shopChooseQty(3)">
+        <span class="spp-size-letter">3</span>
+        <span class="spp-size-price">$15.990</span>
+        <span class="spp-size-label">unidades</span>
       </button>
-      <button class="spp-size-btn active" id="sz-M" onclick="chooseSize('M')">
-        <span class="spp-size-letter">M</span>
-        <span class="spp-size-price" style="font-size:9px;letter-spacing:0">Precio por definir</span>
-        <span class="spp-size-label">Mediano</span>
+      <button class="spp-size-btn" id="shop-sz-5" onclick="shopChooseQty(5)">
+        <span class="spp-size-letter">5</span>
+        <span class="spp-size-price">$23.990</span>
+        <span class="spp-size-label">unidades</span>
       </button>
-      <button class="spp-size-btn" id="sz-L" onclick="chooseSize('L')">
-        <span class="spp-size-letter">L</span>
-        <span class="spp-size-price" style="font-size:9px;letter-spacing:0">Precio por definir</span>
-        <span class="spp-size-label">Grande</span>
+      <button class="spp-size-btn" id="shop-sz-8" onclick="shopChooseQty(8)">
+        <span class="spp-size-letter">8</span>
+        <span class="spp-size-price">$36.990</span>
+        <span class="spp-size-label">unidades</span>
       </button>
     </div>
-    <div class="spp-info" id="sppInfo"></div>
+    <div class="spp-info" id="shopInfo"></div>
     <div class="spp-price-row">
       <div>
-        <div class="spp-price-label">Precio semanal</div>
+        <div class="spp-price-label">Precio</div>
         <div class="spp-price-period">Entrega a domicilio · Punta Arenas</div>
       </div>
       <div style="text-align:right">
-        <div class="spp-price-val" id="sppPrice" style="font-size:16px;letter-spacing:0">En evaluación</div>
-        <div class="spp-price-period">Precios próximamente</div>
+        <div class="spp-price-val" id="shopPriceVal">$15.990</div>
+        <div class="spp-price-period">IVA incluido</div>
       </div>
     </div>
-    <button class="spp-cta-btn" id="sppCtaBtn" onclick="goToContactBox()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Quiero suscribirme
+    <button class="spp-cta-btn" onclick="shopOpenModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Comprar ahora
     </button>
-    <div class="spp-note">Sin compromisos · Precios se confirmarán antes del lanzamiento</div>
+    <div class="spp-note">Pago seguro · Entrega coordinada · Sin sorpresas</div>
   </div>
 
   <div class="sub-cta fade-in">
     <h3>¿Tienes preguntas?</h3>
     <p>Escríbenos y te respondemos antes de tu primera entrega.</p>
-    <p class="sub-note">Sin compromisos · Cancela cuando quieras</p>
+    <p class="sub-note">Entregas en Punta Arenas · Lunes</p>
   </div>
 </section>
-
 
 <!-- PHOTO BREAK 4 -->
 <div class="pb" style="height:92vh;background:#080d0a">
@@ -1119,6 +1121,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 
+<!-- MODAL COMPRA -->
+<div class="flow-modal-overlay" id="shopModal" onclick="shopCloseModalOutside(event)">
+  <div class="flow-modal" style="max-width:520px">
+    <button class="flow-modal-close" onclick="shopCloseModal()">✕</button>
+    <div class="flow-modal-tag">Compra directa · Pago seguro</div>
+    <div class="flow-modal-title">Completa tus datos</div>
+    <div class="flow-modal-plan" id="shopModalPlan"></div>
+    <div class="flow-modal-rule"></div>
+    <div class="flow-modal-price-row">
+      <div>
+        <div class="flow-modal-price-label">Total a pagar</div>
+        <div class="flow-modal-price-period">Entrega a domicilio · Punta Arenas · Lunes</div>
+      </div>
+      <div style="text-align:right">
+        <div class="flow-modal-price-val" id="shopModalPrice"></div>
+        <div class="flow-modal-price-period">IVA incluido</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Nombre completo</label>
+      <input type="text" id="sm-nombre" placeholder="Tu nombre" autocomplete="name"/>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="sm-email" placeholder="correo@ejemplo.cl" autocomplete="email"/>
+    </div>
+    <div class="field">
+      <label>Teléfono</label>
+      <input type="tel" id="sm-telefono" placeholder="+56 9 ..." autocomplete="tel"/>
+    </div>
+    <div class="field">
+      <label>Dirección de entrega</label>
+      <input type="text" id="sm-direccion" placeholder="Calle, número, departamento" autocomplete="street-address"/>
+    </div>
+    <div class="field">
+      <label>Nota opcional</label>
+      <input type="text" id="sm-mensaje" placeholder="Piso, color de puerta, instrucciones..."/>
+    </div>
+    <!-- Método de pago -->
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray);margin-bottom:8px">Método de pago</div>
+    <div class="pay-methods">
+      <button class="pay-method-btn active" id="pm-flow" onclick="selectPayMethod('flow')">
+        <span class="pay-method-icon">💳</span>
+        <span class="pay-method-label">Flow</span>
+        <span class="pay-method-sub">Webpay · Tarjeta</span>
+      </button>
+      <button class="pay-method-btn" id="pm-transfer" onclick="selectPayMethod('transfer')">
+        <span class="pay-method-icon">🏦</span>
+        <span class="pay-method-label">Transferencia</span>
+        <span class="pay-method-sub">Banco Santander</span>
+      </button>
+    </div>
+    <!-- Datos transferencia -->
+    <div class="transfer-box" id="transferBox">
+      <div class="transfer-row"><span class="transfer-label">Banco</span><span class="transfer-val">Santander</span></div>
+      <div class="transfer-row"><span class="transfer-label">Tipo</span><span class="transfer-val">Cuenta Corriente</span></div>
+      <div class="transfer-row"><span class="transfer-label">N° Cuenta</span><span class="transfer-val">88683986</span></div>
+      <div class="transfer-row"><span class="transfer-label">RUT</span><span class="transfer-val">77.466.345-2</span></div>
+      <div class="transfer-row"><span class="transfer-label">Nombre</span><span class="transfer-val">Vertical Microgreens SpA</span></div>
+      <div class="transfer-row"><span class="transfer-label">Email</span><span class="transfer-val">hola@vertical53.com</span></div>
+      <p class="transfer-note">Envía el comprobante a hola@vertical53.com o por WhatsApp. Tu pedido se confirma una vez verificada la transferencia.</p>
+    </div>
+    <div class="flow-modal-error" id="sm-error"></div>
+    <button class="flow-modal-submit" id="sm-submit" onclick="shopPagar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Pagar con Flow
+    </button>
+    <div class="flow-modal-note" id="sm-note">Serás redirigido a Flow para pagar de forma segura.<br/>Webpay · Redcompra · Tarjetas de crédito</div>
+  </div>
+</div>
+
 <!-- MODAL SUSCRIPCIÓN FLOW -->
 <div class="flow-modal-overlay" id="flowModal" onclick="closeFlowModalOutside(event)">
   <div class="flow-modal">
@@ -1441,6 +1514,170 @@ function goWA(){window.open('https://wa.me/'+WA_NUM+'?text='+WA_MSG,'_blank');ca
 function cancelWA(){document.getElementById('waDefault').style.display='block';document.getElementById('waConfirm').classList.remove('show');waConfirming=false;}
 let lastScroll=0;
 window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>lastScroll+40&&waBubbleOpen&&!waConfirming)document.getElementById('waBubble').classList.remove('show');else if(c<lastScroll-40)document.getElementById('waBubble').classList.add('show');lastScroll=c;},{passive:true});
+
+
+// ── TIENDA DIRECTA ────────────────────────────────────────────
+const SHOP_NAMES = {detox:'Detox', brunch:'Brunch', spicy:'Spicy', protein:'Proteína'};
+const SHOP_VARIETIES = {
+  detox:   ['Brócoli', 'Repollo verde', 'Amaranto', 'Mizuna'],
+  brunch:  ['Mizuna', 'Tatsoi', 'Brócoli', 'Repollo verde'],
+  spicy:   ['Mostaza verde', 'Rábano verde', 'Rábano morado', 'Rúcula'],
+  protein: ['Arveja', 'Brócoli', 'Rábano verde', 'Mizuna verde'],
+};
+
+function shopGetVarieties(box, qty){
+  const v = SHOP_VARIETIES[box];
+  let list = [];
+  if(qty === 3)       list = v.slice(0, 3);
+  else if(qty === 5)  list = [...v, v[0]];
+  else if(qty === 8)  list = [...v, ...v];
+  // Contar repeticiones
+  const count = {};
+  list.forEach(x => count[x] = (count[x] || 0) + 1);
+  return Object.entries(count).map(([k,n]) => n > 1 ? k + ' ×' + n : k).join(' · ');
+}
+const SHOP_PRICES = { 3: 15990, 5: 23990, 8: 36990 };
+const SHOP_FLOW_URLS = {
+  3: 'https://www.flow.cl/uri/vG8Fta88g',
+  5: 'https://www.flow.cl/uri/Gm0BFnX72',
+  8: 'https://www.flow.cl/uri/Hr1vDh3Dv',
+};
+
+let shopBox = null;
+let shopQty = null;
+
+function formatCLP(n){ return '$' + n.toLocaleString('es-CL'); }
+
+function shopSelectBox(id){
+  shopBox = id;
+  document.querySelectorAll('#shopBoxGrid .box-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('shop-' + id).classList.add('selected');
+  const panel = document.getElementById('shopPanel');
+  panel.classList.add('visible');
+  document.getElementById('shopBoxName').textContent = 'Box ' + SHOP_NAMES[id];
+  document.getElementById('shopInfo').textContent = shopGetVarieties(id, shopQty || 3);
+  // Reset cantidad
+  if(shopQty){
+    document.getElementById('shop-sz-' + shopQty).classList.remove('active');
+    shopQty = null;
+  }
+  if(document.getElementById('shopPriceVal'))
+    document.getElementById('shopPriceVal').textContent = formatCLP(15990);
+  setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
+}
+
+function shopChooseQty(n){
+  shopQty = n;
+  [3,5,8].forEach(q => document.getElementById('shop-sz-' + q).classList.remove('active'));
+  document.getElementById('shop-sz-' + n).classList.add('active');
+  if(document.getElementById('shopPriceVal'))
+    document.getElementById('shopPriceVal').textContent = formatCLP(SHOP_PRICES[n]);
+  if(shopBox) document.getElementById('shopInfo').textContent = shopGetVarieties(shopBox, n);
+}
+
+function shopReset(){
+  shopBox = null;
+  shopQty = null;
+  document.querySelectorAll('#shopBoxGrid .box-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('shopPanel').classList.remove('visible');
+  document.getElementById('suscripcion').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function shopOpenModal(){
+  if(!shopBox){ alert('Por favor selecciona un box primero.'); return; }
+  if(!shopQty){ alert('Por favor elige una cantidad.'); return; }
+  document.getElementById('shopModalPlan').textContent =
+    'Box ' + SHOP_NAMES[shopBox] + ' · ' + shopQty + ' unidades · ' + shopGetVarieties(shopBox, shopQty);
+  document.getElementById('shopModalPrice').textContent = formatCLP(SHOP_PRICES[shopQty]);
+  document.getElementById('sm-error').textContent = '';
+  ['sm-nombre','sm-email','sm-telefono','sm-direccion','sm-mensaje'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  const btn = document.getElementById('sm-submit');
+  btn.disabled = false;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
+  payMethod = 'flow';
+  selectPayMethod('flow');
+  document.getElementById('shopModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('sm-nombre').focus(), 100);
+}
+
+function shopCloseModal(){
+  document.getElementById('shopModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function shopCloseModalOutside(e){
+  if(e.target === document.getElementById('shopModal')) shopCloseModal();
+}
+
+
+// Método de pago
+let payMethod = 'flow';
+
+function selectPayMethod(method){
+  payMethod = method;
+  document.getElementById('pm-flow').classList.toggle('active', method === 'flow');
+  document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
+  const transferBox = document.getElementById('transferBox');
+  const btn = document.getElementById('sm-submit');
+  const note = document.getElementById('sm-note');
+  if(method === 'transfer'){
+    transferBox.classList.add('show');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Confirmar pedido por transferencia';
+    if(note) note.textContent = 'Recibirás un correo con los datos de tu pedido. Envía el comprobante para confirmar.';
+  } else {
+    transferBox.classList.remove('show');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
+    if(note) note.textContent = 'Serás redirigido a Flow para pagar de forma segura.\nWebpay · Redcompra · Tarjetas de crédito';
+  }
+}
+async function shopPagar(){
+  const nombre    = document.getElementById('sm-nombre').value.trim();
+  const email     = document.getElementById('sm-email').value.trim();
+  const telefono  = document.getElementById('sm-telefono').value.trim();
+  const direccion = document.getElementById('sm-direccion').value.trim();
+  const mensaje   = document.getElementById('sm-mensaje').value.trim();
+  const errEl     = document.getElementById('sm-error');
+  const btn       = document.getElementById('sm-submit');
+
+  if(!nombre)   { errEl.textContent = 'Por favor ingresa tu nombre.'; return; }
+  if(!email || !email.includes('@')) { errEl.textContent = 'Por favor ingresa un email válido.'; return; }
+  if(!telefono) { errEl.textContent = 'Por favor ingresa tu teléfono.'; return; }
+  if(!direccion){ errEl.textContent = 'Por favor ingresa tu dirección de entrega.'; return; }
+  errEl.textContent = '';
+
+  btn.disabled = true;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Redirigiendo a Flow...';
+
+  // Registrar pedido en Formspree (para que llegue aviso a hola@vertical53.com)
+  try {
+    await fetch('https://formspree.io/f/xlgkejdp', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify({
+        _subject: '🛒 NUEVO PEDIDO · Vertical 53°',
+        box: 'Box ' + SHOP_NAMES[shopBox],
+        cantidad: shopQty + ' unidades',
+        precio: formatCLP(SHOP_PRICES[shopQty]),
+        nombre, email, telefono, direccion,
+        nota: mensaje || '—',
+        entrega: 'Próximo lunes',
+      })
+    });
+  } catch(e){ /* continuar igual, el pago es lo prioritario */ }
+
+  if(payMethod === 'transfer'){
+    // Pedido por transferencia — solo registrar y confirmar
+    shopCloseModal();
+    shopReset();
+    alert('¡Pedido registrado, ' + nombre.split(' ')[0] + '! Realiza la transferencia a Banco Santander · Cta. Cte. 88683986 · RUT 77.466.345-2 y envía el comprobante a hola@vertical53.com o por WhatsApp. Tu pedido se confirma al verificar el pago.');
+  } else {
+    // Redirigir a Flow para pago
+    window.location.href = SHOP_FLOW_URLS[shopQty];
+  }
+}
 
 // Tabs sección deportiva
 function depTab(btn,panel){
