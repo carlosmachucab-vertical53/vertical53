@@ -115,7 +115,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
 .nutri-table td:nth-child(2),.nutri-table td:nth-child(3){font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gs)}
 .nutri-source{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,.25);margin-top:16px;text-transform:uppercase}
 
-/* SUSCRIPCIÓN */
+/* QUIERO COMPRAR */
 #suscripcion{background:var(--white);position:relative;overflow:hidden}
 #suscripcion::before{content:'';position:absolute;top:-100px;right:-100px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(112,186,94,.07) 0%,transparent 70%);pointer-events:none}
 .sub-intro{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:end;margin-bottom:56px}
@@ -415,7 +415,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
   .sub-step-sep{display:none}
 }
 
-/* MODAL SUSCRIPCIÓN FLOW */
+/* MODAL QUIERO COMPRAR FLOW */
 .flow-modal-overlay{position:fixed;inset:0;background:rgba(0,26,43,.75);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
 .flow-modal-overlay.open{display:flex}
 .flow-modal{background:var(--white);border-radius:24px;max-width:480px;width:100%;padding:40px;position:relative;box-shadow:0 24px 64px rgba(0,26,43,.18)}
@@ -470,12 +470,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#nosotros" onclick="closeMenu()">Nosotros</a>
-  <a href="#suscripcion" onclick="closeMenu()">Suscripción</a>
+  <a href="#suscripcion" onclick="closeMenu()">Quiero comprar</a>
   <a href="#catalogo" onclick="openModal('modal-catalogo');closeMenu();return false;">Catálogo</a>
   <a href="#horeca" onclick="closeMenu()">Horeca</a>
   <a href="#ubicacion" onclick="closeMenu()">Ubicación</a>
   <a href="#contacto" onclick="closeMenu()">Contacto</a>
-  <a href="#suscripcion" class="m-cta" onclick="closeMenu()">Suscribirme</a>
+  <a href="#suscripcion" class="m-cta" onclick="closeMenu()">Quiero comprar</a>
 </div>
 
 <!-- NAV -->
@@ -485,13 +485,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </a>
   <ul class="nav-links">
     <li><a href="#nosotros">Nosotros</a></li>
-    <li><a href="#suscripcion">Suscripción</a></li>
+    <li><a href="#suscripcion">Quiero comprar</a></li>
     <li><a href="#catalogo" onclick="openModal('modal-catalogo');return false;">Catálogo</a></li>
     <li><a href="#horeca">Horeca</a></li>
     <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Suscribirme</button>
+  <button class="nav-cta" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Quiero comprar</button>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
@@ -505,7 +505,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <h1 class="hero-h1">Cultivo <span class="g">vivo</span><br/>desde el<br/>fin del mundo<span class="sub-line">Future Farming · Innovation</span></h1>
     <p class="hero-sub">Microgreens de alta densidad nutricional cultivados en sistemas verticales controlados en la Patagonia. Frescos, limpios, entregados a tu puerta.</p>
     <div class="hero-btns">
-      <button class="btn-p" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Ver planes de suscripción</button>
+      <button class="btn-p" onclick="document.getElementById('suscripcion').scrollIntoView({behavior:'smooth'})">Quiero comprar</button>
       <button class="btn-s" onclick="document.getElementById('nosotros').scrollIntoView({behavior:'smooth'})">Conocer más</button>
     </div>
   </div>
@@ -606,7 +606,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="rule"></div>
     </div>
     <div class="sub-intro-right">
-      <span class="sub-badge">Entrega semanal · Punta Arenas</span>
+      <span class="sub-badge">Entrega a domicilio · Punta Arenas</span>
       <p class="body-text">Selecciona tu box favorito y la cantidad que necesitas. Pagas una vez y te lo llevamos directamente.</p>
       <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Pago seguro vía Flow · Entrega el próximo lunes</p>
     </div>
@@ -623,7 +623,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="box-tag">Detox</span>
       <div class="box-name">Detox</div>
       <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('detox')">Seleccionar →</button>
+      <button class="box-select-btn" onclick="shopSelectBox('detox')">Quiero comprar →</button>
     </div>
     <!-- BRUNCH -->
     <div class="box-card" id="shop-brunch">
@@ -632,7 +632,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="box-tag">Brunch</span>
       <div class="box-name">Brunch</div>
       <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('brunch')">Seleccionar →</button>
+      <button class="box-select-btn" onclick="shopSelectBox('brunch')">Quiero comprar →</button>
     </div>
     <!-- SPICY -->
     <div class="box-card" id="shop-spicy">
@@ -641,7 +641,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="box-tag">Spicy</span>
       <div class="box-name">Spicy</div>
       <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('spicy')">Seleccionar →</button>
+      <button class="box-select-btn" onclick="shopSelectBox('spicy')">Quiero comprar →</button>
     </div>
     <!-- PROTEÍNA -->
     <div class="box-card" id="shop-protein">
@@ -650,7 +650,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="box-tag">Proteína</span>
       <div class="box-name">Proteína</div>
       <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('protein')">Seleccionar →</button>
+      <button class="box-select-btn" onclick="shopSelectBox('protein')">Quiero comprar →</button>
     </div>
   </div>
 
@@ -1048,7 +1048,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="rule fade-in"></div>
     <div class="contact-grid">
       <div class="contact-info fade-in">
-        <p class="body-text">¿Quieres suscribirte a una box o perteneces al Canal Horeca? Escríbenos y te respondemos a la brevedad.</p>
+        <p class="body-text">¿Quieres comprar una box o perteneces al Canal Horeca? Escríbenos y te respondemos a la brevedad.</p>
         <div class="ci"><h4>Email</h4><p>hola@vertical53.com</p></div>
         <div class="ci"><h4>Ubicación</h4><p>Punta Arenas, Región de Magallanes</p></div>
         <div class="ci"><h4>Horario</h4><p>Lunes a Viernes · 9:00 – 18:00</p></div>
@@ -1062,7 +1062,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="field"><label>¿Qué te interesa?</label>
           <select id="f-interes" onchange="handleInteresChange(this.value)">
             <option value="">Selecciona una opción</option>
-            <option value="suscriptor">Soy suscriptor / quiero suscribirme</option>
+            <option value="suscriptor">Quiero comprar</option>
             <option value="horeca">Canal Horeca – solicitar información</option>
           </select>
         </div>
@@ -1192,11 +1192,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 
-<!-- MODAL SUSCRIPCIÓN FLOW -->
+<!-- MODAL QUIERO COMPRAR FLOW -->
 <div class="flow-modal-overlay" id="flowModal" onclick="closeFlowModalOutside(event)">
   <div class="flow-modal">
     <button class="flow-modal-close" onclick="closeFlowModal()">✕</button>
-    <div class="flow-modal-tag">Suscripción</div>
+    <div class="flow-modal-tag">Quiero comprar</div>
     <div class="flow-modal-title">Completa tus datos</div>
     <div class="flow-modal-plan" id="fmPlan"></div>
     <div class="flow-modal-rule"></div>
@@ -1244,7 +1244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h3>2. Datos que recopilamos</h3>
       <ul><li>Nombre, correo electrónico, teléfono y dirección de entrega.</li><li>RUT (solo para facturación electrónica).</li><li>Datos de navegación (cookies técnicas).</li><li>Datos de pago procesados por Mercado Pago (no los almacenamos).</li></ul>
       <h3>3. Para qué usamos tus datos</h3>
-      <ul><li>Gestionar y entregar tu suscripción.</li><li>Emitir boletas y facturas ante el SII.</li><li>Responderte cuando nos escribes.</li><li>Enviarte comunicaciones comerciales solo con tu consentimiento.</li></ul>
+      <ul><li>Gestionar y entregar tu pedido.</li><li>Emitir boletas y facturas ante el SII.</li><li>Responderte cuando nos escribes.</li><li>Enviarte comunicaciones comerciales solo con tu consentimiento.</li></ul>
       <h3>4. Con quién compartimos tus datos</h3>
       <ul><li>Mercado Pago (pagos), Bsale (facturación), Formspree (formularios), SII (obligación legal).</li><li>No vendemos ni cedemos tus datos a terceros con fines comerciales.</li></ul>
       <h3>5. Tus derechos (ARCO)</h3>
@@ -1269,13 +1269,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h3>1. Proveedor</h3>
       <p>Vertical Microgreens SpA · RUT 77.466.345-2 · Punta Arenas, Chile · hola@vertical53.com</p>
       <h3>2. Productos y servicios</h3>
-      <p>Suscripción semanal de microgreens vivos en boxes Detox, Brunch, Spicy y Proteína, en tamaños S, M y L, con entrega a domicilio en Punta Arenas.</p>
+      <p>Quiero comprar semanal de microgreens vivos en boxes Detox, Brunch, Spicy y Proteína, en tamaños S, M y L, con entrega a domicilio en Punta Arenas.</p>
       <h3>3. Precios y facturación</h3>
       <p>Precios en pesos chilenos (CLP) con IVA incluido. Emitimos boleta o factura electrónica ante el SII por cada transacción.</p>
       <h3>4. Derecho a retracto</h3>
       <div class="highlight"><p>Conforme al <strong>Art. 3 bis Ley 19.496</strong>, tienes derecho a retractarte dentro de <strong>10 días hábiles</strong> desde la contratación. No aplica sobre productos perecibles ya entregados en buen estado.</p></div>
       <h3>5. Cancelación</h3>
-      <p>Puedes cancelar o pausar tu suscripción en cualquier momento con 72 horas de anticipación al próximo cobro. Sin multas ni penalizaciones.</p>
+      <p>Puedes cancelar tu pedido antes de la entrega sin costo. Escríbenos a hola@vertical53.com.</p>
       <h3>6. Entregas</h3>
       <p>Entregas semanales en Punta Arenas los días lunes, miércoles o viernes, según disponibilidad coordinada con el cliente.</p>
       <h3>7. Garantía del producto</h3>
@@ -1300,7 +1300,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   <div class="footer-links">
     <a href="#nosotros">Nosotros</a>
-    <a href="#suscripcion">Suscripción</a>
+    <a href="#suscripcion">Quiero comprar</a>
     <a href="#catalogo" onclick="openModal('modal-catalogo');return false;">Catálogo</a>
     <a href="#horeca">Horeca</a>
     <a href="#ubicacion">Ubicación</a>
@@ -1502,7 +1502,7 @@ async function sendForm(e){
 
 // WhatsApp
 const WA_NUM='56989680810';
-const WA_MSG=encodeURIComponent('Hola, me interesa suscribirme a Vertical 53°. ¿Me pueden dar más información?');
+const WA_MSG=encodeURIComponent('Hola, me interesa comprar microgreens en Vertical 53°. ¿Me pueden dar más información?');
 let waBubbleOpen=false,waConfirming=false;
 setTimeout(()=>{document.getElementById('waBubble').classList.add('show');waBubbleOpen=true;},3000);
 function handleWA(){
