@@ -1123,8 +1123,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- MODAL COMPRA -->
 <div class="flow-modal-overlay" id="shopModal" onclick="shopCloseModalOutside(event)">
-  <div class="flow-modal" style="max-width:520px">
-    <button class="flow-modal-close" onclick="shopCloseModal()">✕</button>
+  <div class="flow-modal" style="max-width:520px;max-height:90vh;overflow-y:auto">
+    <button class="flow-modal-close" onclick="shopCloseModal()" style="position:sticky;top:0;z-index:10">✕</button>
     <div class="flow-modal-tag">Compra directa · Pago seguro</div>
     <div class="flow-modal-title">Completa tus datos</div>
     <div class="flow-modal-plan" id="shopModalPlan"></div>
