@@ -1843,24 +1843,34 @@ async function shopPagar(){
   const total = SHOP_PRICES[shopQty] + despacho;
   const horarioText = shopHorario === 'am' ? 'Mañana 9:00–11:00 hrs' : 'Tarde 16:00–18:00 hrs';
 
+  // Registrar pedido en Formspree ANTES de redirigir a Flow
   try {
-    await fetch('https://formspree.io/f/xlgkejdp', {
+    const formRes = await fetch('https://formspree.io/f/xlgkejdp', {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
       body: JSON.stringify({
-        _subject: '🛒 NUEVO PEDIDO · Vertical 53°',
-        cantidad: shopQty + ' bandejas vivas',
-        brotes: nombres.join(', '),
-        horario: horarioText,
-        precio_brotes: formatCLP(SHOP_PRICES[shopQty]),
-        despacho: despacho > 0 ? formatCLP(despacho) : 'Gratis',
-        total: formatCLP(total),
-        metodo_pago: payMethod === 'flow' ? 'Flow' : 'Transferencia',
-        nombre, email, telefono, direccion,
-        nota: mensaje || '—',
+        _subject: '🛒 NUEVO PEDIDO · Vertical 53° — ' + nombre,
+        '1_nombre': nombre,
+        '2_email': email,
+        '3_telefono': telefono,
+        '4_direccion': direccion,
+        '5_cantidad': shopQty + ' bandejas vivas',
+        '6_brotes': nombres.join(', '),
+        '7_horario': horarioText,
+        '8_precio': formatCLP(SHOP_PRICES[shopQty]),
+        '9_despacho': despacho > 0 ? formatCLP(despacho) : 'Gratis',
+        '10_total': formatCLP(total),
+        '11_metodo_pago': payMethod === 'flow' ? 'Flow' : 'Transferencia',
+        '12_nota': mensaje || '—',
       })
     });
-  } catch(e){ /* continuar igual */ }
+    if(!formRes.ok) throw new Error('Formspree error');
+  } catch(e){
+    errEl.textContent = 'Error al registrar el pedido. Por favor intenta nuevamente.';
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
+    return;
+  }
 
   if(payMethod === 'transfer'){
     shopCloseModal();
