@@ -68,15 +68,13 @@ module.exports = async (req, res) => {
       urlConfirmation,
       urlReturn,
       optional: JSON.stringify({
-        nombre,
-        email,
-        brotes,
-        horario,
-        direccion,
-        nota: nota || '',
-        qty: String(qty),
-        despacho: despacho > 0 ? `$${despacho.toLocaleString('es-CL')}` : 'Gratis',
-        total: `$${total.toLocaleString('es-CL')}`,
+        n: nombre,
+        e: email,
+        b: brotes,
+        h: horario,
+        d: direccion,
+        q: String(qty),
+        t: String(total),
       }),
     });
 
