@@ -5,8 +5,8 @@ const FLOW_API_URL = 'https://www.flow.cl/api';
 const API_KEY      = process.env.FLOW_API_KEY;
 const SECRET_KEY   = process.env.FLOW_SECRET_KEY;
 
-const PRICES  = { 1: 5990, 2: 11990, 3: 17990, 4: 23990, 5: 29990 };
-const DESPACHO = { 1: 3000, 2: 3000, 3: 3000, 4: 0, 5: 0 };
+const PRICES   = { 1: 5990, 2: 11990, 3: 17990, 4: 23990, 5: 29990 };
+const DESPACHO = { 1: 3000, 2: 3000,  3: 3000,  4: 0,     5: 0 };
 
 function signParams(params) {
   const keys = Object.keys(params).sort();
@@ -47,11 +47,15 @@ module.exports = async (req, res) => {
   if (!precio) return res.status(400).json({ error: 'Cantidad no válida' });
 
   const commerceOrder = 'V53-' + Date.now();
-  const urlReturn = 'https://www.vertical53.com?compra=ok'
-    + '&nombre=' + encodeURIComponent(nombre)
-    + '&qty=' + qty
-    + '&horario=' + encodeURIComponent(horario);
+
+  // FIX 1: urlReturn como GET simple — Flow redirige aquí con GET después del pago
+  // No incluimos datos sensibles en la URL, los datos vienen por el webhook
+  const urlReturn = 'https://www.vertical53.com/gracias';
+
+  // urlConfirmation: Flow hace POST aquí para confirmar el pago
+  // Esta función envía los correos y registra el pedido
   const urlConfirmation = 'https://www.vertical53.com/api/payment-confirm';
+
   const subject = `Vertical 53° · ${qty} bandeja${qty > 1 ? 's' : ''} viva${qty > 1 ? 's' : ''}`;
 
   try {
@@ -64,9 +68,13 @@ module.exports = async (req, res) => {
       urlConfirmation,
       urlReturn,
       optional: JSON.stringify({
-        nombre, brotes, horario, direccion,
+        nombre,
+        email,
+        brotes,
+        horario,
+        direccion,
         nota: nota || '',
-        qty,
+        qty: String(qty),
         despacho: despacho > 0 ? `$${despacho.toLocaleString('es-CL')}` : 'Gratis',
         total: `$${total.toLocaleString('es-CL')}`,
       }),
