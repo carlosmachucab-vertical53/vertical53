@@ -1860,34 +1860,23 @@ async function shopPagar(){
   const total = SHOP_PRICES[shopQty] + despacho;
   const horarioText = shopHorario === 'am' ? 'Mañana 9:00–11:00 hrs' : 'Tarde 16:00–18:00 hrs';
 
-  // Registrar pedido en Formspree ANTES de redirigir a Flow
-  try {
-    const formRes = await fetch('https://formspree.io/f/xlgkejdp', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({
-        _subject: '🛒 NUEVO PEDIDO · Vertical 53° — ' + nombre,
-        '1_nombre': nombre,
-        '2_email': email,
-        '3_telefono': telefono,
-        '4_direccion': direccion,
-        '5_cantidad': shopQty + ' bandejas vivas',
-        '6_brotes': nombres.join(', '),
-        '7_horario': horarioText,
-        '8_precio': formatCLP(SHOP_PRICES[shopQty]),
-        '9_despacho': despacho > 0 ? formatCLP(despacho) : 'Gratis',
-        '10_total': formatCLP(total),
-        '11_metodo_pago': payMethod === 'flow' ? 'Flow' : 'Transferencia',
-        '12_nota': mensaje || '—',
-      })
-    });
-    if(!formRes.ok) throw new Error('Formspree error');
-  } catch(e){
-    errEl.textContent = 'Error al registrar el pedido. Por favor intenta nuevamente.';
-    btn.disabled = false;
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
-    return;
-  }
+  // Nota: el correo de confirmación se envía DESPUÉS del pago via webhook payment-confirm
+  // Solo registramos en Formspree como respaldo interno (no bloquea el flujo)
+  fetch('https://formspree.io/f/xlgkejdp', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify({
+      _subject: '🛒 PEDIDO INICIADO · ' + nombre,
+      nombre, email, telefono,
+      cantidad: shopQty + ' bandejas',
+      brotes: nombres.join(', '),
+      horario: horarioText,
+      total: formatCLP(total),
+      direccion,
+      nota: mensaje || '—',
+      metodo: payMethod === 'flow' ? 'Flow' : 'Transferencia',
+    })
+  }).catch(() => {}); // silencioso — no bloquea
 
   if(payMethod === 'transfer'){
     shopCloseModal();
@@ -1944,22 +1933,19 @@ function handleInteresChange(val){
 // Detectar retorno desde Flow con suscripción confirmada
 (function(){
   const params = new URLSearchParams(window.location.search);
-  const estado = params.get('suscripcion');
-  if(estado === 'ok'){
+  if(params.get('compra') === 'ok'){
+    setTimeout(()=>{
+      alert('¡Pago confirmado! Te enviaremos un correo con el detalle de tu pedido y la fecha de entrega. Gracias por comprar en Vertical 53°.');
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }, 500);
+  }
+  if(params.get('suscripcion') === 'ok'){
     const nombre = params.get('nombre') || '';
     setTimeout(()=>{
-      const primerNombre = nombre ? decodeURIComponent(nombre).split(' ')[0] : '';
-      const msg = primerNombre
-        ? primerNombre + ', tu suscripcion quedo confirmada. Te enviaremos un correo con los detalles de tu primera entrega el proximo lunes.'
-        : 'Tu suscripcion quedo confirmada. Te enviaremos un correo con los detalles de tu primera entrega el proximo lunes.';
-      alert(msg);
+      const n = nombre ? decodeURIComponent(nombre).split(' ')[0] : '';
+      alert((n ? n + ', tu' : 'Tu') + ' suscripcion quedo confirmada. Te enviaremos un correo con los detalles.');
       window.history.replaceState({}, document.title, window.location.pathname);
-    }, 800);
-  } else if(estado === 'error'){
-    setTimeout(()=>{
-      alert('Hubo un problema al registrar tu tarjeta. Por favor intentalo nuevamente o escribenos a hola@vertical53.com');
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }, 800);
+    }, 500);
   }
 })();
 
