@@ -472,6 +472,52 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .total-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray)}
 .total-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--gp);letter-spacing:-0.5px}
 
+
+/* BANDEJA VIVA — SECCIÓN PRODUCTO */
+.bv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0}
+.bv-card{border-radius:20px;overflow:hidden;position:relative}
+.bv-card img{width:100%;height:220px;object-fit:cover;display:block;transition:.4s}
+.bv-card:hover img{transform:scale(1.04)}
+.bv-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,26,43,.85),transparent);padding:18px 16px}
+.bv-cap span{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--white);display:block}
+.bv-cap p{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,.55);text-transform:uppercase;margin-top:3px}
+
+/* SELECTOR DE BROTES */
+.brotes-section{margin:28px 0}
+.brotes-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.brote-filter{padding:7px 16px;border:1.5px solid rgba(23,102,99,.3);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gp);border-radius:8px;cursor:pointer;transition:.2s;text-transform:uppercase}
+.brote-filter:hover{border-color:var(--gs);color:var(--gs)}
+.brote-filter.active{background:var(--gp);border-color:var(--gp);color:var(--white)}
+.brotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.brote-item{padding:14px 16px;background:var(--bg);border-radius:14px;border:2px solid transparent;cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:space-between}
+.brote-item:hover{border-color:rgba(112,186,94,.4)}
+.brote-item.selected{background:var(--lg);border-color:var(--gs)}
+.brote-item.disabled{opacity:.35;cursor:not-allowed;border-color:transparent}
+.brote-item-left{display:flex;flex-direction:column;gap:3px}
+.brote-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy)}
+.brote-tags{display:flex;gap:4px;flex-wrap:wrap}
+.brote-tag{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 6px;border-radius:4px;text-transform:uppercase}
+.brote-tag.detox{background:rgba(112,186,94,.15);color:#176663}
+.brote-tag.proteina{background:rgba(0,26,43,.1);color:#001A2B}
+.brote-tag.spicy{background:rgba(199,100,50,.12);color:#8B3A0F}
+.brote-tag.brunch{background:rgba(199,166,104,.2);color:#7a5a1e}
+.brote-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(23,102,99,.3);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--white);transition:.2s;flex-shrink:0}
+.brote-item.selected .brote-check{background:var(--gs);border-color:var(--gs)}
+.brotes-counter{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--gp);margin-bottom:12px;min-height:18px}
+
+/* HORARIO */
+.horario-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.horario-btn{padding:16px;border:2px solid rgba(23,102,99,.25);background:var(--white);border-radius:14px;cursor:pointer;transition:.25s;text-align:left}
+.horario-btn:hover{border-color:var(--gs)}
+.horario-btn.active{border-color:var(--gp);background:var(--gp)}
+.horario-btn.active .horario-label{color:var(--white)}
+.horario-btn.active .horario-sub{color:rgba(255,255,255,.65)}
+.horario-label{font-family:'Sora',sans-serif;font-size:14px;font-weight:600;color:var(--navy);display:block;margin-bottom:3px;transition:.3s}
+.horario-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;transition:.3s}
+
+@media(max-width:900px){.bv-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.bv-grid{grid-template-columns:1fr}.brotes-grid{grid-template-columns:1fr 1fr}.horario-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -615,95 +661,116 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sub-intro fade-in">
     <div>
       <div class="tag-label">Compra directa</div>
-      <h2>Elige tu pack<br/>de microgreens.</h2>
+      <h2>Elige tus<br/>brotes favoritos.</h2>
       <div class="rule"></div>
     </div>
     <div class="sub-intro-right">
-      <span class="sub-badge">Entrega a domicilio · Punta Arenas</span>
-      <p class="body-text">Selecciona tu box favorito y la cantidad que necesitas. Pagas una vez y te lo llevamos directamente.</p>
-      <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Pago seguro vía Flow · Entrega el próximo lunes</p>
+      <span class="sub-badge">Martes y jueves · Punta Arenas</span>
+      <p class="body-text">Arma tu pedido a tu gusto. Elige los brotes que quieres, la cantidad y el horario de entrega.</p>
+      <p style="font-size:12px;color:var(--gs);font-family:'IBM Plex Mono',monospace;letter-spacing:1px">Pago seguro vía Flow · Entrega coordinada</p>
     </div>
   </div>
 
-
-
-  <!-- PASO 1: BOXES -->
-  <div class="boxes-grid fade-in" id="shopBoxGrid">
-    <!-- DETOX -->
-    <div class="box-card" id="shop-detox">
-      <div class="box-check">✓</div>
-      <div class="box-icon">🥤</div>
-      <span class="box-tag">Detox</span>
-      <div class="box-name">Detox</div>
-      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('detox')">Seleccionar →</button>
-    </div>
-    <!-- BRUNCH -->
-    <div class="box-card" id="shop-brunch">
-      <div class="box-check">✓</div>
-      <div class="box-icon">🍳</div>
-      <span class="box-tag">Brunch</span>
-      <div class="box-name">Brunch</div>
-      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('brunch')">Seleccionar →</button>
-    </div>
-    <!-- SPICY -->
-    <div class="box-card" id="shop-spicy">
-      <div class="box-check">✓</div>
-      <div class="box-icon">🌶️</div>
-      <span class="box-tag">Spicy</span>
-      <div class="box-name">Spicy</div>
-      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('spicy')">Seleccionar →</button>
-    </div>
-    <!-- PROTEÍNA -->
-    <div class="box-card" id="shop-protein">
-      <div class="box-check">✓</div>
-      <div class="box-icon">💪</div>
-      <span class="box-tag">Proteína</span>
-      <div class="box-name">Proteína</div>
-      <div class="box-desc">Elige tu cantidad y verás las variedades incluidas.</div>
-      <button class="box-select-btn" onclick="shopSelectBox('protein')">Seleccionar →</button>
-    </div>
-  </div>
-
-  <!-- PASO 2+3: CANTIDAD Y COMPRA -->
-  <div class="size-price-panel fade-in" id="shopPanel">
-    <div class="spp-top">
-      <div>
-        <div class="spp-title">Elige la cantidad</div>
-        <div class="spp-box-name" id="shopBoxName"></div>
+  <!-- SECCIÓN BANDEJA VIVA -->
+  <div class="bv-grid fade-in">
+    <div class="bv-card">
+      <img src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/51FCD0E9-CB88-4774-AC68-9E82B6E98603.PNG" alt="Bandeja viva de microgreens"/>
+      <div class="bv-cap">
+        <span>La bandeja viva</span>
+        <p>Lo que recibes en tu puerta</p>
       </div>
-      <button onclick="shopReset()" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);cursor:pointer;text-transform:uppercase;text-decoration:underline">Cambiar box</button>
     </div>
-    <div class="spp-sizes">
+    <div class="bv-card">
+      <img src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/QUE%20SON%20MICROGREENS%20DSC06148.jpg" alt="Microgreens frescos del contenedor"/>
+      <div class="bv-cap">
+        <span>Directo del contenedor</span>
+        <p>Cosecha y entrega el mismo día</p>
+      </div>
+    </div>
+    <div class="bv-card">
+      <img src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/HUEVOS%20DSC06159.jpg" alt="Cómo consumir microgreens"/>
+      <div class="bv-cap">
+        <span>Listos para consumir</span>
+        <p>Corta y sirve directo</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 1: CANTIDAD -->
+  <div class="fade-in" id="shopStep1">
+    <div class="tag-label" style="margin-top:16px">Paso 1 · Elige la cantidad</div>
+    <div class="spp-sizes" style="margin-top:12px">
+      <button class="spp-size-btn" id="shop-sz-2" onclick="shopChooseQty(2)">
+        <span class="spp-size-letter">2</span>
+        <span class="spp-size-price">$11.990</span>
+        <span class="spp-size-label">bandejas vivas</span>
+        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#c47a1e;background:rgba(199,166,104,.2);padding:3px 8px;border-radius:6px">+ $3.000 despacho</span>
+      </button>
       <button class="spp-size-btn" id="shop-sz-3" onclick="shopChooseQty(3)">
         <span class="spp-size-letter">3</span>
-        <span class="spp-size-price">$15.990</span>
-        <span class="spp-size-label">unidades</span>
-        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#c47a1e;background:rgba(199,166,104,.2);padding:3px 8px;border-radius:6px;white-space:nowrap">+ $3.000 despacho</span>
+        <span class="spp-size-price">$17.990</span>
+        <span class="spp-size-label">bandejas vivas</span>
+        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#c47a1e;background:rgba(199,166,104,.2);padding:3px 8px;border-radius:6px">+ $3.000 despacho</span>
       </button>
       <button class="spp-size-btn" id="shop-sz-5" onclick="shopChooseQty(5)">
         <span class="spp-size-letter">5</span>
-        <span class="spp-size-price">$23.990</span>
-        <span class="spp-size-label">unidades</span>
-        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#176663;background:rgba(112,186,94,.2);padding:3px 8px;border-radius:6px;white-space:nowrap">🚚 Despacho gratis</span>
-      </button>
-      <button class="spp-size-btn" id="shop-sz-8" onclick="shopChooseQty(8)">
-        <span class="spp-size-letter">8</span>
-        <span class="spp-size-price">$36.990</span>
-        <span class="spp-size-label">unidades</span>
-        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#176663;background:rgba(112,186,94,.2);padding:3px 8px;border-radius:6px;white-space:nowrap">🚚 Despacho gratis</span>
+        <span class="spp-size-price">$29.990</span>
+        <span class="spp-size-label">bandejas vivas</span>
+        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#176663;background:rgba(112,186,94,.2);padding:3px 8px;border-radius:6px">🚚 Despacho gratis</span>
       </button>
     </div>
-    <div class="spp-info" id="shopInfo"></div>
+  </div>
+
+  <!-- PASO 2: BROTES -->
+  <div class="brotes-section fade-in" id="shopStep2" style="display:none">
+    <div class="tag-label" style="margin-top:8px">Paso 2 · Elige tus brotes</div>
+    <p class="body-text" style="margin:8px 0 16px;font-size:13px">Filtra por perfil o elige libremente. Puedes combinar los que quieras.</p>
+    <div class="brotes-filters">
+      <button class="brote-filter active" onclick="filterBrotes('todos')">Todos</button>
+      <button class="brote-filter" onclick="filterBrotes('detox')">🌿 Detox</button>
+      <button class="brote-filter" onclick="filterBrotes('proteina')">💪 Proteína</button>
+      <button class="brote-filter" onclick="filterBrotes('spicy')">🌶️ Spicy</button>
+      <button class="brote-filter" onclick="filterBrotes('brunch')">🍳 Brunch</button>
+    </div>
+    <div class="brotes-counter" id="brotesCounter"></div>
+    <div class="brotes-grid" id="brotesGrid">
+      <!-- Se genera por JS -->
+    </div>
+  </div>
+
+  <!-- PASO 3: HORARIO -->
+  <div class="fade-in" id="shopStep3" style="display:none">
+    <div class="tag-label" style="margin-top:24px">Paso 3 · Elige el horario de entrega</div>
+    <p class="body-text" style="margin:8px 0 4px;font-size:13px">Entregas los martes y jueves.</p>
+    <div class="horario-grid">
+      <button class="horario-btn" id="horario-am" onclick="shopChooseHorario('am')">
+        <span class="horario-label">🌅 Mañana</span>
+        <span class="horario-sub">Entre 9:00 y 11:00 hrs</span>
+      </button>
+      <button class="horario-btn" id="horario-pm" onclick="shopChooseHorario('pm')">
+        <span class="horario-label">🌇 Tarde</span>
+        <span class="horario-sub">Entre 16:00 y 18:00 hrs</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- RESUMEN Y COMPRAR -->
+  <div class="size-price-panel fade-in" id="shopPanel" style="margin-top:24px">
+    <div class="spp-top">
+      <div>
+        <div class="spp-title">Resumen de tu pedido</div>
+        <div class="spp-box-name" id="shopBoxName"></div>
+      </div>
+      <button onclick="shopReset()" style="background:none;border:none;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--gray);cursor:pointer;text-transform:uppercase;text-decoration:underline">Empezar de nuevo</button>
+    </div>
+    <div class="spp-info" id="shopInfo" style="margin-bottom:12px"></div>
     <div class="spp-price-row">
       <div>
         <div class="spp-price-label">Precio</div>
         <div class="spp-price-period">Entrega a domicilio · Punta Arenas</div>
       </div>
       <div style="text-align:right">
-        <div class="spp-price-val" id="shopPriceVal">$15.990</div>
+        <div class="spp-price-val" id="shopPriceVal"></div>
         <div class="spp-price-period">IVA incluido</div>
       </div>
     </div>
@@ -717,7 +784,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sub-cta fade-in">
     <h3>¿Tienes preguntas?</h3>
     <p>Escríbenos y te respondemos antes de tu primera entrega.</p>
-    <p class="sub-note">Entregas en Punta Arenas · Lunes</p>
+    <p class="sub-note">Entregas martes y jueves · Punta Arenas</p>
   </div>
 </section>
 
@@ -1143,12 +1210,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="flow-modal-close" onclick="shopCloseModal()" style="position:sticky;top:0;z-index:10">✕</button>
     <div class="flow-modal-tag">Compra directa · Pago seguro</div>
     <div class="flow-modal-title">Completa tus datos</div>
-    <div class="flow-modal-plan" id="shopModalPlan"></div>
+    <div class="flow-modal-plan" id="shopModalPlan" style="line-height:1.6;margin-bottom:16px"></div>
     <div class="flow-modal-rule"></div>
     <div class="flow-modal-price-row">
       <div>
         <div class="flow-modal-price-label">Total a pagar</div>
-        <div class="flow-modal-price-period">Entrega a domicilio · Punta Arenas · Lunes</div>
+        <div class="flow-modal-price-period" id="shopModalEntrega">Entrega martes o jueves · Punta Arenas</div>
       </div>
       <div style="text-align:right">
         <div class="flow-modal-price-val" id="shopModalPrice"></div>
@@ -1546,95 +1613,175 @@ window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>lastScroll+40&
 
 
 // ── TIENDA DIRECTA ────────────────────────────────────────────
-const SHOP_NAMES = {detox:'Detox', brunch:'Brunch', spicy:'Spicy', protein:'Proteína'};
-const SHOP_VARIETIES = {
-  detox:   ['Brócoli', 'Repollo verde', 'Amaranto', 'Mizuna'],
-  brunch:  ['Mizuna', 'Tatsoi', 'Brócoli', 'Repollo verde'],
-  spicy:   ['Mostaza verde', 'Rábano verde', 'Rábano morado', 'Rúcula'],
-  protein: ['Arveja', 'Brócoli', 'Rábano verde', 'Mizuna verde'],
-};
-
-function shopGetVarieties(box, qty){
-  const v = SHOP_VARIETIES[box];
-  let list = [];
-  if(qty === 3)       list = v.slice(0, 3);
-  else if(qty === 5)  list = [...v, v[0]];
-  else if(qty === 8)  list = [...v, ...v];
-  // Contar repeticiones
-  const count = {};
-  list.forEach(x => count[x] = (count[x] || 0) + 1);
-  return Object.entries(count).map(([k,n]) => n > 1 ? k + ' ×' + n : k).join(' · ');
-}
-const SHOP_PRICES = { 3: 15990, 5: 23990, 8: 36990 };
-const SHOP_DESPACHO = { 3: 3000, 5: 0, 8: 0 };
+const SHOP_PRICES   = { 2: 11990, 3: 17990, 5: 29990 };
+const SHOP_DESPACHO = { 2: 3000,  3: 3000,  5: 0 };
 const SHOP_FLOW_URLS = {
-  3: 'https://www.flow.cl/uri/Ln71fHj2Q',
-  5: 'https://www.flow.cl/uri/Gm0BFnX72',
-  8: 'https://www.flow.cl/uri/Hr1vDh3Dv',
+  2: 'PENDIENTE_2UN',
+  3: 'PENDIENTE_3UN',
+  5: 'PENDIENTE_5UN',
 };
 
-let shopBox = null;
-let shopQty = null;
+const BROTES = [
+  { id:'rucula',      nombre:'Rúcula',        tags:['detox','spicy'] },
+  { id:'amaranto',    nombre:'Amaranto',       tags:['detox','proteina'] },
+  { id:'tatsoi',      nombre:'Tatsoi',         tags:['brunch','detox'] },
+  { id:'mizuna-v',    nombre:'Mizuna verde',   tags:['brunch','detox'] },
+  { id:'mizuna-r',    nombre:'Mizuna roja',    tags:['brunch','spicy'] },
+  { id:'brocoli',     nombre:'Brócoli',        tags:['proteina','detox'] },
+  { id:'rabano-v',    nombre:'Rábano verde',   tags:['spicy','proteina'] },
+  { id:'rabano-m',    nombre:'Rábano morado',  tags:['spicy'] },
+  { id:'repollo',     nombre:'Repollo verde',  tags:['brunch','proteina'] },
+];
+
+const TAG_LABELS = { detox:'Detox', proteina:'Proteína', spicy:'Spicy', brunch:'Brunch' };
+
+let shopQty      = null;
+let shopHorario  = null;
+let selectedBrotes = [];
+let activeFilter = 'todos';
 
 function formatCLP(n){ return '$' + n.toLocaleString('es-CL'); }
 
-function shopSelectBox(id){
-  shopBox = id;
-  document.querySelectorAll('#shopBoxGrid .box-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('shop-' + id).classList.add('selected');
+// ── PASO 1: Cantidad ──────────────────────────────────────────
+function shopChooseQty(n){
+  shopQty = n;
+  selectedBrotes = [];
+  [2,3,5].forEach(q => document.getElementById('shop-sz-' + q).classList.remove('active'));
+  document.getElementById('shop-sz-' + n).classList.add('active');
+  document.getElementById('shopPriceVal') && (document.getElementById('shopPriceVal').textContent = '');
+  document.getElementById('shopPanel').classList.remove('visible');
+  // Mostrar paso 2
+  document.getElementById('shopStep2').style.display = 'block';
+  document.getElementById('shopStep3').style.display = 'none';
+  renderBrotes();
+  setTimeout(() => document.getElementById('shopStep2').scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
+}
+
+// ── PASO 2: Brotes ────────────────────────────────────────────
+function renderBrotes(){
+  const grid = document.getElementById('brotesGrid');
+  const counter = document.getElementById('brotesCounter');
+  const max = shopQty;
+  const sel = selectedBrotes.length;
+  counter.textContent = sel + ' de ' + max + ' brotes seleccionados';
+  counter.style.color = sel === max ? 'var(--gs)' : 'var(--gp)';
+
+  grid.innerHTML = BROTES.map(b => {
+    const isSel = selectedBrotes.includes(b.id);
+    const isFull = selectedBrotes.length >= max && !isSel;
+    const hidden = activeFilter !== 'todos' && !b.tags.includes(activeFilter);
+    const tagsHTML = b.tags.map(t => `<span class="brote-tag ${t}">${TAG_LABELS[t]}</span>`).join('');
+    return `<div class="brote-item ${isSel ? 'selected' : ''} ${isFull ? 'disabled' : ''}"
+      style="${hidden ? 'display:none' : ''}"
+      onclick="toggleBrote('${b.id}')">
+      <div class="brote-item-left">
+        <span class="brote-name">${b.nombre}</span>
+        <div class="brote-tags">${tagsHTML}</div>
+      </div>
+      <div class="brote-check">${isSel ? '✓' : ''}</div>
+    </div>`;
+  }).join('');
+
+  // Mostrar paso 3 si está completo
+  if(sel === max){
+    document.getElementById('shopStep3').style.display = 'block';
+    setTimeout(() => document.getElementById('shopStep3').scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
+  } else {
+    document.getElementById('shopStep3').style.display = 'none';
+    shopHorario = null;
+    document.getElementById('shopPanel').classList.remove('visible');
+  }
+}
+
+function toggleBrote(id){
+  const idx = selectedBrotes.indexOf(id);
+  if(idx >= 0){
+    selectedBrotes.splice(idx, 1);
+  } else {
+    if(selectedBrotes.length >= shopQty) return;
+    selectedBrotes.push(id);
+  }
+  renderBrotes();
+}
+
+function filterBrotes(filter){
+  activeFilter = filter;
+  document.querySelectorAll('.brote-filter').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderBrotes();
+}
+
+// ── PASO 3: Horario ───────────────────────────────────────────
+function shopChooseHorario(h){
+  shopHorario = h;
+  document.getElementById('horario-am').classList.toggle('active', h === 'am');
+  document.getElementById('horario-pm').classList.toggle('active', h === 'pm');
+  // Mostrar resumen
+  const nombres = selectedBrotes.map(id => BROTES.find(b => b.id === id).nombre);
+  const despacho = SHOP_DESPACHO[shopQty];
+  const total = SHOP_PRICES[shopQty] + despacho;
+  const horarioText = h === 'am' ? '9:00 – 11:00 hrs' : '16:00 – 18:00 hrs';
+  document.getElementById('shopBoxName').textContent = shopQty + ' bandejas · ' + horarioText;
+  document.getElementById('shopInfo').textContent = nombres.join(' · ');
+  document.getElementById('shopPriceVal').textContent = formatCLP(total);
   const panel = document.getElementById('shopPanel');
   panel.classList.add('visible');
-  document.getElementById('shopBoxName').textContent = 'Box ' + SHOP_NAMES[id];
-  document.getElementById('shopInfo').textContent = shopGetVarieties(id, shopQty || 3);
-  // Reset cantidad
-  if(shopQty){
-    document.getElementById('shop-sz-' + shopQty).classList.remove('active');
-    shopQty = null;
-  }
-  if(document.getElementById('shopPriceVal'))
-    document.getElementById('shopPriceVal').textContent = formatCLP(15990);
   setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
 }
 
-function shopChooseQty(n){
-  shopQty = n;
-  [3,5,8].forEach(q => document.getElementById('shop-sz-' + q).classList.remove('active'));
-  document.getElementById('shop-sz-' + n).classList.add('active');
-  if(document.getElementById('shopPriceVal'))
-    document.getElementById('shopPriceVal').textContent = formatCLP(SHOP_PRICES[n]);
-  if(shopBox) document.getElementById('shopInfo').textContent = shopGetVarieties(shopBox, n);
-}
-
+// ── Reset ─────────────────────────────────────────────────────
 function shopReset(){
-  shopBox = null;
   shopQty = null;
-  document.querySelectorAll('#shopBoxGrid .box-card').forEach(c => c.classList.remove('selected'));
+  shopHorario = null;
+  selectedBrotes = [];
+  activeFilter = 'todos';
+  [2,3,5].forEach(q => {
+    const el = document.getElementById('shop-sz-' + q);
+    if(el) el.classList.remove('active');
+  });
+  document.getElementById('shopStep2').style.display = 'none';
+  document.getElementById('shopStep3').style.display = 'none';
   document.getElementById('shopPanel').classList.remove('visible');
   document.getElementById('suscripcion').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
+// ── Modal ─────────────────────────────────────────────────────
 function shopOpenModal(){
-  if(!shopBox){ alert('Por favor selecciona un box primero.'); return; }
-  if(!shopQty){ alert('Por favor elige una cantidad.'); return; }
-  document.getElementById('shopModalPlan').textContent =
-    'Box ' + SHOP_NAMES[shopBox] + ' · ' + shopQty + ' unidades · ' + shopGetVarieties(shopBox, shopQty);
-  document.getElementById('shopModalPrice').textContent = formatCLP(SHOP_PRICES[shopQty]);
-  // Despacho y total
+  if(!shopQty || !shopHorario || selectedBrotes.length < shopQty){
+    alert('Por favor completa todos los pasos: cantidad, brotes y horario.');
+    return;
+  }
+  const nombres = selectedBrotes.map(id => BROTES.find(b => b.id === id).nombre);
   const despacho = SHOP_DESPACHO[shopQty];
   const total = SHOP_PRICES[shopQty] + despacho;
-  document.getElementById('despacho-row-cobro').style.display = despacho > 0 ? 'flex' : 'none';
-  document.getElementById('despacho-row-gratis').style.display = despacho === 0 ? 'flex' : 'none';
-  document.getElementById('total-row').style.display = 'flex';
-  document.getElementById('sm-total').textContent = formatCLP(total);
+  const horarioText = shopHorario === 'am' ? 'Mañana · 9:00 – 11:00 hrs' : 'Tarde · 16:00 – 18:00 hrs';
+  const despachoText = despacho > 0 ? ' · + $3.000 despacho' : ' · Despacho gratis';
+
+  document.getElementById('shopModalPlan').innerHTML =
+    '<strong>' + shopQty + ' bandejas vivas</strong>' + despachoText + '<br/>' +
+    '<span style="font-size:11px;color:var(--gray)">' + nombres.join(' · ') + '</span><br/>' +
+    '<span style="font-size:11px;color:var(--gp)">Entrega: ' + horarioText + '</span>';
+  document.getElementById('shopModalPrice').textContent = formatCLP(total);
+
+  // Despacho y total en modal
+  const desCobro = document.getElementById('despacho-row-cobro');
+  const desGratis = document.getElementById('despacho-row-gratis');
+  const totalRow = document.getElementById('total-row');
+  const smTotal = document.getElementById('sm-total');
+  if(desCobro) desCobro.style.display = despacho > 0 ? 'flex' : 'none';
+  if(desGratis) desGratis.style.display = despacho === 0 ? 'flex' : 'none';
+  if(totalRow) totalRow.style.display = 'flex';
+  if(smTotal) smTotal.textContent = formatCLP(total);
+
   document.getElementById('sm-error').textContent = '';
   ['sm-nombre','sm-email','sm-telefono','sm-direccion','sm-mensaje'].forEach(id => {
     document.getElementById(id).value = '';
   });
+  payMethod = 'flow';
+  selectPayMethod('flow');
   const btn = document.getElementById('sm-submit');
   btn.disabled = false;
   btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
-  payMethod = 'flow';
-  selectPayMethod('flow');
   document.getElementById('shopModal').classList.add('open');
   document.body.style.overflow = 'hidden';
   setTimeout(() => document.getElementById('sm-nombre').focus(), 100);
@@ -1649,27 +1796,6 @@ function shopCloseModalOutside(e){
   if(e.target === document.getElementById('shopModal')) shopCloseModal();
 }
 
-
-// Método de pago
-let payMethod = 'flow';
-
-function selectPayMethod(method){
-  payMethod = method;
-  document.getElementById('pm-flow').classList.toggle('active', method === 'flow');
-  document.getElementById('pm-transfer').classList.toggle('active', method === 'transfer');
-  const transferBox = document.getElementById('transferBox');
-  const btn = document.getElementById('sm-submit');
-  const note = document.getElementById('sm-note');
-  if(method === 'transfer'){
-    transferBox.classList.add('show');
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Confirmar pedido por transferencia';
-    if(note) note.textContent = 'Recibirás un correo con los datos de tu pedido. Envía el comprobante para confirmar.';
-  } else {
-    transferBox.classList.remove('show');
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
-    if(note) note.textContent = 'Serás redirigido a Flow para pagar de forma segura.\nWebpay · Redcompra · Tarjetas de crédito';
-  }
-}
 async function shopPagar(){
   const nombre    = document.getElementById('sm-nombre').value.trim();
   const email     = document.getElementById('sm-email').value.trim();
@@ -1679,42 +1805,53 @@ async function shopPagar(){
   const errEl     = document.getElementById('sm-error');
   const btn       = document.getElementById('sm-submit');
 
-  if(!nombre)   { errEl.textContent = 'Por favor ingresa tu nombre.'; return; }
+  if(!nombre)    { errEl.textContent = 'Por favor ingresa tu nombre.'; return; }
   if(!email || !email.includes('@')) { errEl.textContent = 'Por favor ingresa un email válido.'; return; }
-  if(!telefono) { errEl.textContent = 'Por favor ingresa tu teléfono.'; return; }
-  if(!direccion){ errEl.textContent = 'Por favor ingresa tu dirección de entrega.'; return; }
+  if(!telefono)  { errEl.textContent = 'Por favor ingresa tu teléfono.'; return; }
+  if(!direccion) { errEl.textContent = 'Por favor ingresa tu dirección de entrega.'; return; }
   errEl.textContent = '';
 
   btn.disabled = true;
-  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Redirigiendo a Flow...';
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Procesando...';
 
-  // Registrar pedido en Formspree (para que llegue aviso a hola@vertical53.com)
+  const nombres = selectedBrotes.map(id => BROTES.find(b => b.id === id).nombre);
+  const despacho = SHOP_DESPACHO[shopQty];
+  const total = SHOP_PRICES[shopQty] + despacho;
+  const horarioText = shopHorario === 'am' ? 'Mañana 9:00–11:00 hrs' : 'Tarde 16:00–18:00 hrs';
+
   try {
     await fetch('https://formspree.io/f/xlgkejdp', {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
       body: JSON.stringify({
         _subject: '🛒 NUEVO PEDIDO · Vertical 53°',
-        box: 'Box ' + SHOP_NAMES[shopBox],
-        cantidad: shopQty + ' unidades',
-        precio: formatCLP(SHOP_PRICES[shopQty]),
-        despacho: SHOP_DESPACHO[shopQty] > 0 ? formatCLP(SHOP_DESPACHO[shopQty]) : 'Gratis',
-        total: formatCLP(SHOP_PRICES[shopQty] + SHOP_DESPACHO[shopQty]),
+        cantidad: shopQty + ' bandejas vivas',
+        brotes: nombres.join(', '),
+        horario: horarioText,
+        precio_brotes: formatCLP(SHOP_PRICES[shopQty]),
+        despacho: despacho > 0 ? formatCLP(despacho) : 'Gratis',
+        total: formatCLP(total),
+        metodo_pago: payMethod === 'flow' ? 'Flow' : 'Transferencia',
         nombre, email, telefono, direccion,
         nota: mensaje || '—',
-        entrega: 'Próximo lunes',
       })
     });
-  } catch(e){ /* continuar igual, el pago es lo prioritario */ }
+  } catch(e){ /* continuar igual */ }
 
   if(payMethod === 'transfer'){
-    // Pedido por transferencia — solo registrar y confirmar
     shopCloseModal();
     shopReset();
-    alert('¡Pedido registrado, ' + nombre.split(' ')[0] + '! Realiza la transferencia a Banco Santander · Cta. Cte. 88683986 · RUT 77.466.345-2 y envía el comprobante a hola@vertical53.com o por WhatsApp. Tu pedido se confirma al verificar el pago.');
+    alert('¡Pedido registrado, ' + nombre.split(' ')[0] + '! Realiza la transferencia a Banco Santander · Cta. Cte. 88683986 · RUT 77.466.345-2 y envía el comprobante a hola@vertical53.com o por WhatsApp.');
   } else {
-    // Redirigir a Flow para pago
-    window.location.href = SHOP_FLOW_URLS[shopQty];
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Redirigiendo a Flow...';
+    const url = SHOP_FLOW_URLS[shopQty];
+    if(url.startsWith('PENDIENTE')){
+      errEl.textContent = 'Links de pago en configuración. Por favor usa transferencia por ahora.';
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
+    } else {
+      window.location.href = url;
+    }
   }
 }
 
