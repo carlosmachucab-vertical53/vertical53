@@ -67,15 +67,14 @@ module.exports = async (req, res) => {
 
     const pedido = {
       orden:     data.commerceOrder || '—',
-      nombre:    opt.nombre   || data.payer || '—',
-      email:     opt.email    || data.payer || '—',
-      brotes:    opt.brotes   || '—',
-      horario:   opt.horario  || '—',
-      direccion: opt.direccion || '—',
-      nota:      opt.nota     || '—',
-      qty:       opt.qty      || '—',
-      despacho:  opt.despacho || '—',
-      total:     opt.total    || '—',
+      nombre:    opt.n   || data.payer || '—',
+      email:     opt.e   || data.payer || '—',
+      brotes:    opt.b   || '—',
+      horario:   opt.h   || '—',
+      direccion: opt.d   || '—',
+      nota:      opt.nota || '—',
+      qty:       opt.q   || '—',
+      total:     opt.t ? `$${Number(opt.t).toLocaleString('es-CL')}` : '—',
       entrega:   proximaEntrega(),
     };
 
