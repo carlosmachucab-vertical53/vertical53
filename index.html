@@ -540,7 +540,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#">
-    <img src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo.1%20vertical53.png" alt="Vertical 53°"/>
+    <img src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo%20sin%20fondo.png" alt="Vertical 53°"/>
   </a>
   <ul class="nav-links">
     <li><a href="#nosotros">Nosotros</a></li>
@@ -1639,6 +1639,7 @@ let shopQty      = null;
 let shopHorario  = null;
 let selectedBrotes = [];
 let activeFilter = 'todos';
+let payMethod = 'flow';
 
 function formatCLP(n){ return '$' + n.toLocaleString('es-CL'); }
 
@@ -1745,6 +1746,29 @@ function shopReset(){
   document.getElementById('suscripcion').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
+// Método de pago
+function selectPayMethod(method){
+  payMethod = method;
+  const pmFlow = document.getElementById('pm-flow');
+  const pmTransfer = document.getElementById('pm-transfer');
+  const transferBox = document.getElementById('transferBox');
+  const btn = document.getElementById('sm-submit');
+  const note = document.getElementById('sm-note');
+  if(pmFlow) pmFlow.classList.toggle('active', method === 'flow');
+  if(pmTransfer) pmTransfer.classList.toggle('active', method === 'transfer');
+  if(transferBox) transferBox.classList.toggle('show', method === 'transfer');
+  if(btn){
+    btn.innerHTML = method === 'transfer'
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Confirmar pedido por transferencia'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
+  }
+  if(note){
+    note.textContent = method === 'transfer'
+      ? 'Recibirás un correo con los datos de tu pedido. Envía el comprobante para confirmar.'
+      : 'Serás redirigido a Flow para pagar de forma segura. Webpay · Redcompra · Tarjetas de crédito';
+  }
+}
+
 // ── Modal ─────────────────────────────────────────────────────
 function shopOpenModal(){
   if(!shopQty || !shopHorario || selectedBrotes.length < shopQty){
@@ -1778,7 +1802,7 @@ function shopOpenModal(){
     document.getElementById(id).value = '';
   });
   payMethod = 'flow';
-  selectPayMethod('flow');
+  if(typeof selectPayMethod === 'function') selectPayMethod('flow');
   const btn = document.getElementById('sm-submit');
   btn.disabled = false;
   btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
