@@ -153,7 +153,7 @@ nav.scrolled .hamburger span{background:var(--navy)}
 
 /* Panel de tamaño y precio (paso 2 y 3) */
 .size-price-panel{background:var(--bg);border-radius:20px;padding:28px 32px;margin-bottom:32px;display:none;border:1px solid rgba(112,186,94,.2);animation:panelIn .3s ease}
-.size-price-panel.visible{display:block}
+.size-price-panel.visible{display:block;opacity:1;transform:none}
 @keyframes panelIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 .spp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
 .spp-title{font-family:'Sora',sans-serif;font-size:14px;font-weight:600;color:var(--navy)}
@@ -722,7 +722,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- PASO 2: BROTES -->
-  <div class="brotes-section fade-in" id="shopStep2" style="display:none">
+  <div class="brotes-section" id="shopStep2" style="display:none">
     <div class="tag-label" style="margin-top:8px">Paso 2 · Elige tus brotes</div>
     <p class="body-text" style="margin:8px 0 16px;font-size:13px">Filtra por perfil o elige libremente. Puedes combinar los que quieras.</p>
     <div class="brotes-filters">
@@ -739,7 +739,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- PASO 3: HORARIO -->
-  <div class="fade-in" id="shopStep3" style="display:none">
+  <div id="shopStep3" style="display:none">
     <div class="tag-label" style="margin-top:24px">Paso 3 · Elige el horario de entrega</div>
     <p class="body-text" style="margin:8px 0 4px;font-size:13px">Entregas los martes y jueves.</p>
     <div class="horario-grid">
@@ -755,7 +755,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <!-- RESUMEN Y COMPRAR -->
-  <div class="size-price-panel fade-in" id="shopPanel" style="margin-top:24px">
+  <div class="size-price-panel" id="shopPanel" style="margin-top:24px">
     <div class="spp-top">
       <div>
         <div class="spp-title">Resumen de tu pedido</div>
@@ -1616,9 +1616,9 @@ window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>lastScroll+40&
 const SHOP_PRICES   = { 2: 11990, 3: 17990, 5: 29990 };
 const SHOP_DESPACHO = { 2: 3000,  3: 3000,  5: 0 };
 const SHOP_FLOW_URLS = {
-  2: 'PENDIENTE_2UN',
-  3: 'PENDIENTE_3UN',
-  5: 'PENDIENTE_5UN',
+  2: 'https://www.flow.cl/uri/7zBaG5g56',
+  3: 'https://www.flow.cl/uri/qywdWZ5YT',
+  5: 'https://www.flow.cl/uri/9hPPN7Qjy',
 };
 
 const BROTES = [
