@@ -699,18 +699,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- PASO 1: CANTIDAD -->
   <div class="fade-in" id="shopStep1">
     <div class="tag-label" style="margin-top:16px">Paso 1 · Elige la cantidad</div>
-    <div class="spp-sizes" style="margin-top:12px">
+    <div class="spp-sizes" style="margin-top:12px;flex-wrap:wrap">
+      <button class="spp-size-btn" id="shop-sz-1" onclick="shopChooseQty(1)">
+        <span class="spp-size-letter">1</span>
+        <span class="spp-size-price">$5.990</span>
+        <span class="spp-size-label">bandeja viva</span>
+      </button>
       <button class="spp-size-btn" id="shop-sz-2" onclick="shopChooseQty(2)">
         <span class="spp-size-letter">2</span>
         <span class="spp-size-price">$11.990</span>
         <span class="spp-size-label">bandejas vivas</span>
-        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#c47a1e;background:rgba(199,166,104,.2);padding:3px 8px;border-radius:6px">+ $3.000 despacho</span>
       </button>
       <button class="spp-size-btn" id="shop-sz-3" onclick="shopChooseQty(3)">
         <span class="spp-size-letter">3</span>
         <span class="spp-size-price">$17.990</span>
         <span class="spp-size-label">bandejas vivas</span>
-        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#c47a1e;background:rgba(199,166,104,.2);padding:3px 8px;border-radius:6px">+ $3.000 despacho</span>
+      </button>
+      <button class="spp-size-btn" id="shop-sz-4" onclick="shopChooseQty(4)">
+        <span class="spp-size-letter">4</span>
+        <span class="spp-size-price">$23.990</span>
+        <span class="spp-size-label">bandejas vivas</span>
+        <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#176663;background:rgba(112,186,94,.2);padding:3px 8px;border-radius:6px">🚚 Despacho gratis</span>
       </button>
       <button class="spp-size-btn" id="shop-sz-5" onclick="shopChooseQty(5)">
         <span class="spp-size-letter">5</span>
@@ -718,6 +727,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="spp-size-label">bandejas vivas</span>
         <span style="font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:#176663;background:rgba(112,186,94,.2);padding:3px 8px;border-radius:6px">🚚 Despacho gratis</span>
       </button>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--gray);margin-top:10px">
+      🚚 Despacho $3.000 en 1, 2 y 3 bandejas · Gratis desde 4 unidades
     </div>
   </div>
 
@@ -1613,11 +1625,13 @@ window.addEventListener('scroll',()=>{const c=window.scrollY;if(c>lastScroll+40&
 
 
 // ── TIENDA DIRECTA ────────────────────────────────────────────
-const SHOP_PRICES   = { 2: 11990, 3: 17990, 5: 29990 };
-const SHOP_DESPACHO = { 2: 3000,  3: 3000,  5: 0 };
+const SHOP_PRICES   = { 1: 5990, 2: 11990, 3: 17990, 4: 23990, 5: 29990 };
+const SHOP_DESPACHO = { 1: 3000, 2: 3000,  3: 3000,  4: 0,     5: 0 };
 const SHOP_FLOW_URLS = {
+  1: 'https://www.flow.cl/uri/WHjWAd9LH',
   2: 'https://www.flow.cl/uri/7zBaG5g56',
   3: 'https://www.flow.cl/uri/qywdWZ5YT',
+  4: 'https://www.flow.cl/uri/HvH58szpQ',
   5: 'https://www.flow.cl/uri/9hPPN7Qjy',
 };
 
@@ -1647,7 +1661,10 @@ function formatCLP(n){ return '$' + n.toLocaleString('es-CL'); }
 function shopChooseQty(n){
   shopQty = n;
   selectedBrotes = [];
-  [2,3,5].forEach(q => document.getElementById('shop-sz-' + q).classList.remove('active'));
+  [1,2,3,4,5].forEach(q => {
+    const el = document.getElementById('shop-sz-' + q);
+    if(el) el.classList.remove('active');
+  });
   document.getElementById('shop-sz-' + n).classList.add('active');
   document.getElementById('shopPriceVal') && (document.getElementById('shopPriceVal').textContent = '');
   document.getElementById('shopPanel').classList.remove('visible');
@@ -1736,7 +1753,7 @@ function shopReset(){
   shopHorario = null;
   selectedBrotes = [];
   activeFilter = 'todos';
-  [2,3,5].forEach(q => {
+  [1,2,3,4,5].forEach(q => {
     const el = document.getElementById('shop-sz-' + q);
     if(el) el.classList.remove('active');
   });
@@ -1877,14 +1894,34 @@ async function shopPagar(){
     shopReset();
     alert('¡Pedido registrado, ' + nombre.split(' ')[0] + '! Realiza la transferencia a Banco Santander · Cta. Cte. 88683986 · RUT 77.466.345-2 y envía el comprobante a hola@vertical53.com o por WhatsApp.');
   } else {
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Redirigiendo a Flow...';
-    const url = SHOP_FLOW_URLS[shopQty];
-    if(url.startsWith('PENDIENTE')){
-      errEl.textContent = 'Links de pago en configuración. Por favor usa transferencia por ahora.';
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Conectando con Flow...';
+
+    // Crear pago via API para obtener URL con retorno al sitio
+    try {
+      const payRes = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          qty: shopQty,
+          nombre, email,
+          brotes: nombres.join(', '),
+          horario: horarioText,
+          direccion,
+          nota: mensaje || '',
+        })
+      });
+      const payData = await payRes.json();
+      if(!payRes.ok || !payData.url){
+        errEl.textContent = payData.error || 'Error al conectar con Flow. Intenta de nuevo.';
+        btn.disabled = false;
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
+        return;
+      }
+      window.location.href = payData.url;
+    } catch(err){
+      errEl.textContent = 'Error de conexión. Por favor intenta nuevamente.';
       btn.disabled = false;
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Pagar con Flow';
-    } else {
-      window.location.href = url;
     }
   }
 }
