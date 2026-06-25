@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "functions": {
     "api/create-subscription.js": { "memory": 128, "maxDuration": 10 },
     "api/flow-webhook.js":        { "memory": 128, "maxDuration": 10 },
@@ -7,9 +8,7 @@
     "api/payment-confirm.js":     { "memory": 128, "maxDuration": 10 }
   },
   "rewrites": [
-    { "source": "/gracias", "destination": "/gracias.html" },
-    { "source": "/links",   "destination": "/links.html" },
     { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/", "destination": "/index.html" }
   ]
 }
