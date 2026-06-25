@@ -1599,7 +1599,8 @@ async function sendForm(e){
   if(!nombre||!email||!interes||!mensaje){status.style.color='#e53e3e';status.textContent='Por favor completa todos los campos.';return;}
   btn.textContent='Enviando…';btn.disabled=true;
   try{
-    const res=await fetch('https://formspree.io/f/xlgkejdp',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Nuevo mensaje · Vertical 53°',nombre,email,telefono:tel,interes,mensaje})});
+    const bodyMsg = `TIPO: ${interes}\nNOMBRE: ${nombre}\nEMAIL: ${email}\nTELÉFONO: ${tel||'No indicado'}\n\nMENSAJE:\n${mensaje}`;
+    const res=await fetch('https://formspree.io/f/xlgkejdp',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:`[Vertical 53°] ${interes} · ${nombre}`,nombre,email,telefono:tel||'No indicado',interes,mensaje,_replyto:email,_body:bodyMsg})});
     if(res.ok){
       status.style.color='var(--gs)';status.textContent='✓ Mensaje enviado · Te respondemos pronto';
       document.getElementById('f-nombre').value='';document.getElementById('f-email').value='';document.getElementById('f-tel').value='';document.getElementById('f-interes').value='';document.getElementById('f-mensaje').value='';
