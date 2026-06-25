@@ -11,6 +11,19 @@
     "api/confirm-registration.js": {
       "memory": 128,
       "maxDuration": 10
+    },
+    "api/create-payment.js": {
+      "memory": 128,
+      "maxDuration": 10
+    },
+    "api/payment-confirm.js": {
+      "memory": 128,
+      "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/gracias", "destination": "/gracias.html" },
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
