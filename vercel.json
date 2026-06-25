@@ -1,14 +1,17 @@
 {
-  "cleanUrls": true,
   "functions": {
     "api/create-subscription.js": { "memory": 128, "maxDuration": 10 },
     "api/flow-webhook.js":        { "memory": 128, "maxDuration": 10 },
     "api/confirm-registration.js":{ "memory": 128, "maxDuration": 10 },
     "api/create-payment.js":      { "memory": 128, "maxDuration": 10 },
-    "api/payment-confirm.js":     { "memory": 128, "maxDuration": 10 }
+    "api/payment-confirm.js":     { "memory": 128, "maxDuration": 10 },
+    "api/notify-transfer.js":     { "memory": 128, "maxDuration": 10 }
   },
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/", "destination": "/index.html" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/gracias", "dest": "/gracias.html" },
+    { "src": "/links",   "dest": "/links.html" },
+    { "src": "/",        "dest": "/index.html" },
+    { "handle": "filesystem" }
   ]
 }
