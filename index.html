@@ -1863,45 +1863,21 @@ async function shopPagar(){
   const total = SHOP_PRICES[shopQty] + despacho;
   const horarioText = shopHorario === 'am' ? 'Mañana 9:00–11:00 hrs' : 'Tarde 16:00–18:00 hrs';
 
-  // Nota: el correo de confirmación se envía DESPUÉS del pago via webhook payment-confirm
-  // Solo registramos en Formspree como respaldo interno (no bloquea el flujo)
-  fetch('https://formspree.io/f/xlgkejdp', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-    body: JSON.stringify({
-      _subject: '🛒 PEDIDO INICIADO · ' + nombre,
-      nombre, email, telefono,
-      cantidad: shopQty + ' bandejas',
-      brotes: nombres.join(', '),
-      horario: horarioText,
-      total: formatCLP(total),
-      direccion,
-      nota: mensaje || '—',
-      metodo: payMethod === 'flow' ? 'Flow' : 'Transferencia',
-    })
-  }).catch(() => {}); // silencioso — no bloquea
+  // Notificación post-pago manejada por payment-confirm.js via Haulmer + Apps Script
 
   if(payMethod === 'transfer'){
-    // Enviar correo automático al cliente con instrucciones de transferencia
-    fetch('https://formspree.io/f/xlgkejdp', {
+    // Notificar pedido por transferencia via Apps Script
+    fetch('/api/notify-transfer', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        _subject: '🛒 Pedido recibido · Vertical 53° — ' + nombre,
-        _replyto: 'hola@vertical53.com',
-        _to: email,
-        tipo: 'PEDIDO POR TRANSFERENCIA',
-        '1_cliente': nombre,
-        '2_email': email,
-        '3_telefono': telefono,
-        '4_direccion': direccion,
-        '5_cantidad': shopQty + ' bandejas vivas',
-        '6_brotes': nombres.join(', '),
-        '7_horario': horarioText,
-        '8_total': formatCLP(total),
-        '9_despacho': despacho > 0 ? formatCLP(despacho) : 'Gratis',
-        '10_nota': mensaje || '—',
-        '_mensaje_cliente': 'Hola ' + nombre.split(' ')[0] + ', recibimos tu pedido de ' + shopQty + ' bandeja(s) viva(s) de Vertical 53°. Para confirmar tu pedido realiza la transferencia de ' + formatCLP(total) + ' a: Banco Santander · Cuenta Corriente · N° 88683986 · RUT 77.466.345-2 · Vertical Microgreens SpA. Envía el comprobante a hola@vertical53.com o WhatsApp +56 9 8968 0810 y coordinaremos tu entrega.',
+        nombre, email, telefono, direccion,
+        cantidad: shopQty,
+        brotes: nombres.join(', '),
+        horario: horarioText,
+        total: formatCLP(total),
+        despacho: despacho > 0 ? formatCLP(despacho) : 'Gratis',
+        nota: mensaje || '—',
       })
     }).catch(() => {});
 
