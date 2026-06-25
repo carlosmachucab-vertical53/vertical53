@@ -1,12 +1,14 @@
 // api/payment-confirm.js
-// Flow llama aquí con POST después de confirmar el pago
-// Envía correos al cliente y a hola@vertical53.com con el detalle completo
-// Emite boleta electrónica via Haulmer OpenFactura
+// Flow llama aquí con POST enviando solo {"token":"..."}
+// Debemos consultar Flow para obtener el estado real del pago
+// Luego emitimos boleta Haulmer y notificamos Apps Script
 
 const crypto = require('crypto');
 const { emitirBoleta } = require('./haulmer-boleta');
 
-const SECRET_KEY      = process.env.FLOW_SECRET_KEY;
+const FLOW_API_URL  = 'https://www.flow.cl/api';
+const API_KEY       = process.env.FLOW_API_KEY;
+const SECRET_KEY    = process.env.FLOW_SECRET_KEY;
 const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL;
 
 function signParams(params) {
@@ -14,6 +16,15 @@ function signParams(params) {
   let toSign = '';
   keys.forEach(k => { toSign += k + params[k]; });
   return crypto.createHmac('sha256', SECRET_KEY).update(toSign).digest('hex');
+}
+
+async function flowGet(endpoint, params) {
+  const p = { ...params, apiKey: API_KEY };
+  p.s = signParams(p);
+  const qs = new URLSearchParams(p).toString();
+  const res = await fetch(`${FLOW_API_URL}${endpoint}?${qs}`);
+  const text = await res.text();
+  try { return JSON.parse(text); } catch(e) { return { _raw: text }; }
 }
 
 function proximaEntrega() {
@@ -32,48 +43,43 @@ function proximaEntrega() {
 }
 
 module.exports = async (req, res) => {
-  if (req.method !== 'POST' && req.method !== 'GET') {
-    return res.status(200).end();
-  }
-  if (req.method === 'GET') {
-    return res.status(200).end();
-  }
+  if (req.method === 'GET') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(200).end();
 
   try {
-    const data = req.body;
-
-    const received = data.s;
-    const toVerify = { ...data };
-    delete toVerify.s;
-    const expected = signParams(toVerify);
-
-    console.log('Firma recibida:', received);
-    console.log('Firma esperada:', expected);
-    console.log('Datos recibidos:', JSON.stringify(toVerify));
-
-    if (received !== expected) {
-      console.error('Firma inválida — procesando igual para no perder el pedido');
-    }
-
-    if (String(data.status) !== '2') {
-      console.log('Pago no aprobado, status:', data.status);
+    // Flow envía solo el token en el body
+    const token = req.body?.token;
+    if (!token) {
+      console.error('No token recibido:', JSON.stringify(req.body));
       return res.status(200).end();
     }
 
+    console.log('Token recibido:', token);
+
+    // Consultar estado real del pago a Flow
+    const pago = await flowGet('/payment/getStatus', { token });
+    console.log('Flow getStatus:', JSON.stringify(pago));
+
+    // status 2 = pagado exitosamente
+    if (String(pago.status) !== '2') {
+      console.log('Pago no aprobado, status:', pago.status, '— ignorando');
+      return res.status(200).end();
+    }
+
+    // Extraer datos del optional
     let opt = {};
-    try { opt = JSON.parse(data.optional || '{}'); } catch(e) {}
+    try { opt = JSON.parse(pago.optional || '{}'); } catch(e) {}
 
     const qty   = Number(opt.q) || 1;
-    const total = Number(opt.t) || 0;
+    const total = Number(opt.t) || pago.amount || 0;
 
     const pedido = {
-      orden:     data.commerceOrder || '—',
-      nombre:    opt.n   || data.payer || '—',
-      email:     opt.e   || data.payer || '—',
-      brotes:    opt.b   || '—',
-      horario:   opt.h   || '—',
-      direccion: opt.d   || '—',
-      nota:      opt.nota || '—',
+      orden:     pago.commerceOrder || '—',
+      nombre:    opt.n  || pago.payer || '—',
+      email:     opt.e  || pago.payer || '—',
+      brotes:    opt.b  || '—',
+      horario:   opt.h  || '—',
+      direccion: opt.d  || '—',
       qty,
       total:     `$${total.toLocaleString('es-CL')}`,
       entrega:   proximaEntrega(),
@@ -86,34 +92,43 @@ module.exports = async (req, res) => {
     let boletaError = null;
     try {
       const boleta = await emitirBoleta({
-        nombre:   pedido.nombre,
-        email:    pedido.email,
+        nombre:  pedido.nombre,
+        email:   pedido.email,
         qty,
-        brotes:   pedido.brotes,
+        brotes:  pedido.brotes,
         total,
-        orderId:  pedido.orden
+        orderId: pedido.orden
       });
       boletaFolio = boleta.folio || boleta.Folio || JSON.stringify(boleta);
-      console.log('Boleta emitida OK:', boletaFolio);
+      console.log('Boleta emitida OK folio:', boletaFolio);
     } catch(e) {
       boletaError = e.message;
       console.error('Error boleta Haulmer:', e.message);
-      // No interrumpimos el flujo — la boleta puede emitirse manualmente si falla
     }
     // ────────────────────────────────────────────────────────────────
 
     // Notificar Apps Script
-    if (APPS_SCRIPT_URL) {
+    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'https://api.example.com') {
       await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          tipo: 'nueva_compra_directa',
-          ...pedido,
-          boletaFolio: boletaFolio || 'pendiente',
-          boletaError: boletaError || null,
+          tipo:         'nueva_compra_directa',
+          orden:        pedido.orden,
+          nombre:       pedido.nombre,
+          email:        pedido.email,
+          brotes:       pedido.brotes,
+          horario:      pedido.horario,
+          direccion:    pedido.direccion,
+          cantidad:     pedido.qty,
+          total:        pedido.total,
+          entrega:      pedido.entrega,
+          boletaFolio:  boletaFolio || 'pendiente',
+          boletaError:  boletaError || null,
         }),
       }).catch(e => console.error('Apps Script error:', e.message));
+    } else {
+      console.log('APPS_SCRIPT_URL no configurada — omitiendo notificación');
     }
 
     return res.status(200).end();
