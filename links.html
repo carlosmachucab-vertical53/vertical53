@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vertical 53° · Links</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#001A2B;
+  --gp:#176663;
+  --gs:#70BA5E;
+  --white:#fff;
+  --gray:rgba(255,255,255,.45);
+}
+html,body{min-height:100vh}
+body{
+  font-family:'Sora',sans-serif;
+  background:var(--navy);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 24px;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Fondo sutil con grid */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(112,186,94,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(112,186,94,.03) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;
+}
+
+/* Orbe de luz verde suave */
+body::after{
+  content:'';
+  position:fixed;
+  top:-120px;
+  left:50%;
+  transform:translateX(-50%);
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(23,102,99,.18) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.wrap{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:400px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:32px;
+}
+
+/* LOGO + IDENTITY */
+.identity{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  text-align:center;
+}
+.logo-ring{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  border:1.5px solid rgba(112,186,94,.3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(23,102,99,.12);
+  position:relative;
+}
+.logo-ring::before{
+  content:'';
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  border:1px solid rgba(112,186,94,.1);
+}
+.logo-ring img{
+  width:56px;
+  height:56px;
+  object-fit:contain;
+}
+.identity h1{
+  font-size:20px;
+  font-weight:700;
+  color:var(--white);
+  letter-spacing:-.3px;
+}
+.coord{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:3px;
+  color:rgba(112,186,94,.7);
+  text-transform:uppercase;
+}
+.bio{
+  font-size:13px;
+  font-weight:300;
+  color:var(--gray);
+  line-height:1.7;
+  max-width:280px;
+}
+
+/* LINKS */
+.links{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:100%;
+}
+
+.link-btn{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:16px 20px;
+  border-radius:16px;
+  text-decoration:none;
+  transition:all .25s ease;
+  cursor:pointer;
+  border:none;
+  width:100%;
+  text-align:left;
+}
+
+/* Sitio web */
+.link-btn.primary{
+  background:var(--gp);
+  border:1px solid rgba(112,186,94,.2);
+}
+.link-btn.primary:hover{
+  background:#1a7a77;
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(23,102,99,.35);
+}
+
+/* WhatsApp */
+.link-btn.wa{
+  background:rgba(37,211,102,.1);
+  border:1px solid rgba(37,211,102,.2);
+}
+.link-btn.wa:hover{
+  background:rgba(37,211,102,.18);
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(37,211,102,.2);
+}
+
+/* B2B */
+.link-btn.secondary{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+}
+.link-btn.secondary:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(112,186,94,.25);
+  transform:translateY(-2px);
+}
+
+.link-icon{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  font-size:18px;
+}
+.primary .link-icon{ background:rgba(255,255,255,.12); }
+.wa .link-icon{ background:rgba(37,211,102,.15); }
+.secondary .link-icon{ background:rgba(255,255,255,.06); }
+
+.link-text{ flex:1 }
+.link-text strong{
+  display:block;
+  font-size:14px;
+  font-weight:600;
+  color:var(--white);
+  margin-bottom:2px;
+}
+.link-text span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--gray);
+  text-transform:uppercase;
+}
+.link-arrow{
+  font-size:14px;
+  color:rgba(255,255,255,.3);
+  transition:.2s;
+}
+.link-btn:hover .link-arrow{ color:var(--gs); transform:translateX(3px); }
+
+/* DIVIDER */
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+}
+.divider-line{ flex:1; height:1px; background:rgba(255,255,255,.06); }
+.divider-text{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.2);
+  text-transform:uppercase;
+}
+
+/* FOOTER */
+.footer-links{
+  display:flex;
+  gap:20px;
+}
+.footer-links a{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.2);
+  text-decoration:none;
+  text-transform:uppercase;
+  transition:.2s;
+}
+.footer-links a:hover{ color:rgba(255,255,255,.5); }
+
+/* Punto live */
+.live-dot{
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--gs);
+  margin-right:6px;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(.8)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- IDENTITY -->
+  <div class="identity">
+    <div class="logo-ring">
+      <img src="https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo%20sin%20fondo.png"
+           alt="Vertical 53°"
+           onerror="this.src='https://raw.githubusercontent.com/carlosmachucab-vertical53/vertical53/main/Logo.1%20vertical53.png'"/>
+    </div>
+    <div>
+      <h1>Vertical 53°</h1>
+      <div class="coord">53°10′S · Punta Arenas · Patagonia</div>
+    </div>
+    <p class="bio"><span class="live-dot"></span>Microgreens vivos cultivados en el fin del mundo. Frescos, limpios, entregados a tu puerta.</p>
+  </div>
+
+  <!-- LINKS -->
+  <div class="links">
+
+    <!-- Sitio web -->
+    <a class="link-btn primary" href="https://www.vertical53.com" target="_blank" rel="noopener">
+      <div class="link-icon">🌱</div>
+      <div class="link-text">
+        <strong>Visitar el sitio</strong>
+        <span>Suscripción · Productos · Info</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <!-- WhatsApp -->
+    <a class="link-btn wa" href="https://wa.me/56989680810?text=Hola%2C%20me%20interesa%20suscribirme%20a%20Vertical%2053%C2%B0.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F" target="_blank" rel="noopener">
+      <div class="link-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <strong>Escribirnos por WhatsApp</strong>
+        <span>Respuesta rápida · Pedidos</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">También</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- B2B -->
+    <a class="link-btn secondary" href="https://www.vertical53.com/#b2b" target="_blank" rel="noopener">
+      <div class="link-icon">🍽️</div>
+      <div class="link-text">
+        <strong>Proveedores B2B</strong>
+        <span>Restaurantes · Hoteles · Catering</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <!-- Email -->
+    <a class="link-btn secondary" href="mailto:hola@vertical53.com">
+      <div class="link-icon">✉️</div>
+      <div class="link-text">
+        <strong>Contacto por email</strong>
+        <span>hola@vertical53.com</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-links">
+    <a href="https://www.vertical53.com/#nosotros">Nosotros</a>
+    <a href="https://www.vertical53.com/#nutricion">Nutrición</a>
+    <a href="https://www.vertical53.com/#contacto">Contacto</a>
+  </div>
+
+</div>
+</body>
+</html>
