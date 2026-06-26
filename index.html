@@ -488,8 +488,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .brote-filter{padding:7px 16px;border:1.5px solid rgba(23,102,99,.3);background:transparent;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gp);border-radius:8px;cursor:pointer;transition:.2s;text-transform:uppercase}
 .brote-filter:hover{border-color:var(--gs);color:var(--gs)}
 .brote-filter.active{background:var(--gp);border-color:var(--gp);color:var(--white)}
-.brotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.brote-item{padding:14px 16px;background:var(--bg);border-radius:14px;border:2px solid transparent;cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:space-between}
+.brotes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;overflow:visible}
+.brote-item{padding:14px 16px;background:var(--bg);border-radius:14px;border:2px solid transparent;cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:space-between;overflow:visible}
 .brote-item:hover{border-color:rgba(112,186,94,.4)}
 .brote-item.selected{background:var(--lg);border-color:var(--gs)}
 .brote-item.disabled{opacity:.35;cursor:not-allowed;border-color:transparent}
@@ -501,22 +501,26 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .brote-tag.proteina{background:rgba(0,26,43,.1);color:#001A2B}
 .brote-tag.spicy{background:rgba(199,100,50,.12);color:#8B3A0F}
 .brote-tag.brunch{background:rgba(199,166,104,.2);color:#7a5a1e}
-.brote-qty-ctrl{display:flex;align-items:center;gap:6px}
-.brote-qty-btn{background:rgba(23,102,99,.15);border:1px solid rgba(23,102,99,.3);color:var(--gp);width:24px;height:24px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.2s}
-.brote-qty-btn:hover:not(:disabled){background:var(--gp);color:#fff}
-.brote-qty-btn:disabled{opacity:.3;cursor:not-allowed}
-.brote-qty-num{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--gp);min-width:16px;text-align:center}
-.brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
-.brote-item.selected .brote-qty-btn:hover:not(:disabled){background:rgba(255,255,255,.3)}
+.brote-qty-ctrl{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.brote-qty-btn{background:var(--gp);border:none;color:#fff;width:28px;height:28px;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.2s;flex-shrink:0}
+.brote-qty-btn:hover{background:var(--gs)}
+.brote-qty-btn-disabled{background:rgba(23,102,99,.3)!important;cursor:not-allowed}
+.brote-qty-num{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:var(--gp);min-width:20px;text-align:center}
+.brote-add-btn{background:var(--gs);color:#fff;width:32px;height:32px;border-radius:50%;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:.2s;line-height:1}
+.brote-add-btn:hover{background:var(--gp);transform:scale(1.1)}
+.brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.25);color:#fff}
+.brote-item.selected .brote-qty-btn:hover{background:rgba(255,255,255,.4)}
 .brote-item.selected .brote-qty-num{color:#fff}
 .brote-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(23,102,99,.3);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--white);transition:.2s;flex-shrink:0}
-.brote-item.selected .brote-qty-ctrl{display:flex;align-items:center;gap:6px}
-.brote-qty-btn{background:rgba(23,102,99,.15);border:1px solid rgba(23,102,99,.3);color:var(--gp);width:24px;height:24px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.2s}
-.brote-qty-btn:hover:not(:disabled){background:var(--gp);color:#fff}
-.brote-qty-btn:disabled{opacity:.3;cursor:not-allowed}
-.brote-qty-num{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--gp);min-width:16px;text-align:center}
-.brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
-.brote-item.selected .brote-qty-btn:hover:not(:disabled){background:rgba(255,255,255,.3)}
+.brote-item.selected .brote-qty-ctrl{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.brote-qty-btn{background:var(--gp);border:none;color:#fff;width:28px;height:28px;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.2s;flex-shrink:0}
+.brote-qty-btn:hover{background:var(--gs)}
+.brote-qty-btn-disabled{background:rgba(23,102,99,.3)!important;cursor:not-allowed}
+.brote-qty-num{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:var(--gp);min-width:20px;text-align:center}
+.brote-add-btn{background:var(--gs);color:#fff;width:32px;height:32px;border-radius:50%;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:.2s;line-height:1}
+.brote-add-btn:hover{background:var(--gp);transform:scale(1.1)}
+.brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.25);color:#fff}
+.brote-item.selected .brote-qty-btn:hover{background:rgba(255,255,255,.4)}
 .brote-item.selected .brote-qty-num{color:#fff}
 .brote-check{background:var(--gs);border-color:var(--gs)}
 .brotes-counter{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--gp);margin-bottom:12px;min-height:18px}
@@ -1795,12 +1799,11 @@ function renderBrotes(){
       ? `<div class="brote-qty-ctrl" onclick="event.stopPropagation()">
            <button class="brote-qty-btn" onclick="removeBrote('${b.id}')">−</button>
            <span class="brote-qty-num">${qty}</span>
-           <button class="brote-qty-btn" onclick="addBrote('${b.id}')" ${isFull ? 'disabled' : ''}>+</button>
+           <button class="brote-qty-btn ${isFull ? 'brote-qty-btn-disabled' : ''}" onclick="${!isFull ? `addBrote('${b.id}')` : ''}">+</button>
          </div>`
-      : `<div class="brote-check">${isFull ? '' : '+'}</div>`;
+      : `<div class="brote-add-btn" style="${isFull ? 'opacity:.3;pointer-events:none' : ''}" onclick="addBrote('${b.id}')">+</div>`;
     return `<div class="brote-item ${isSel ? 'selected' : ''} ${isFull && !isSel ? 'disabled' : ''}"
-      style="${hidden ? 'display:none' : ''}"
-      onclick="${!isSel && !isFull ? `addBrote('${b.id}')` : ''}">
+      style="${hidden ? 'display:none' : ''}">
       <div class="brote-item-left">
         <span class="brote-name">${b.nombre}</span>
         <div class="brote-tags">${tagsHTML}</div>
