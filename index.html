@@ -491,7 +491,7 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .brotes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;overflow:visible}
 .brote-item{padding:14px 16px;background:var(--bg);border-radius:14px;border:2px solid transparent;cursor:pointer;transition:.25s;display:flex;align-items:center;justify-content:space-between;overflow:visible}
 .brote-item:hover{border-color:rgba(112,186,94,.4)}
-.brote-item.selected{background:var(--lg);border-color:var(--gs)}
+.brote-item.selected{background:var(--gp);border-color:var(--gs)}
 .brote-item.disabled{opacity:.35;cursor:not-allowed;border-color:transparent}
 .brote-item-left{display:flex;flex-direction:column;gap:3px}
 .brote-name{font-family:'Sora',sans-serif;font-size:13px;font-weight:600;color:var(--navy)}
@@ -509,6 +509,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .brote-add-btn{background:var(--gs);color:#fff;width:32px;height:32px;border-radius:50%;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:.2s;line-height:1}
 .brote-add-btn:hover{background:var(--gp);transform:scale(1.1)}
 .brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.25);color:#fff}
+.brote-item.selected .brote-name{color:#fff}
+.brote-item.selected .brote-tag{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
 .brote-item.selected .brote-qty-btn:hover{background:rgba(255,255,255,.4)}
 .brote-item.selected .brote-qty-num{color:#fff}
 .brote-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(23,102,99,.3);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--white);transition:.2s;flex-shrink:0}
@@ -520,6 +522,8 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .brote-add-btn{background:var(--gs);color:#fff;width:32px;height:32px;border-radius:50%;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:.2s;line-height:1}
 .brote-add-btn:hover{background:var(--gp);transform:scale(1.1)}
 .brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.25);color:#fff}
+.brote-item.selected .brote-name{color:#fff}
+.brote-item.selected .brote-tag{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
 .brote-item.selected .brote-qty-btn:hover{background:rgba(255,255,255,.4)}
 .brote-item.selected .brote-qty-num{color:#fff}
 .brote-check{background:var(--gs);border-color:var(--gs)}
