@@ -501,8 +501,24 @@ footer{background:var(--gp);padding:48px 72px;display:flex;justify-content:space
 .brote-tag.proteina{background:rgba(0,26,43,.1);color:#001A2B}
 .brote-tag.spicy{background:rgba(199,100,50,.12);color:#8B3A0F}
 .brote-tag.brunch{background:rgba(199,166,104,.2);color:#7a5a1e}
+.brote-qty-ctrl{display:flex;align-items:center;gap:6px}
+.brote-qty-btn{background:rgba(23,102,99,.15);border:1px solid rgba(23,102,99,.3);color:var(--gp);width:24px;height:24px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.2s}
+.brote-qty-btn:hover:not(:disabled){background:var(--gp);color:#fff}
+.brote-qty-btn:disabled{opacity:.3;cursor:not-allowed}
+.brote-qty-num{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--gp);min-width:16px;text-align:center}
+.brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
+.brote-item.selected .brote-qty-btn:hover:not(:disabled){background:rgba(255,255,255,.3)}
+.brote-item.selected .brote-qty-num{color:#fff}
 .brote-check{width:22px;height:22px;border-radius:50%;border:2px solid rgba(23,102,99,.3);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--white);transition:.2s;flex-shrink:0}
-.brote-item.selected .brote-check{background:var(--gs);border-color:var(--gs)}
+.brote-item.selected .brote-qty-ctrl{display:flex;align-items:center;gap:6px}
+.brote-qty-btn{background:rgba(23,102,99,.15);border:1px solid rgba(23,102,99,.3);color:var(--gp);width:24px;height:24px;border-radius:6px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:.2s}
+.brote-qty-btn:hover:not(:disabled){background:var(--gp);color:#fff}
+.brote-qty-btn:disabled{opacity:.3;cursor:not-allowed}
+.brote-qty-num{font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--gp);min-width:16px;text-align:center}
+.brote-item.selected .brote-qty-btn{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff}
+.brote-item.selected .brote-qty-btn:hover:not(:disabled){background:rgba(255,255,255,.3)}
+.brote-item.selected .brote-qty-num{color:#fff}
+.brote-check{background:var(--gs);border-color:var(--gs)}
 .brotes-counter{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--gp);margin-bottom:12px;min-height:18px}
 
 /* HORARIO */
@@ -1683,23 +1699,35 @@ function renderBrotes(){
   const grid = document.getElementById('brotesGrid');
   const counter = document.getElementById('brotesCounter');
   const max = shopQty;
+  // Count occurrences of each brote
+  const counts = {};
+  selectedBrotes.forEach(id => { counts[id] = (counts[id]||0) + 1; });
   const sel = selectedBrotes.length;
   counter.textContent = sel + ' de ' + max + ' brotes seleccionados';
   counter.style.color = sel === max ? 'var(--gs)' : 'var(--gp)';
 
   grid.innerHTML = BROTES.map(b => {
-    const isSel = selectedBrotes.includes(b.id);
-    const isFull = selectedBrotes.length >= max && !isSel;
+    const qty = counts[b.id] || 0;
+    const isSel = qty > 0;
+    const isFull = sel >= max;
     const hidden = activeFilter !== 'todos' && !b.tags.includes(activeFilter);
     const tagsHTML = b.tags.map(t => `<span class="brote-tag ${t}">${TAG_LABELS[t]}</span>`).join('');
-    return `<div class="brote-item ${isSel ? 'selected' : ''} ${isFull ? 'disabled' : ''}"
+    // Show +/- controls if selected, else show add button
+    const controls = isSel
+      ? `<div class="brote-qty-ctrl" onclick="event.stopPropagation()">
+           <button class="brote-qty-btn" onclick="removeBrote('${b.id}')">−</button>
+           <span class="brote-qty-num">${qty}</span>
+           <button class="brote-qty-btn" onclick="addBrote('${b.id}')" ${isFull ? 'disabled' : ''}>+</button>
+         </div>`
+      : `<div class="brote-check">${isFull ? '' : '+'}</div>`;
+    return `<div class="brote-item ${isSel ? 'selected' : ''} ${isFull && !isSel ? 'disabled' : ''}"
       style="${hidden ? 'display:none' : ''}"
-      onclick="toggleBrote('${b.id}')">
+      onclick="${!isSel && !isFull ? `addBrote('${b.id}')` : ''}">
       <div class="brote-item-left">
         <span class="brote-name">${b.nombre}</span>
         <div class="brote-tags">${tagsHTML}</div>
       </div>
-      <div class="brote-check">${isSel ? '✓' : ''}</div>
+      ${controls}
     </div>`;
   }).join('');
 
@@ -1714,15 +1742,21 @@ function renderBrotes(){
   }
 }
 
-function toggleBrote(id){
-  const idx = selectedBrotes.indexOf(id);
-  if(idx >= 0){
-    selectedBrotes.splice(idx, 1);
-  } else {
-    if(selectedBrotes.length >= shopQty) return;
-    selectedBrotes.push(id);
-  }
+function addBrote(id){
+  if(selectedBrotes.length >= shopQty) return;
+  selectedBrotes.push(id);
   renderBrotes();
+}
+
+function removeBrote(id){
+  const idx = selectedBrotes.lastIndexOf(id);
+  if(idx >= 0) selectedBrotes.splice(idx, 1);
+  renderBrotes();
+}
+
+function toggleBrote(id){
+  // Legacy - kept for compatibility
+  addBrote(id);
 }
 
 function filterBrotes(filter){
