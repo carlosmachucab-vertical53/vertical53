@@ -687,134 +687,265 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- BLOG TICKER -->
 <section style="background:var(--navy);padding:0;overflow:hidden;position:relative;border-top:1px solid rgba(112,186,94,.1);border-bottom:1px solid rgba(112,186,94,.1)">
 
-  <!-- Label izquierdo fijo -->
-  <div style="position:absolute;left:0;top:0;bottom:0;width:140px;background:var(--gp);display:flex;align-items:center;justify-content:center;z-index:3;flex-shrink:0">
-    <div style="transform:rotate(-90deg);white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:400">🌱 Recetas & Tips</div>
+  <!-- Label izquierdo delgado -->
+  <div style="position:absolute;left:0;top:0;bottom:0;width:72px;background:var(--gp);display:flex;align-items:center;justify-content:center;z-index:3;flex-shrink:0">
+    <div style="transform:rotate(-90deg);white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.8)">Recetas & Tips</div>
   </div>
 
-  <!-- Gradiente fade izquierda -->
-  <div style="position:absolute;left:140px;top:0;bottom:0;width:60px;background:linear-gradient(90deg,var(--navy),transparent);z-index:2;pointer-events:none"></div>
-  <!-- Gradiente fade derecha -->
+  <!-- Gradientes fade -->
+  <div style="position:absolute;left:72px;top:0;bottom:0;width:40px;background:linear-gradient(90deg,var(--navy),transparent);z-index:2;pointer-events:none"></div>
   <div style="position:absolute;right:0;top:0;bottom:0;width:60px;background:linear-gradient(270deg,var(--navy),transparent);z-index:2;pointer-events:none"></div>
 
-  <!-- Track scrollable -->
-  <div style="margin-left:140px;overflow:hidden">
-    <div class="ticker-track" style="display:flex;gap:16px;padding:20px 80px 20px 20px;width:max-content">
+  <!-- Track -->
+  <div style="margin-left:72px;overflow:hidden">
+    <div class="ticker-track" style="display:flex;gap:12px;padding:16px 80px 16px 16px;width:max-content">
 
-      <!-- Card 1 -->
-      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+      <div class="ticker-card" onclick="openReceta('r1')">
         <div class="ticker-tag">💧 Cuidados</div>
         <div class="ticker-title">¿Cómo regar tus microgreens?</div>
-        <div class="ticker-body">El riego es por absorción desde abajo. ~100ml al día siguiente de la entrega. Nunca mojes las hojas.</div>
+        <div class="ticker-body">El riego es por absorción desde abajo. ~100ml al día siguiente.</div>
         <div class="ticker-cta">Leer más →</div>
-      </a>
+      </div>
 
-      <!-- Card 2 -->
-      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+      <div class="ticker-card" onclick="openReceta('r2')">
         <div class="ticker-tag">🥤 Receta</div>
         <div class="ticker-title">Batido verde de mañana</div>
-        <div class="ticker-body">Brócoli + plátano + leche de avena + miel. Sulforafano activo en tu desayuno. Listo en 40 segundos.</div>
+        <div class="ticker-body">Brócoli + plátano + leche de avena. Sulforafano activo en tu desayuno.</div>
         <div class="ticker-cta">Ver receta →</div>
-      </a>
+      </div>
 
-      <!-- Card 3 -->
-      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+      <div class="ticker-card" onclick="openReceta('r3')">
         <div class="ticker-tag">💪 Post-entrenamiento</div>
         <div class="ticker-title">Verde + proteína</div>
-        <div class="ticker-body">Brócoli + proteína en polvo + mantequilla de maní. Recuperación con antioxidantes activos.</div>
+        <div class="ticker-body">Brócoli + proteína en polvo + mantequilla de maní. Recuperación completa.</div>
         <div class="ticker-cta">Ver receta →</div>
-      </a>
+      </div>
 
-      <!-- Card 4 -->
-      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+      <div class="ticker-card" onclick="openReceta('r4')">
         <div class="ticker-tag">🍋 Detox</div>
         <div class="ticker-title">Batido detox simple</div>
-        <div class="ticker-body">Brócoli + manzana verde + limón + jengibre. Sin lácteos, sin azúcar. Apoya la función hepática.</div>
+        <div class="ticker-body">Brócoli + manzana verde + limón + jengibre. Sin lácteos ni azúcar.</div>
         <div class="ticker-cta">Ver receta →</div>
-      </a>
+      </div>
 
-      <!-- Card 5 -->
-      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+      <div class="ticker-card" onclick="openReceta('r5')">
         <div class="ticker-tag">✂️ Tip</div>
         <div class="ticker-title">Corta solo lo que usarás</div>
-        <div class="ticker-body">La bandeja viva sigue creciendo. Usa tijeras limpias, corta sobre el sustrato. Siempre fresco al plato.</div>
+        <div class="ticker-body">La bandeja sigue creciendo. Corta con tijeras limpias sobre el sustrato.</div>
         <div class="ticker-cta">Leer más →</div>
-      </a>
+      </div>
 
-      <!-- Card 6 -->
-      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+      <div class="ticker-card" onclick="openReceta('r6')">
         <div class="ticker-tag">❄️ Tip</div>
         <div class="ticker-title">¿Se pueden refrigerar?</div>
-        <div class="ticker-body">Sí, pero en envase hermético. Siempre es mejor fresco recién cortado — el sabor y nutrientes son notablemente superiores.</div>
+        <div class="ticker-body">Sí, en envase hermético. Pero siempre son mejores recién cortados.</div>
         <div class="ticker-cta">Leer más →</div>
-      </a>
+      </div>
+
+      <!-- Duplicado para loop -->
+      <div class="ticker-card" onclick="openReceta('r1')">
+        <div class="ticker-tag">💧 Cuidados</div>
+        <div class="ticker-title">¿Cómo regar tus microgreens?</div>
+        <div class="ticker-body">El riego es por absorción desde abajo. ~100ml al día siguiente.</div>
+        <div class="ticker-cta">Leer más →</div>
+      </div>
+      <div class="ticker-card" onclick="openReceta('r2')">
+        <div class="ticker-tag">🥤 Receta</div>
+        <div class="ticker-title">Batido verde de mañana</div>
+        <div class="ticker-body">Brócoli + plátano + leche de avena. Sulforafano activo en tu desayuno.</div>
+        <div class="ticker-cta">Ver receta →</div>
+      </div>
+      <div class="ticker-card" onclick="openReceta('r3')">
+        <div class="ticker-tag">💪 Post-entrenamiento</div>
+        <div class="ticker-title">Verde + proteína</div>
+        <div class="ticker-body">Brócoli + proteína en polvo + mantequilla de maní. Recuperación completa.</div>
+        <div class="ticker-cta">Ver receta →</div>
+      </div>
+      <div class="ticker-card" onclick="openReceta('r4')">
+        <div class="ticker-tag">🍋 Detox</div>
+        <div class="ticker-title">Batido detox simple</div>
+        <div class="ticker-body">Brócoli + manzana verde + limón + jengibre. Sin lácteos ni azúcar.</div>
+        <div class="ticker-cta">Ver receta →</div>
+      </div>
+      <div class="ticker-card" onclick="openReceta('r5')">
+        <div class="ticker-tag">✂️ Tip</div>
+        <div class="ticker-title">Corta solo lo que usarás</div>
+        <div class="ticker-body">La bandeja sigue creciendo. Corta con tijeras limpias sobre el sustrato.</div>
+        <div class="ticker-cta">Leer más →</div>
+      </div>
+      <div class="ticker-card" onclick="openReceta('r6')">
+        <div class="ticker-tag">❄️ Tip</div>
+        <div class="ticker-title">¿Se pueden refrigerar?</div>
+        <div class="ticker-body">Sí, en envase hermético. Pero siempre son mejores recién cortados.</div>
+        <div class="ticker-cta">Leer más →</div>
+      </div>
 
     </div>
   </div>
 </section>
 
+<!-- MODALES RECETAS -->
+<div id="receta-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9000;align-items:center;justify-content:center;padding:20px" onclick="closeReceta()">
+  <div id="receta-modal" style="background:#001A2B;border:1px solid rgba(112,186,94,.2);border-radius:24px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;position:relative" onclick="event.stopPropagation()">
+    <button onclick="closeReceta()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1">×</button>
+    <div id="receta-content" style="padding:32px"></div>
+  </div>
+</div>
+
 <style>
 .ticker-card{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  width:260px;
-  flex-shrink:0;
+  display:flex;flex-direction:column;gap:6px;
+  width:220px;flex-shrink:0;
   background:rgba(255,255,255,.04);
-  border:1px solid rgba(112,186,94,.12);
-  border-radius:16px;
-  padding:20px;
-  text-decoration:none;
-  transition:.25s;
-  cursor:pointer;
+  border:1px solid rgba(112,186,94,.1);
+  border-radius:14px;padding:16px;
+  cursor:pointer;transition:.2s;
 }
-.ticker-card:hover{
-  background:rgba(255,255,255,.08);
-  border-color:rgba(112,186,94,.3);
-  transform:translateY(-2px);
-}
-.ticker-tag{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--gs);
-}
-.ticker-title{
-  font-family:'Sora',sans-serif;
-  font-size:15px;
-  font-weight:700;
-  color:#fff;
-  line-height:1.3;
-}
-.ticker-body{
-  font-size:12px;
-  font-weight:300;
-  color:rgba(255,255,255,.45);
-  line-height:1.7;
-  flex:1;
-}
-.ticker-cta{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:10px;
-  letter-spacing:1.5px;
-  color:var(--gs);
-  text-transform:uppercase;
-  margin-top:4px;
+.ticker-card:hover{background:rgba(255,255,255,.08);border-color:rgba(112,186,94,.3);transform:translateY(-2px)}
+.ticker-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gs)}
+.ticker-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:#fff;line-height:1.3}
+.ticker-body{font-size:11px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.6;flex:1}
+.ticker-cta{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--gs);text-transform:uppercase;margin-top:4px}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-track{animation:ticker-scroll 40s linear infinite}
+.ticker-track:hover{animation-play-state:paused}
+</style>
+
+<script>
+const RECETAS = {
+  r1: {
+    tag: '💧 Cuidados',
+    titulo: 'Cómo regar tus microgreens en casa',
+    contenido: `
+      <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8;margin-bottom:16px">Los microgreens toman agua desde abajo — no desde arriba. Este método se llama riego por absorción y es clave para mantenerlos sanos.</p>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">Cómo hacerlo</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Coloca la bandeja dentro de un recipiente con agua y déjala absorber por la base 30–60 segundos. Retira y escurre. Nunca mojes las hojas directamente.</p>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">¿Cuánta agua?</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Aproximadamente 100ml al día siguiente de la entrega. Luego observa el peso de la bandeja — si se siente liviana, es hora de regar.</p>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">¿Refrigerador?</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">La bandeja viva no necesita frío. Déjala en luz natural indirecta a temperatura ambiente. Si guardas brotes ya cortados, usa envase hermético en el refrigerador.</p>
+      </div>
+    `
+  },
+  r2: {
+    tag: '🥤 Receta · Batido',
+    titulo: 'Batido verde de mañana',
+    contenido: `
+      <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8;margin-bottom:16px">Para empezar el día con energía limpia. El sulforafano del Brócoli se activa al cortar — máximos beneficios en crudo.</p>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--gs);margin-bottom:8px">Ingredientes</div>
+        <ul style="font-size:12px;color:rgba(255,255,255,.55);line-height:2;padding-left:16px">
+          <li>1 puñado microgreens de Brócoli (~20g)</li>
+          <li>1 plátano maduro</li>
+          <li>1 taza leche de avena o leche entera</li>
+          <li>1 cucharadita de miel</li>
+          <li>4 cubos de hielo</li>
+        </ul>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--gs);margin-bottom:8px">Preparación</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Corta los microgreens directamente de la bandeja con tijeras. Agrega todos los ingredientes a la licuadora y procesa 40 segundos. Sirve de inmediato.</p>
+      </div>
+    `
+  },
+  r3: {
+    tag: '💪 Receta · Post-entrenamiento',
+    titulo: 'Batido verde + proteína',
+    contenido: `
+      <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8;margin-bottom:16px">Para después del entrenamiento. El Brócoli aporta sulforafano activo en la ventana de recuperación post entreno.</p>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--gs);margin-bottom:8px">Ingredientes</div>
+        <ul style="font-size:12px;color:rgba(255,255,255,.55);line-height:2;padding-left:16px">
+          <li>1 puñado microgreens de Brócoli (~20g)</li>
+          <li>1 medida proteína en polvo (vainilla o neutro)</li>
+          <li>1 taza leche fría</li>
+          <li>½ plátano congelado</li>
+          <li>1 cucharada mantequilla de maní</li>
+        </ul>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--gs);margin-bottom:8px">Preparación</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Corta los microgreens frescos. Licúa todo 45 segundos. Si queda espeso, agrega un poco más de leche.</p>
+      </div>
+    `
+  },
+  r4: {
+    tag: '🍋 Receta · Detox',
+    titulo: 'Batido detox simple',
+    contenido: `
+      <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8;margin-bottom:16px">Para los días en que necesitas resetear. Sin lácteos, sin azúcar agregada. Apoya la función hepática.</p>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--gs);margin-bottom:8px">Ingredientes</div>
+        <ul style="font-size:12px;color:rgba(255,255,255,.55);line-height:2;padding-left:16px">
+          <li>1 puñado generoso microgreens de Brócoli (~30g)</li>
+          <li>1 manzana verde, sin semillas</li>
+          <li>Jugo de ½ limón</li>
+          <li>1 trozo jengibre fresco (1 cm)</li>
+          <li>1 taza agua fría o agua de coco</li>
+        </ul>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--gs);margin-bottom:8px">Preparación</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Corta la manzana en trozos. Exprime el limón. Agrega todo a la licuadora y procesa 1 minuto. Puedes colarlo o tomarlo con toda la fibra.</p>
+      </div>
+    `
+  },
+  r5: {
+    tag: '✂️ Tip',
+    titulo: 'Corta solo lo que vas a consumir',
+    contenido: `
+      <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8;margin-bottom:16px">La gran ventaja del producto vivo: no tienes que cosechar todo de una vez. La planta sigue creciendo mientras la vas usando.</p>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">Cómo cortar bien</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Usa tijeras limpias y corta justo por encima del sustrato. No arranques — corta. Así las plantas vecinas no se dañan y la bandeja dura más días.</p>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">¿Cuánto duran?</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Entre 5 y 10 días bien cuidados. Las más resistentes: Rabanito y Mizuna. Las más delicadas: Rúcula y Amaranto.</p>
+      </div>
+    `
+  },
+  r6: {
+    tag: '❄️ Tip',
+    titulo: '¿Se pueden refrigerar?',
+    contenido: `
+      <p style="color:rgba(255,255,255,.6);font-size:13px;line-height:1.8;margin-bottom:16px">Sí, pero con condiciones. La bandeja viva no necesita frío — la diferencia está entre guardar la bandeja o los brotes ya cortados.</p>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">Bandeja viva</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">No al refrigerador. Déjala en luz natural indirecta a temperatura ambiente. El frío detiene el crecimiento y daña las hojas más delicadas.</p>
+      </div>
+      <div style="background:rgba(112,186,94,.08);border-radius:12px;padding:16px">
+        <div style="font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px">Brotes ya cortados</div>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.8">Sí pueden ir al refrigerador en envase hermético, máximo 24 horas. Pero siempre son notablemente mejores recién cortados — el sabor y los nutrientes se degradan rápido.</p>
+      </div>
+    `
+  }
+};
+
+function openReceta(id) {
+  const r = RECETAS[id];
+  if (!r) return;
+  document.getElementById('receta-content').innerHTML = `
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gs);margin-bottom:10px">${r.tag}</div>
+    <h3 style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:20px;line-height:1.3">${r.titulo}</h3>
+    ${r.contenido}
+  `;
+  const overlay = document.getElementById('receta-overlay');
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 
-/* Auto-scroll animation */
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+function closeReceta() {
+  document.getElementById('receta-overlay').style.display = 'none';
+  document.body.style.overflow = '';
 }
-.ticker-track {
-  animation: ticker-scroll 35s linear infinite;
-}
-.ticker-track:hover {
-  animation-play-state: paused;
-}
-</style>
+</script>
+
 
 <!-- COMPRA -->
 <section id="suscripcion" class="sec">
