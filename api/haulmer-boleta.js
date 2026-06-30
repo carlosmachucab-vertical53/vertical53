@@ -1,8 +1,4 @@
 // api/haulmer-boleta.js
-// Emite boleta electrónica via Haulmer OpenFactura API
-// Endpoint: POST https://api.haulmer.com/v2/dte/document
-// Tipo documento 39 = Boleta Electrónica
-
 const HAULMER_API_URL = 'https://api.haulmer.com/v2/dte/document';
 
 async function emitirBoleta({ nombre, email, qty, brotes, total, orderId }) {
@@ -12,13 +8,19 @@ async function emitirBoleta({ nombre, email, qty, brotes, total, orderId }) {
   const descripcionItem = `Microgreens Vertical 53 ${qty} bandeja${qty > 1 ? 's' : ''} ${brotes}`.substring(0, 80);
   const precioUnitario = Math.round(total / qty);
 
-  // Haulmer requiere el campo "dte" como wrapper con TipoDTE
+  // Fecha de emisión en formato YYYY-MM-DD (Santiago)
+  const now = new Date();
+  const santiago = new Date(now.toLocaleString('en-US', { timeZone: 'America/Santiago' }));
+  const pad = n => String(n).padStart(2, '0');
+  const fechaEmision = `${santiago.getFullYear()}-${pad(santiago.getMonth()+1)}-${pad(santiago.getDate())}`;
+
   const body = {
     "dte": {
       "TipoDTE": 39,
       "Encabezado": {
         "IdDoc": {
           "TipoDTE": 39,
+          "FchEmis": fechaEmision,
           "MedioPago": "EF"
         },
         "Emisor": {
@@ -50,8 +52,7 @@ async function emitirBoleta({ nombre, email, qty, brotes, total, orderId }) {
   };
 
   const idempotencyKey = orderId || `V53-${Date.now()}`;
-
-  console.log('Haulmer request body:', JSON.stringify(body));
+  console.log('Haulmer request:', JSON.stringify(body));
 
   const res = await fetch(HAULMER_API_URL, {
     method: 'POST',
@@ -65,13 +66,11 @@ async function emitirBoleta({ nombre, email, qty, brotes, total, orderId }) {
 
   const text = await res.text();
   console.log('Haulmer response:', res.status, text);
-  
+
   let data;
   try { data = JSON.parse(text); } catch(e) { data = { _raw: text }; }
 
-  if (!res.ok) {
-    throw new Error(`Haulmer ${res.status}: ${text}`);
-  }
+  if (!res.ok) throw new Error(`Haulmer ${res.status}: ${text}`);
 
   return data;
 }
