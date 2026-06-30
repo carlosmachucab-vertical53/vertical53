@@ -697,8 +697,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div style="position:absolute;right:0;top:0;bottom:0;width:60px;background:linear-gradient(270deg,var(--navy),transparent);z-index:2;pointer-events:none"></div>
 
   <!-- Track -->
-  <div style="margin-left:72px;overflow:hidden">
-    <div class="ticker-track" style="display:flex;gap:12px;padding:16px 80px 16px 16px;width:max-content">
+  <div id="tickerContainer" style="margin-left:72px;overflow:hidden;cursor:grab">
+    <div class="ticker-track" id="tickerTrack" style="display:flex;gap:12px;padding:16px 80px 16px 16px;width:max-content">
 
       <div class="ticker-card" onclick="openReceta('r1')">
         <div class="ticker-tag">💧 Cuidados</div>
@@ -944,6 +944,82 @@ function closeReceta() {
   document.getElementById('receta-overlay').style.display = 'none';
   document.body.style.overflow = '';
 }
+
+// Ticker drag/swipe
+(function(){
+  const container = document.getElementById('tickerContainer');
+  const track = document.getElementById('tickerTrack');
+  if (!container || !track) return;
+
+  let isDragging = false;
+  let startX = 0;
+  let scrollLeft = 0;
+  let animOffset = 0;
+  let animPaused = false;
+
+  // Get current animation offset
+  function getAnimOffset() {
+    const style = window.getComputedStyle(track);
+    const matrix = new DOMMatrix(style.transform);
+    return matrix.m41;
+  }
+
+  function pauseAnim() {
+    if (!animPaused) {
+      animOffset = getAnimOffset();
+      track.style.animationPlayState = 'paused';
+      track.style.transform = `translateX(${animOffset}px)`;
+      animPaused = true;
+    }
+  }
+
+  function resumeAnim() {
+    track.style.animationPlayState = 'running';
+    track.style.transform = '';
+    animPaused = false;
+  }
+
+  // Mouse events
+  container.addEventListener('mousedown', e => {
+    isDragging = true;
+    startX = e.pageX;
+    scrollLeft = animOffset;
+    pauseAnim();
+    container.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const dx = e.pageX - startX;
+    animOffset = scrollLeft + dx;
+    track.style.transform = `translateX(${animOffset}px)`;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    container.style.cursor = 'grab';
+    setTimeout(resumeAnim, 2000);
+  });
+
+  // Touch events
+  container.addEventListener('touchstart', e => {
+    startX = e.touches[0].pageX;
+    scrollLeft = animOffset;
+    pauseAnim();
+  }, { passive: true });
+
+  container.addEventListener('touchmove', e => {
+    const dx = e.touches[0].pageX - startX;
+    animOffset = scrollLeft + dx;
+    track.style.transform = `translateX(${animOffset}px)`;
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    setTimeout(resumeAnim, 2000);
+  });
+})();
 </script>
 
 
