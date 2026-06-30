@@ -684,6 +684,138 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
+<!-- BLOG TICKER -->
+<section style="background:var(--navy);padding:0;overflow:hidden;position:relative;border-top:1px solid rgba(112,186,94,.1);border-bottom:1px solid rgba(112,186,94,.1)">
+
+  <!-- Label izquierdo fijo -->
+  <div style="position:absolute;left:0;top:0;bottom:0;width:140px;background:var(--gp);display:flex;align-items:center;justify-content:center;z-index:3;flex-shrink:0">
+    <div style="transform:rotate(-90deg);white-space:nowrap;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;font-weight:400">🌱 Recetas & Tips</div>
+  </div>
+
+  <!-- Gradiente fade izquierda -->
+  <div style="position:absolute;left:140px;top:0;bottom:0;width:60px;background:linear-gradient(90deg,var(--navy),transparent);z-index:2;pointer-events:none"></div>
+  <!-- Gradiente fade derecha -->
+  <div style="position:absolute;right:0;top:0;bottom:0;width:60px;background:linear-gradient(270deg,var(--navy),transparent);z-index:2;pointer-events:none"></div>
+
+  <!-- Track scrollable -->
+  <div style="margin-left:140px;overflow:hidden">
+    <div class="ticker-track" style="display:flex;gap:16px;padding:20px 80px 20px 20px;width:max-content">
+
+      <!-- Card 1 -->
+      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+        <div class="ticker-tag">💧 Cuidados</div>
+        <div class="ticker-title">¿Cómo regar tus microgreens?</div>
+        <div class="ticker-body">El riego es por absorción desde abajo. ~100ml al día siguiente de la entrega. Nunca mojes las hojas.</div>
+        <div class="ticker-cta">Leer más →</div>
+      </a>
+
+      <!-- Card 2 -->
+      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+        <div class="ticker-tag">🥤 Receta</div>
+        <div class="ticker-title">Batido verde de mañana</div>
+        <div class="ticker-body">Brócoli + plátano + leche de avena + miel. Sulforafano activo en tu desayuno. Listo en 40 segundos.</div>
+        <div class="ticker-cta">Ver receta →</div>
+      </a>
+
+      <!-- Card 3 -->
+      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+        <div class="ticker-tag">💪 Post-entrenamiento</div>
+        <div class="ticker-title">Verde + proteína</div>
+        <div class="ticker-body">Brócoli + proteína en polvo + mantequilla de maní. Recuperación con antioxidantes activos.</div>
+        <div class="ticker-cta">Ver receta →</div>
+      </a>
+
+      <!-- Card 4 -->
+      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+        <div class="ticker-tag">🍋 Detox</div>
+        <div class="ticker-title">Batido detox simple</div>
+        <div class="ticker-body">Brócoli + manzana verde + limón + jengibre. Sin lácteos, sin azúcar. Apoya la función hepática.</div>
+        <div class="ticker-cta">Ver receta →</div>
+      </a>
+
+      <!-- Card 5 -->
+      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+        <div class="ticker-tag">✂️ Tip</div>
+        <div class="ticker-title">Corta solo lo que usarás</div>
+        <div class="ticker-body">La bandeja viva sigue creciendo. Usa tijeras limpias, corta sobre el sustrato. Siempre fresco al plato.</div>
+        <div class="ticker-cta">Leer más →</div>
+      </a>
+
+      <!-- Card 6 -->
+      <a href="https://vertical53blog.wordpress.com" target="_blank" rel="noopener" class="ticker-card">
+        <div class="ticker-tag">❄️ Tip</div>
+        <div class="ticker-title">¿Se pueden refrigerar?</div>
+        <div class="ticker-body">Sí, pero en envase hermético. Siempre es mejor fresco recién cortado — el sabor y nutrientes son notablemente superiores.</div>
+        <div class="ticker-cta">Leer más →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.ticker-card{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  width:260px;
+  flex-shrink:0;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(112,186,94,.12);
+  border-radius:16px;
+  padding:20px;
+  text-decoration:none;
+  transition:.25s;
+  cursor:pointer;
+}
+.ticker-card:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(112,186,94,.3);
+  transform:translateY(-2px);
+}
+.ticker-tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gs);
+}
+.ticker-title{
+  font-family:'Sora',sans-serif;
+  font-size:15px;
+  font-weight:700;
+  color:#fff;
+  line-height:1.3;
+}
+.ticker-body{
+  font-size:12px;
+  font-weight:300;
+  color:rgba(255,255,255,.45);
+  line-height:1.7;
+  flex:1;
+}
+.ticker-cta{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;
+  letter-spacing:1.5px;
+  color:var(--gs);
+  text-transform:uppercase;
+  margin-top:4px;
+}
+
+/* Auto-scroll animation */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker-scroll 35s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+</style>
+
 <!-- COMPRA -->
 <section id="suscripcion" class="sec">
   <div class="sub-intro fade-in">
