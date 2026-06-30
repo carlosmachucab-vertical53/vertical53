@@ -5,8 +5,14 @@
     "api/confirm-registration.js":{ "memory": 128, "maxDuration": 10 },
     "api/create-payment.js":      { "memory": 128, "maxDuration": 10 },
     "api/payment-confirm.js":     { "memory": 128, "maxDuration": 10 },
-    "api/notify-transfer.js":     { "memory": 128, "maxDuration": 10 }
+    "api/notify-transfer.js":     { "memory": 128, "maxDuration": 10 },
+    "api/gracias.js":             { "memory": 128, "maxDuration": 10 }
   },
-  "cleanUrls": true,
-  "trailingSlash": false
+  "rewrites": [
+    { "source": "/gracias", "destination": "/api/gracias" },
+    { "source": "/links",   "destination": "/links.html" },
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/",        "destination": "/index.html" }
+  ],
+  "cleanUrls": true
 }
